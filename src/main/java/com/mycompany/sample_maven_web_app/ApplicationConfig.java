@@ -30,6 +30,7 @@ public class ApplicationConfig extends Application {
      */
     private void addRestResourceClasses(Set<Class<?>> resources) {
         resources.add(com.mycompany.sample_maven_web_app.GenericResource.class);
+        resources.add(com.mycompany.sample_maven_web_app.GenericResource_1.class);
     }
     
 }

@@ -70,7 +70,7 @@ public class GenericResource {
         text.append("The JSON obj:" + jobj.toString() + "\n");
         text.append("Hello " + user.getName() + "\n");
         text.append("You're only " + user.getAge() + " years old.\n");
-        user.getMessages().forEach((msg) -> { text.append(msg + "\n"); });
+        //user.getMessages().forEach((msg) -> { text.append(msg + "\n"); });
         
         return text.toString();
     }
