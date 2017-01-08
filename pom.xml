@@ -193,6 +193,7 @@
                     <phase>package</phase>
                     <goals><goal>copy</goal></goals>
                     <configuration>
+                        <outputDirectory>${dependency.dir}</outputDirectory>
                         <artifactItems>
                             <artifactItem>
                                 <groupId>com.github.jsimone</groupId>
