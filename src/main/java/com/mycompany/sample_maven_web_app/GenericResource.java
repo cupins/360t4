@@ -15,9 +15,9 @@ import javax.ws.rs.PUT;
 import javax.ws.rs.core.MediaType;
 import java.io.IOException;
 import javax.ws.rs.POST;
+import objects.User;
 import org.codehaus.jackson.map.ObjectMapper;
 import org.codehaus.jettison.json.JSONObject;
-import objects.User;
 
 /**
  * REST Web Service
@@ -63,13 +63,17 @@ public class GenericResource {
     @Consumes(MediaType.APPLICATION_JSON)
     public String PostJson(String jobj) throws IOException {
         ObjectMapper mapper = new ObjectMapper();
-        //User user = mapper.readValue(jobj.toString(), User.class);
-        User user = mapper.readValue(jobj, User.class);
+        User user = mapper.readValue(jobj.toString(), User.class);
+        //User user = mapper.readValue(jobj, User.class);
         
         StringBuilder text = new StringBuilder();
         text.append("The JSON obj:" + jobj.toString() + "\n");
         text.append("Hello " + user.getName() + "\n");
         text.append("You're only " + user.getAge() + " years old.\n");
+        text.append("Messages:\n");
+        for (Object msg : user.getMessages())
+            text.append(msg.toString() + "\n");
+        // Lambda function fails to deploy
         //user.getMessages().forEach((msg) -> { text.append(msg + "\n"); });
         
         return text.toString();
