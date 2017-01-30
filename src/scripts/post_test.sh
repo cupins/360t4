@@ -1,4 +1,6 @@
 ENDPOINT=https://enigmatic-peak-68851.herokuapp.com/rest/generic
+# heroku
+#ENDPOINT=https://frozen-temple-15527.herokuapp.com/rest/generic
 # local web runner deploy
 #ENDPOINT=http://localhost:8080/rest/generic
 # net beans deploy
