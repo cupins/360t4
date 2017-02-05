@@ -51,13 +51,13 @@ public class UserService {
     public String getHtml() {
         //TODO return proper representation object
         StringBuilder sb = new StringBuilder();
-        sb.append("<html><body><b>USERS LIST:</b><br><br><table><tr><td>Name</td><td>Age</td><td>userid</td></tr>");
+        sb.append("<html><body><b>USERS LIST:</b><br><br><table style=\"font-family=arial;font-size=12px;\" border=1><tr><td>Name</td><td>Age</td><td>userid</td></tr>");
         try
         {
             Model db = Model.singleton();
             User[] users = db.getUsers();
             for (int i=0;i<users.length;i++)
-                sb.append("<tr><td>" + users[i].getName() + "</td><td>" + users[i].getAge() + "</td><td>" + users[i].getUserid() + "</td></tr>;");
+                sb.append("<tr><td>" + users[i].getName() + "</td><td>" + users[i].getAge() + "</td><td>" + users[i].getUserid() + "</td></tr>");
         }
         catch (Exception e)
         {
