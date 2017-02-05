@@ -9,12 +9,15 @@
  */
 
 create table users (
-name varchar(40),
-age integer,
-userid serial primary key);
+    name varchar(40),
+    age integer,
+    userid serial primary key
+);
 
 create table messages (
-messageid integer,
-userid integer,
-message varchar(255));
+    messageid integer,
+    userid integer,
+    message varchar(255),
+    dateadded timestamp
+);
 
