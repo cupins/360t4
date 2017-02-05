@@ -51,7 +51,7 @@ public class UserService {
     public String getHtml() {
         //TODO return proper representation object
         StringBuilder sb = new StringBuilder();
-        sb.append("<html><body><style>table, th, td {font-family:Arial,Verdana,sans-serif;font-size:1em;padding: 0px;border-spacing: 0px;}</style><b>USERS LIST:</b><br><br><table border=1><tr><td>Name</td><td>Age</td><td>userid</td></tr>");
+        sb.append("<html><body><style>table, th, td {font-family:Arial,Verdana,sans-serif;font-size:1em;cellpadding: 10px;padding: 0px;border-spacing: 0px;}</style><b>USERS LIST:</b><br><br><table border=1><tr><td>Name</td><td>Age</td><td>userid</td></tr>");
         try
         {
             Model db = Model.singleton();
