@@ -51,19 +51,19 @@ public class UserService {
     public String getHtml() {
         //TODO return proper representation object
         StringBuilder sb = new StringBuilder();
-        sb.append("<html><body>Here is the list of known users!<br></body></html>");
+        sb.append("<html><body><b>USERS LIST:</b><br><br><table><tr><td>Name</td><td>Age</td><td>userid</td></tr>");
         try
         {
             Model db = Model.singleton();
             User[] users = db.getUsers();
             for (int i=0;i<users.length;i++)
-                sb.append("Name=" + users[i].getName() + ", age=" + users[i].getAge() + ", userid=" + users[i].getUserid());
+                sb.append("<tr><td>" + users[i].getName() + "</td><td>" + users[i].getAge() + "</td><td>" + users[i].getUserid() + "</td></tr>;");
         }
         catch (Exception e)
         {
-            sb.append("Error getting users: " + e.toString() + "<br>");
+            sb.append("</table><br>Error getting users: " + e.toString() + "<br>");
         }
-        sb.append("</body></html>");
+        sb.append("</table></body></html>");
         return sb.toString();
     }
 
