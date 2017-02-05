@@ -88,7 +88,9 @@ public class UserService {
         }
         catch (SQLException sqle)
         {
-            logger.log(Level.SEVERE, "Error persisting user after db connection made:" + sqle.getMessage() + " --- " + sqle.getSQLState());
+            String errText = "Error persisting user after db connection made:\n" + sqle.getMessage() + " --- " + sqle.getSQLState() + "\n";
+            logger.log(Level.SEVERE, errText);
+            text.append(errText);
             StackTraceElement[] ste = sqle.getStackTrace();
             for (int i=0;i<ste.length;i++)
                 logger.log(Level.SEVERE, ste[i].toString());
