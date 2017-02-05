@@ -28,7 +28,7 @@ import org.codehaus.jackson.map.ObjectMapper;
  *
  * @author wlloyd
  */
-@Path("generic")
+@Path("users")
 public class UserService {
 
     static final Logger logger = Logger.getLogger(UserService.class.getName());

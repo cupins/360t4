@@ -13,6 +13,6 @@
     </servlet>
     <servlet-mapping>
         <servlet-name>Jersey Web Application</servlet-name>
-        <url-pattern>/rest/*</url-pattern>
+        <url-pattern>/tcss360/*</url-pattern>
     </servlet-mapping>
 </web-app>
