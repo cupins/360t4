@@ -18,6 +18,7 @@ import java.io.IOException;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.ws.rs.DELETE;
 import javax.ws.rs.POST;
 import objects.User;
 import org.codehaus.jackson.map.ObjectMapper;
@@ -47,9 +48,23 @@ public class UserService {
      */
     @GET
     @Produces(MediaType.TEXT_HTML)
-    public String getXml() {
+    public String getHtml() {
         //TODO return proper representation object
-        return "<html><body>Generic web service GET!</body></html>";
+        StringBuilder sb = new StringBuilder();
+        sb.append("<html><body>Here is the list of known users!<br></body></html>");
+        try
+        {
+            Model db = Model.singleton();
+            User[] users = db.getUsers();
+            for (int i=0;i<users.length;i++)
+                sb.append("Name=" + users[i].getName() + ", age=" + users[i].getAge() + ", userid=" + users[i].getUserid());
+        }
+        catch (Exception e)
+        {
+            sb.append("Error getting users: " + e.toString() + "<br>");
+        }
+        sb.append("</body></html>");
+        return sb.toString();
     }
 
     /**
@@ -58,9 +73,58 @@ public class UserService {
      */
     @PUT
     @Produces(MediaType.TEXT_PLAIN)
-    @Consumes(MediaType.TEXT_PLAIN)
-    public String putXml(String content) {
-        return "The user just put=" + content;
+    @Consumes(MediaType.APPLICATION_JSON)
+    public String updateUser(String jobj) throws IOException
+    {
+        ObjectMapper mapper = new ObjectMapper();
+        User user = mapper.readValue(jobj.toString(), User.class);
+        StringBuilder text = new StringBuilder();
+        try {
+            Model db = Model.singleton();
+            int userid = user.getUserid();
+            db.updateUser(user);
+            logger.log(Level.INFO, "update user with userid=" + userid);
+            text.append("User id updated with user id=" + userid + "\n");
+        }
+        catch (SQLException sqle)
+        {
+            String errText = "Error updating user after db connection made:\n" + sqle.getMessage() + " --- " + sqle.getSQLState() + "\n";
+            logger.log(Level.SEVERE, errText);
+            text.append(errText);
+        }
+        catch (Exception e)
+        {
+            logger.log(Level.SEVERE, "Error connecting to db.");
+            text.append("Error connecting to db.");
+        }
+        return text.toString();
+    }
+    
+    @DELETE
+    public String deleteUser(String jobj) throws IOException
+    {
+        ObjectMapper mapper = new ObjectMapper();
+        User user = mapper.readValue(jobj.toString(), User.class);
+        StringBuilder text = new StringBuilder();
+        try {
+            Model db = Model.singleton();
+            int userid = user.getUserid();
+            db.deleteUser(userid);
+            logger.log(Level.INFO, "user deleted from db=" + userid);
+            text.append("User id deleted with id=" + userid);
+        }
+        catch (SQLException sqle)
+        {
+            String errText = "Error deleteing user after db connection made:\n" + sqle.getMessage() + " --- " + sqle.getSQLState() + "\n";
+            logger.log(Level.SEVERE, errText);
+            text.append(errText);
+        }
+        catch (Exception e)
+        {
+            logger.log(Level.SEVERE, "Error connecting to db.");
+            text.append("Error connecting to db.");
+        }
+        return text.toString();
     }
     
     @POST
@@ -83,8 +147,9 @@ public class UserService {
         
         try {
             Model db = Model.singleton();
-            db.newUser(user);
-            logger.log(Level.INFO, "user persisted to db.");
+            int userid = db.newUser(user);
+            logger.log(Level.INFO, "user persisted to db as userid=" + userid);
+            text.append("User id persisted with id=" + userid);
         }
         catch (SQLException sqle)
         {

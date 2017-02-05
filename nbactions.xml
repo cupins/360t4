@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<actions>
+        <action>
+            <actionName>run</actionName>
+            <packagings>
+                <packaging>war</packaging>
+                <packaging>ear</packaging>
+                <packaging>ejb</packaging>
+            </packagings>
+            <goals>
+                <goal>package</goal>
+            </goals>
+            <properties>
+                <netbeans.deploy>true</netbeans.deploy>
+                <Env.JDBC_DATABASE_URL>jdbc:postgresql://ec2-54-235-204-221.compute-1.amazonaws.com:5432/d19m0j1erhvr7v?user=wxojhmodfpbmsv&amp;password=80cfef5defecd78ff44e5e2bab48a26b06f930d1f57e097a6be957be98358c53&amp;sslmode=require</Env.JDBC_DATABASE_URL>
+                
+                
+            </properties>
+        </action>
+    </actions>

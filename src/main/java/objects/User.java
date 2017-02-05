@@ -42,7 +42,17 @@ public class User {
     public void setMessages(List messages) {
         this.messages = messages;
     }
-
+    
+    private int userid;
+    
+    public int getUserid() {
+        return userid;
+    }
+    
+    public void setUserId(int userid)
+    {
+        this.userid = userid;
+    }
     
 }
 
