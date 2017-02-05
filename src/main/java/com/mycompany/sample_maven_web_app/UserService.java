@@ -5,6 +5,7 @@
  */
 package com.mycompany.sample_maven_web_app;
 
+import data.Model;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.UriInfo;
 import javax.ws.rs.Consumes;
@@ -14,10 +15,12 @@ import javax.ws.rs.Path;
 import javax.ws.rs.PUT;
 import javax.ws.rs.core.MediaType;
 import java.io.IOException;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.ws.rs.POST;
 import objects.User;
 import org.codehaus.jackson.map.ObjectMapper;
-import org.codehaus.jettison.json.JSONObject;
 
 /**
  * REST Web Service
@@ -25,15 +28,17 @@ import org.codehaus.jettison.json.JSONObject;
  * @author wlloyd
  */
 @Path("generic")
-public class GenericResource {
+public class UserService {
 
+    static final Logger logger = Logger.getLogger(UserService.class.getName());
+    
     @Context
     private UriInfo context;
 
     /**
      * Creates a new instance of GenericResource
      */
-    public GenericResource() {
+    public UserService() {
     }
 
     /**
@@ -75,6 +80,24 @@ public class GenericResource {
             text.append(msg.toString() + "\n");
         // Lambda function fails to deploy
         //user.getMessages().forEach((msg) -> { text.append(msg + "\n"); });
+        
+        try {
+            Model db = Model.singleton();
+            db.newUser(user);
+            logger.log(Level.INFO, "user persisted to db.");
+        }
+        catch (SQLException sqle)
+        {
+            logger.log(Level.SEVERE, "Error persisting user after db connection made:" + sqle.getMessage() + " --- " + sqle.getSQLState());
+            StackTraceElement[] ste = sqle.getStackTrace();
+            for (int i=0;i<ste.length;i++)
+                logger.log(Level.SEVERE, ste[i].toString());
+        }
+        catch (Exception e)
+        {
+            logger.log(Level.SEVERE, "Error connecting to db.");
+        }
+        
         
         return text.toString();
     }
