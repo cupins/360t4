@@ -5,7 +5,6 @@
  */
 package data;
 
-import com.mycompany.sample_maven_web_app.UserService;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
@@ -22,12 +21,6 @@ import objects.User;
  */
 public class Model {
     static final Logger logger = Logger.getLogger(Model.class.getName());
-
-    private static String PG_URL = "postgres://wxojhmodfpbmsv:80cfef5defecd78ff44e5e2bab48a26b06f930d1f57e097a6be957be98358c53@ec2-54-235-204-221.compute-1.amazonaws.com:5432/d19m0j1erhvr7v";
-    private Properties dbprops = new Properties();
-    
-    private static String USR = "wxojhmodfpbmsv";
-    private static String PWD = "80cfef5defecd78ff44e5e2bab48a26b06f930d1f57e097a6be957be98358c53";
     private static Model instance;
     private Connection conn;
     
@@ -41,12 +34,12 @@ public class Model {
     Model() throws Exception
     {
         Class.forName("org.postgresql.Driver");
-        dbprops.setProperty("user", USR);
-        dbprops.setProperty("password", PWD);
-        dbprops.setProperty("ssl", "true");
-          
+        String dbUrl = System.getenv("JDBC_DATABASE_URL");
+        if ((dbUrl == null) || (dbUrl.length() < 1))
+            dbUrl = System.getProperties().getProperty("DBCONN");
+        logger.log(Level.INFO, "dbUrl=" + dbUrl);  
         logger.log(Level.INFO, "attempting db connection");
-        conn = DriverManager.getConnection(PG_URL, dbprops);
+        conn = DriverManager.getConnection(dbUrl);
         logger.log(Level.INFO, "db connection ok.");
     }
     

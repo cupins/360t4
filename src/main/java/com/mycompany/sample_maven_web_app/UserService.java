@@ -91,9 +91,9 @@ public class UserService {
             String errText = "Error persisting user after db connection made:\n" + sqle.getMessage() + " --- " + sqle.getSQLState() + "\n";
             logger.log(Level.SEVERE, errText);
             text.append(errText);
-            StackTraceElement[] ste = sqle.getStackTrace();
-            for (int i=0;i<ste.length;i++)
-                logger.log(Level.SEVERE, ste[i].toString());
+//            StackTraceElement[] ste = sqle.getStackTrace();
+//            for (int i=0;i<ste.length;i++)
+//                logger.log(Level.SEVERE, ste[i].toString());
         }
         catch (Exception e)
         {
