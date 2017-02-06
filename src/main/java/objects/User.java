@@ -33,13 +33,13 @@ public class User {
         this.age = age;
     }
 
-    private List messages;
+    private List<Message> messages;
 
-    public List getMessages() {
+    public List<Message> getMessages() {
         return messages;
     }
 
-    public void setMessages(List messages) {
+    public void setMessages(List<Message> messages) {
         this.messages = messages;
     }
     
