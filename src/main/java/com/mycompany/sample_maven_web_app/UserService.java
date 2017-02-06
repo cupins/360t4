@@ -48,10 +48,10 @@ public class UserService {
      */
     @GET
     @Produces(MediaType.TEXT_HTML)
-    public String getHtml() {
+    public String getUsers() {
         //TODO return proper representation object
         StringBuilder sb = new StringBuilder();
-        sb.append("<html><body><style>table, th, td {font-family:Arial,Verdana,sans-serif;font-size:1em;padding: 0px;border-spacing: 0px;}</style><b>USERS LIST:</b><br><br><table cellpadding=10 border=1><tr><td>Name</td><td>Age</td><td>userid</td></tr>");
+        sb.append("<html><body><style>table, th, td {font-family:Arial,Verdana,sans-serif;font-size:2em;padding: 0px;border-spacing: 0px;}</style><b>USERS LIST:</b><br><br><table cellpadding=10 border=1><tr><td>Name</td><td>Age</td><td>userid</td></tr>");
         try
         {
             Model db = Model.singleton();
@@ -130,7 +130,7 @@ public class UserService {
     @POST
     @Produces(MediaType.TEXT_PLAIN)
     @Consumes(MediaType.APPLICATION_JSON)
-    public String PostJson(String jobj) throws IOException {
+    public String createUser(String jobj) throws IOException {
         ObjectMapper mapper = new ObjectMapper();
         User user = mapper.readValue(jobj.toString(), User.class);
         //User user = mapper.readValue(jobj, User.class);
