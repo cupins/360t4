@@ -135,7 +135,6 @@ public class UserService {
     public String createUser(String jobj) throws IOException {
         ObjectMapper mapper = new ObjectMapper();
         User user = mapper.readValue(jobj.toString(), User.class);
-        //User user = mapper.readValue(jobj, User.class);
         
         StringBuilder text = new StringBuilder();
         text.append("The JSON obj:" + jobj.toString() + "\n");
@@ -144,8 +143,6 @@ public class UserService {
         text.append("Messages:\n");
         for (Object msg : user.getMessages())
             text.append(msg.toString() + "\n");
-        // Lambda function fails to deploy
-        //user.getMessages().forEach((msg) -> { text.append(msg + "\n"); });
         
         try {
             Model db = Model.singleton();
@@ -158,9 +155,6 @@ public class UserService {
             String errText = "Error persisting user after db connection made:\n" + sqle.getMessage() + " --- " + sqle.getSQLState() + "\n";
             logger.log(Level.SEVERE, errText);
             text.append(errText);
-//            StackTraceElement[] ste = sqle.getStackTrace();
-//            for (int i=0;i<ste.length;i++)
-//                logger.log(Level.SEVERE, ste[i].toString());
         }
         catch (Exception e)
         {
