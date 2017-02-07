@@ -1,4 +1,4 @@
-ENDPOINT=https://frozen-temple-15527.herokuapp.com/tcss360/users
+ENDPOINT=https://glacial-anchorage-84282.herokuapp.com/tcss360/users
 # local web runner deploy
 #ENDPOINT=http://localhost:8080/tcss360/users
 # net beans deploy
