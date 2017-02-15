@@ -3,13 +3,17 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package objects;
+package com.mycompany.sample_maven_web_app;
 
 /**
  *
  * @author reid
  */
-public class Coffee_Shop {
-    //Determine fields getter/setters and constructors
+public class Coffee_shopService {
     
+    
+    // TODO: 
+    //  Create a PSOT for json
+    
+    //  Create GET for json
 }
