@@ -158,10 +158,28 @@ public class Model {
         return shopid;
     }
     
-    public Coffee_Shop[] getCoffeeShops() {
-        return null;
+    public Coffee_Shop[] getCoffeeShops() throws SQLException {
+        LinkedList<Coffee_Shop> ll = new LinkedList<Coffee_Shop>();
+        String sqlQuery ="select * from shops;";
+        Statement st = createStatement();
+        ResultSet rows = st.executeQuery(sqlQuery);
+        while (rows.next())
+        {
+            logger.log(Level.INFO, "Reading row...");
+            Coffee_Shop cs = new Coffee_Shop();
+            cs.setCid(rows.getInt("cid"));
+            cs.setCoffeeName(rows.getString("coffeeName"));
+            cs.setCoffeeAddress(rows.getString("coffeeAddress"));
+            cs.setRawReview(rows.getInt("rawReview"));
+            cs.setPhone(rows.getString("phone"));
+            cs.setUrl(rows.getString("url"));
+            logger.log(Level.INFO, "Adding shop to list with id=" + cs.getCid());
+            ll.add(cs);
+        }
+        return ll.toArray(new Coffee_Shop[ll.size()]);
     }
     
+<<<<<<< HEAD
     public Coffee_Shop[] getCS() throws SQLException
    {
        LinkedList<Coffee_Shop> ll = new LinkedList<Coffee_Shop>();
@@ -185,6 +203,21 @@ public class Model {
    }
     public boolean updateCoffeShop(Coffee_Shop cs) {
         return false;
+=======
+    public boolean updateCoffeShop(Coffee_Shop cs) throws SQLException {
+        StringBuilder sqlQuery = new StringBuilder();
+        sqlQuery.append("update shops ");
+        sqlQuery.append("cid='" + cs.getCid() + "', ");
+        sqlQuery.append("coffeeName=" + cs.getCoffeeName() + " ");
+        sqlQuery.append("coffeeAddress=" + cs.getCoffeeAddress() + ",");
+        sqlQuery.append("rawReview=" + cs.getRawReview() + ",");
+        sqlQuery.append("phone=" + cs.getPhone() + ",");
+        sqlQuery.append("url=" + cs.getUrl() + ";");
+        Statement st = createStatement();
+        logger.log(Level.INFO, "UPDATE SQL=" + sqlQuery.toString());
+        return st.execute(sqlQuery.toString());
+        
+>>>>>>> 144195921b67fe9b4b727598ec577f279ce63e56
     }
     
     
