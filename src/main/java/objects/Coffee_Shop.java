@@ -19,7 +19,7 @@ public class Coffee_Shop {
     private String url;
     
     // Constructor
-    Coffee_Shop(){}
+    public Coffee_Shop(){}
     
     // Getter and Setters
     
