@@ -158,8 +158,25 @@ public class Model {
         return shopid;
     }
     
-    public Coffee_Shop[] getCoffeeShops() {
-        return null;
+    public Coffee_Shop[] getCoffeeShops() throws SQLException {
+        LinkedList<Coffee_Shop> ll = new LinkedList<Coffee_Shop>();
+        String sqlQuery ="select * from shops;";
+        Statement st = createStatement();
+        ResultSet rows = st.executeQuery(sqlQuery);
+        while (rows.next())
+        {
+            logger.log(Level.INFO, "Reading row...");
+            Coffee_Shop cs = new Coffee_Shop();
+            cs.setCid(rows.getInt("cid"));
+            cs.setCoffeeName(rows.getString("coffeName"));
+            cs.setCoffeeAddress(rows.getString("coffeAddress"));
+            cs.setRawReview(rows.getInt("rawReview"));
+            cs.setPhone(rows.getString("phone"));
+            cs.setUrl(rows.getString("url"));
+            logger.log(Level.INFO, "Adding shop to list with id=" + cs.getCid());
+            ll.add(cs);
+        }
+        return ll.toArray(new Coffee_Shop[ll.size()]);
     }
     
     public boolean updateCoffeShop(Coffee_Shop cs) {
