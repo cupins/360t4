@@ -15,6 +15,7 @@ import java.util.LinkedList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import objects.User;
+import objects.Coffee_Shop;
 
 /**
  *
@@ -138,8 +139,16 @@ public class Model {
         return st.execute(sqlQuery.toString());
     }
     
-    public void newMessage(User usr) throws SQLException
+    public int newCoffeeShop(Coffee_Shop cs) throws SQLException
     {
-        //String sqlInsert="insert into messages ("
+        return 0;   //String sqlInsert="insert into messages ("
     }
+    
+    public Coffee_Shop[] getCoffeeShops() {
+        return null;
+    }
+    
+    
+    
+    
 }
