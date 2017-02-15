@@ -141,7 +141,7 @@ public class Model {
     
     public int newCoffeeShop(Coffee_Shop cs) throws SQLException
     {
-        String sqlInsert="insert into shops (name, age) values ('" + cs.getCid() 
+        String sqlInsert="insert into shops (cid, name, address, rawreview, phone, getUrl) values ('" + cs.getCid() 
                 + "'" + "," + cs.getCoffeeName() + "'" + "," + cs.getCoffeeAddress()
                 + "'" + "," + cs.getRawReview() + "'" + "," + cs.getPhone()
                 + "'" + "," + cs.getUrl() +");";
