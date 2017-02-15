@@ -162,7 +162,7 @@ public class Coffee_shopService {
        
        try {
            Model db = Model.singleton();
-           int cid = db.newCoffee_Shop(shop);
+           int cid = db.newCoffeeShop(shop);
            logger.log(Level.INFO, "shop persisted to db as cid=" + cid);
            text.append("Shop id persisted with id=" + cid);
        }
