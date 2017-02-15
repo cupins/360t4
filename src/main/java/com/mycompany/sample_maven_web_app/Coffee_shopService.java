@@ -56,22 +56,22 @@ public class Coffee_shopService {
      * Retrieves representation of an instance of services.GenericResource
      * @return an instance of java.lang.String
      */
-    @GET
+	@GET
     @Produces(MediaType.TEXT_HTML)
-    public String getUsers() {
+    public String getCShops() {
         //TODO return proper representation object
         StringBuilder sb = new StringBuilder();
-        sb.append("<html><body><style>table, th, td {font-family:Arial,Verdana,sans-serif;font-size:16px;padding: 0px;border-spacing: 0px;}</style><b>USERS LIST:</b><br><br><table cellpadding=10 border=1><tr><td>Name</td><td>Age</td><td>userid</td></tr>");
+        sb.append("<html><body><style>table, th, td {font-family:Arial,Verdana,sans-serif;font-size:16px;padding: 0px;border-spacing: 0px;}</style><b>Coffee Shop List:</b><br><br><table cellpadding=10 border=1><tr><td>coffee id</td><td>coffee name</td><td>coffee address</td><td>raw review</td><td>phone number</td><td>url</td></tr>");
         try
         {
             Model db = Model.singleton();
-            User[] users = db.getUsers();
-            for (int i=0;i<users.length;i++)
-                sb.append("<tr><td>" + users[i].getName() + "</td><td>" + users[i].getAge() + "</td><td>" + users[i].getUserid() + "</td></tr>");
+            Coffee_Shop[] cs = db.getCS();
+            for (int i=0;i<cs.length;i++)
+                sb.append("<tr><td>" + cs[i].getCid() + "</td><td>" + cs[i].getCoffeeName() + "</td><td>" + cs[i].getCoffeeAddress() + "</td><td>" + cs[i].getRawReview() + "</td><td>" + cs[i].getPhone() + "</td><td>" + cs[i].getUrl() + "</td></tr>");
         }
         catch (Exception e)
         {
-            sb.append("</table><br>Error getting users: " + e.toString() + "<br>");
+            sb.append("</table><br>Error getting coffee shops: " + e.toString() + "<br>");
         }
         sb.append("</table></body></html>");
         return sb.toString();
