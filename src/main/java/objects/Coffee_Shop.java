@@ -22,6 +22,8 @@ public class Coffee_Shop {
     Coffee_Shop(){}
     
     // Getter and Setters
+    
+    // Coffee shop id 
     public int getCid() {
         return cid;
     }
@@ -29,7 +31,8 @@ public class Coffee_Shop {
     public void setCid(int cid) {
         this.cid = cid;
     }
-
+    
+    //Coffee shop name
     public String getCoffeeName() {
         return coffeeName;
     }
@@ -37,7 +40,8 @@ public class Coffee_Shop {
     public void setCoffeeName(String coffeeName) {
         this.coffeeName = coffeeName;
     }
-
+    
+    // Coffee shop address
     public String getCoffeeAddress() {
         return coffeeAddress;
     }
@@ -45,7 +49,8 @@ public class Coffee_Shop {
     public void setCoffeeAddress(String coffeeAddress) {
         this.coffeeAddress = coffeeAddress;
     }
-
+    
+    // raw score for all reviews for this (cid) coffee shop
     public int getRawReview() {
         return rawReview;
     }
@@ -53,7 +58,8 @@ public class Coffee_Shop {
     public void setRawReview(int rawReview) {
         this.rawReview = rawReview;
     }
-
+    
+    // phone number for coffee shop
     public String getPhone() {
         return phone;
     }
@@ -61,7 +67,8 @@ public class Coffee_Shop {
     public void setPhone(String phone) {
         this.phone = phone;
     }
-
+    
+    // URL for coffee shop
     public String getUrl() {
         return url;
     }
