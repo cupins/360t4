@@ -20,7 +20,7 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.UriInfo;
-import objects.User;
+import objects.Coffee_Shop;
 import org.codehaus.jackson.map.ObjectMapper;
 
 /**
@@ -86,6 +86,7 @@ public class Coffee_shopService {
     @Consumes(MediaType.APPLICATION_JSON)
     public String updateUser(String jobj) throws IOException
     {
+        /*
         ObjectMapper mapper = new ObjectMapper();
         User user = mapper.readValue(jobj.toString(), User.class);
         StringBuilder text = new StringBuilder();
@@ -108,6 +109,7 @@ public class Coffee_shopService {
             text.append("Error connecting to db.");
         }
         return text.toString();
+*/
     }
     
     @DELETE
@@ -115,6 +117,7 @@ public class Coffee_shopService {
     @Consumes(MediaType.APPLICATION_JSON)
     public String deleteUser(String jobj) throws IOException
     {
+        /*
         ObjectMapper mapper = new ObjectMapper();
         User user = mapper.readValue(jobj.toString(), User.class);
         StringBuilder text = new StringBuilder();
@@ -137,6 +140,7 @@ public class Coffee_shopService {
             text.append("Error connecting to db.");
         }
         return text.toString();
+*/
     }
     
     @POST
