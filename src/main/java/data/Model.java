@@ -168,8 +168,8 @@ public class Model {
             logger.log(Level.INFO, "Reading row...");
             Coffee_Shop cs = new Coffee_Shop();
             cs.setCid(rows.getInt("cid"));
-            cs.setCoffeeName(rows.getString("coffeName"));
-            cs.setCoffeeAddress(rows.getString("coffeAddress"));
+            cs.setCoffeeName(rows.getString("coffeeName"));
+            cs.setCoffeeAddress(rows.getString("coffeeAddress"));
             cs.setRawReview(rows.getInt("rawReview"));
             cs.setPhone(rows.getString("phone"));
             cs.setUrl(rows.getString("url"));
@@ -179,8 +179,19 @@ public class Model {
         return ll.toArray(new Coffee_Shop[ll.size()]);
     }
     
-    public boolean updateCoffeShop(Coffee_Shop cs) {
-        return false;
+    public boolean updateCoffeShop(Coffee_Shop cs) throws SQLException {
+        StringBuilder sqlQuery = new StringBuilder();
+        sqlQuery.append("update shops ");
+        sqlQuery.append("cid='" + cs.getCid() + "', ");
+        sqlQuery.append("coffeeName=" + cs.getCoffeeName() + " ");
+        sqlQuery.append("coffeeAddress=" + cs.getCoffeeAddress() + ",");
+        sqlQuery.append("rawReview=" + cs.getRawReview() + ",");
+        sqlQuery.append("phone=" + cs.getPhone() + ",");
+        sqlQuery.append("url=" + cs.getUrl() + ";");
+        Statement st = createStatement();
+        logger.log(Level.INFO, "UPDATE SQL=" + sqlQuery.toString());
+        return st.execute(sqlQuery.toString());
+        
     }
     
     
