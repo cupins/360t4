@@ -110,6 +110,7 @@ public class Coffee_shopService {
         }
         return text.toString();
 */
+        return "";
     }
     
     @DELETE
@@ -141,6 +142,7 @@ public class Coffee_shopService {
         }
         return text.toString();
 */
+        return "";
     }
     
    @POST
@@ -148,7 +150,7 @@ public class Coffee_shopService {
    @Consumes(MediaType.APPLICATION_JSON)
    public String createCShop(String jobj) throws IOException {
        ObjectMapper mapper = new ObjectMapper();
-       Coffee_Shop shop = mapper.readValue(jobj.toString(), Cofee_Shop.class);
+       Coffee_Shop shop = mapper.readValue(jobj.toString(), Coffee_Shop.class);
        
        StringBuilder text = new StringBuilder();
        text.append("The JSON obj:" + jobj.toString() + "\n");
