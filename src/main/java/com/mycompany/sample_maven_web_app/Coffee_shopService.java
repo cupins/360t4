@@ -56,7 +56,7 @@ public class Coffee_shopService {
      * Retrieves representation of an instance of services.GenericResource
      * @return an instance of java.lang.String
      */
-    @GET
+	@GET
     @Produces(MediaType.TEXT_HTML)
     public String getCShops() {
         //TODO return proper representation object
@@ -143,39 +143,39 @@ public class Coffee_shopService {
 */
     }
     
-    @POST
-    @Produces(MediaType.TEXT_PLAIN)
-    @Consumes(MediaType.APPLICATION_JSON)
-    public String createUser(String jobj) throws IOException {
-        ObjectMapper mapper = new ObjectMapper();
-        User user = mapper.readValue(jobj.toString(), User.class);
-        
-        StringBuilder text = new StringBuilder();
-        text.append("The JSON obj:" + jobj.toString() + "\n");
-        text.append("Hello " + user.getName() + "\n");
-        text.append("You're only " + user.getAge() + " years old.\n");
-        text.append("Messages:\n");
-        for (Object msg : user.getMessages())
-            text.append(msg.toString() + "\n");
-        
-        try {
-            Model db = Model.singleton();
-            int userid = db.newUser(user);
-            logger.log(Level.INFO, "user persisted to db as userid=" + userid);
-            text.append("User id persisted with id=" + userid);
-        }
-        catch (SQLException sqle)
-        {
-            String errText = "Error persisting user after db connection made:\n" + sqle.getMessage() + " --- " + sqle.getSQLState() + "\n";
-            logger.log(Level.SEVERE, errText);
-            text.append(errText);
-        }
-        catch (Exception e)
-        {
-            logger.log(Level.SEVERE, "Error connecting to db.");
-        }
-        
-        
-        return text.toString();
-    }
+   @POST
+   @Produces(MediaType.TEXT_PLAIN)
+   @Consumes(MediaType.APPLICATION_JSON)
+   public String createCShop(String jobj) throws IOException {
+       ObjectMapper mapper = new ObjectMapper();
+       Coffee_Shop shop = mapper.readValue(jobj.toString(), Cofee_Shop.class);
+       
+       StringBuilder text = new StringBuilder();
+       text.append("The JSON obj:" + jobj.toString() + "\n");
+//         text.append("Hello " + user.getName() + "\n");
+//         text.append("You're only " + user.getAge() + " years old.\n");
+//         text.append("Messages:\n");
+//         for (Object msg : user.getMessages())
+//             text.append(msg.toString() + "\n");
+       
+       try {
+           Model db = Model.singleton();
+           int cid = db.newCoffee_Shop(shop);
+           logger.log(Level.INFO, "shop persisted to db as cid=" + cid);
+           text.append("Shop id persisted with id=" + cid);
+       }
+       catch (SQLException sqle)
+       {
+           String errText = "Error persisting user after db connection made:\n" + sqle.getMessage() + " --- " + sqle.getSQLState() + "\n";
+           logger.log(Level.SEVERE, errText);
+           text.append(errText);
+       }
+       catch (Exception e)
+       {
+           logger.log(Level.SEVERE, "Error connecting to db.");
+       }
+       
+       
+       return text.toString();
+   }
 }
