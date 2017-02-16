@@ -84,7 +84,7 @@ public class Coffee_shopService {
     @PUT
     @Produces(MediaType.TEXT_PLAIN)
     @Consumes(MediaType.APPLICATION_JSON)
-    public String updateUser(String jobj) throws IOException
+    public String updateCoffeeShop(String jobj) throws IOException
     {
         /*
         ObjectMapper mapper = new ObjectMapper();
