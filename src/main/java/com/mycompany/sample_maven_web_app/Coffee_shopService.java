@@ -86,20 +86,20 @@ public class Coffee_shopService {
     @Consumes(MediaType.APPLICATION_JSON)
     public String updateCoffeeShop(String jobj) throws IOException
     {
-        /*
+        
         ObjectMapper mapper = new ObjectMapper();
-        User user = mapper.readValue(jobj.toString(), User.class);
+        Coffee_Shop cs = mapper.readValue(jobj.toString(), Coffee_Shop.class);
         StringBuilder text = new StringBuilder();
         try {
             Model db = Model.singleton();
-            int userid = user.getUserid();
-            db.updateUser(user);
-            logger.log(Level.INFO, "update user with userid=" + userid);
-            text.append("User id updated with user id=" + userid + "\n");
+            int cid = cs.getCid();
+            db.updateCoffeeShop(cs);
+            logger.log(Level.INFO, "update coffee_shop with cid=" + cid);
+            text.append("cid updated with  cid=" + cid + "\n");
         }
         catch (SQLException sqle)
         {
-            String errText = "Error updating user after db connection made:\n" + sqle.getMessage() + " --- " + sqle.getSQLState() + "\n";
+            String errText = "Error updating coffee_shop after db connection made:\n" + sqle.getMessage() + " --- " + sqle.getSQLState() + "\n";
             logger.log(Level.SEVERE, errText);
             text.append(errText);
         }
@@ -109,8 +109,6 @@ public class Coffee_shopService {
             text.append("Error connecting to db.");
         }
         return text.toString();
-*/
-        return "";
     }
     
     @DELETE
@@ -118,16 +116,16 @@ public class Coffee_shopService {
     @Consumes(MediaType.APPLICATION_JSON)
     public String deleteUser(String jobj) throws IOException
     {
-        /*
+        
         ObjectMapper mapper = new ObjectMapper();
-        User user = mapper.readValue(jobj.toString(), User.class);
+        Coffee_Shop cs = mapper.readValue(jobj.toString(), Coffee_Shop.class);
         StringBuilder text = new StringBuilder();
         try {
             Model db = Model.singleton();
-            int userid = user.getUserid();
-            db.deleteUser(userid);
-            logger.log(Level.INFO, "user deleted from db=" + userid);
-            text.append("User id deleted with id=" + userid);
+            int cid = cs.getCid();
+            db.deleteCoffeeShop(cid);
+            logger.log(Level.INFO, "CoffeeShop deleted from db=" + cid);
+            text.append("Cid deleted with id=" + cid);
         }
         catch (SQLException sqle)
         {
@@ -141,8 +139,6 @@ public class Coffee_shopService {
             text.append("Error connecting to db.");
         }
         return text.toString();
-*/
-        return "";
     }
     
    @POST

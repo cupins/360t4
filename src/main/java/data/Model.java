@@ -200,9 +200,6 @@ public class Model {
        }
        return ll.toArray(new Coffee_Shop[ll.size()]);
    }
-    public boolean updateCoffeShop(Coffee_Shop cs) {
-        return false;
-    }
     
     public boolean updateCoffeeShop(Coffee_Shop cs) throws SQLException {
         StringBuilder sqlQuery = new StringBuilder();
@@ -220,5 +217,11 @@ public class Model {
     }
     
     
-    
+    public void deleteCoffeeShop(int cid) throws SQLException
+   {
+       String sqlDelete="delete from shops where cid=" + cid;
+       PreparedStatement pst = createPreparedStatement(sqlDelete);
+       pst.setInt(1, cid);
+       pst.execute();
+   }
 }
