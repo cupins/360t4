@@ -29,10 +29,11 @@ create table shops (
     website varchar(512)
 );
 
-create table review(
+create table reviews(
     date timestamp,
     text varchar(160),
     rating integer,
     cid integer,
-    userid integer
+    userid integer,
+    rid serial primary key
 );

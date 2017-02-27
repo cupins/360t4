@@ -16,6 +16,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import objects.User;
 import objects.Coffee_Shop;
+import objects.Review;
 
 
 
@@ -96,7 +97,8 @@ public class Model {
         return null;
     }
 
-    
+    // users
+    /////////////////////////////////////////////////////////////////////////
 
     public int newUser(User usr) throws SQLException
     {
@@ -162,7 +164,8 @@ public class Model {
         return st.execute(sqlQuery.toString());
     }
 
-    
+    // Shops
+    /////////////////////////////////////////////////////////////////////////
 
     public int newCoffeeShop(Coffee_Shop cs) throws SQLException
 
@@ -225,4 +228,73 @@ public class Model {
 
     }
 
+    // Reviews
+    /////////////////////////////////////////////////////////////////////////
+    
+    
+    public int createReview(Review rvw) throws SQLException
+    {
+        String sqlInsert="insert into users (name, age) values ('" + usr.getName() + "'" + "," + usr.getAge() + ");";
+        Statement s = createStatement();
+        logger.log(Level.INFO, "attempting statement execute");
+        s.execute(sqlInsert,Statement.RETURN_GENERATED_KEYS);
+        logger.log(Level.INFO, "statement executed.  atempting get generated keys");
+        ResultSet rs = s.getGeneratedKeys();
+        logger.log(Level.INFO, "retrieved keys from statement");
+        int userid = -1;
+        while (rs.next())
+            userid = rs.getInt(3);   // assuming 3rd column is userid
+        logger.log(Level.INFO, "The new user id=" + userid);
+        return userid;
+
+    }
+
+    
+
+    public void deleteReview(int rid) throws SQLException
+    {
+        String sqlDelete="delete from users where userid=?";
+        PreparedStatement pst = createPreparedStatement(sqlDelete);
+        pst.setInt(1, userid);
+        pst.execute();
+    }
+
+    
+
+    public Review[] getReview() throws SQLException
+    {
+        LinkedList<Review> ll = new LinkedList<Review>();
+        String sqlQuery ="select * from users;";
+        Statement st = createStatement();
+        ResultSet rows = st.executeQuery(sqlQuery);
+        while (rows.next())
+        {
+            logger.log(Level.INFO, "Reading row...");
+            User usr = new User();
+            usr.setName(rows.getString("name"));
+            usr.setUserId(rows.getInt("userid"));
+            usr.setAge(rows.getInt("age"));
+            logger.log(Level.INFO, "Adding user to list with id=" + usr.getUserid());
+            ll.add(usr);
+        }
+        return ll.toArray(new User[ll.size()]);
+    }
+
+    
+
+    public boolean updateReview(Review rvw) throws SQLException
+
+    {
+
+        StringBuilder sqlQuery = new StringBuilder();
+        sqlQuery.append("update users ");
+        sqlQuery.append("set name='" + usr.getName() + "', ");
+        sqlQuery.append("age=" + usr.getAge() + " ");
+        sqlQuery.append("where userid=" + usr.getUserid() + ";");
+        Statement st = createStatement();
+        logger.log(Level.INFO, "UPDATE SQL=" + sqlQuery.toString());
+        return st.execute(sqlQuery.toString());
+    }
+
+    
 }

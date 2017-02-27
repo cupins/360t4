@@ -44,7 +44,7 @@ import org.codehaus.jackson.map.ObjectMapper;
  * @author wlloyd
 
  */
-@Path("Coffeeshop")
+@Path("shops")
 public class Coffee_shopService {
 
     static final Logger logger = Logger.getLogger(UserService.class.getName());
