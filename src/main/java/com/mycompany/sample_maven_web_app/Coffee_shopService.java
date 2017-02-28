@@ -105,7 +105,6 @@ public class Coffee_shopService {
     @DELETE
     @Produces(MediaType.TEXT_PLAIN)
     @Consumes(MediaType.APPLICATION_JSON)
-    // NEEDS UPDATING
     public String deleteCoffeeShop(String jobj) throws IOException
     {
         ObjectMapper mapper = new ObjectMapper();

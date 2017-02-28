@@ -151,9 +151,7 @@ public class Model {
     
 
     public boolean updateUser(User usr) throws SQLException
-
     {
-
         StringBuilder sqlQuery = new StringBuilder();
         sqlQuery.append("update users ");
         sqlQuery.append("set name='" + usr.getName() + "', ");
@@ -198,11 +196,11 @@ public class Model {
             logger.log(Level.INFO, "Reading row...");
             Coffee_Shop cs = new Coffee_Shop();
             cs.setCid(rows.getInt("cid"));
-            cs.setCoffeeName(rows.getString("coffeName"));
-            cs.setCoffeeAddress(rows.getString("coffeAddress"));
-            cs.setRawReview(rows.getInt("rawReview"));
+            cs.setCoffeeName(rows.getString("coffee_name"));
+            cs.setCoffeeAddress(rows.getString("coffee_address"));
+            cs.setRawReview(rows.getInt("raw_review"));
             cs.setPhone(rows.getString("phone"));
-            cs.setUrl(rows.getString("url"));
+            cs.setUrl(rows.getString("website"));
             logger.log(Level.INFO, "Adding shop to list with id=" + cs.getCid());
             ll.add(cs);
         }
