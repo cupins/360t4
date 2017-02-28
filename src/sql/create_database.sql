@@ -13,11 +13,12 @@
 
 create table users (
     username varchar(50),
-    passwd varchar(50),
+    password varchar(50),
     email varchar(50),
     userid serial primary key,
     Fname varchar(50),
-    Lname varchar(50)
+    Lname varchar(50),
+    utype char
 );
 
 create table shops (

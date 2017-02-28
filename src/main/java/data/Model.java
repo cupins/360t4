@@ -170,10 +170,10 @@ public class Model {
     public int newCoffeeShop(Coffee_Shop cs) throws SQLException
 
     {
-        String sqlInsert="insert into shops (cid, name, address, rawreview, phone, getUrl) values ('" + cs.getCid() 
-                + "'" + "," + cs.getCoffeeName() + "'" + "," + cs.getCoffeeAddress()
-                + "'" + "," + cs.getRawReview() + "'" + "," + cs.getPhone()
-                + "'" + "," + cs.getUrl() +");";
+        String sqlInsert="insert into shops (name, address, rawreview, phone, getUrl) values ("
+                + "'" + cs.getCoffeeName() + "'" + ", " + "'" + cs.getCoffeeAddress()
+                + "'" + "," + cs.getRawReview() + "," + "'" + cs.getPhone()
+                + "'" + "," + "'" + cs.getUrl() + "'" +");";
         Statement s = createStatement();
         logger.log(Level.INFO, "attempting statement execute");
         s.execute(sqlInsert,Statement.RETURN_GENERATED_KEYS);

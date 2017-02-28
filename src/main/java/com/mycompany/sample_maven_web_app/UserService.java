@@ -39,8 +39,7 @@ public class UserService {
     /**
      * Creates a new instance of GenericResource
      */
-    public UserService() {
-    }
+    public UserService() {}
 
     /**
      * Retrieves representation of an instance of services.GenericResource

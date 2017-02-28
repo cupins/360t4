@@ -25,53 +25,28 @@ import javax.ws.rs.core.UriInfo;
 import objects.Coffee_Shop;
 import org.codehaus.jackson.map.ObjectMapper;
 
-
-
 /**
-
- *
-
- * @author reid
-
- */    
-
-/**
-
  * REST Web Service
-
- *
-
- * @author wlloyd
-
+ * @author tim, reid, gabriel & chris
  */
 @Path("shops")
 public class Coffee_shopService {
 
     static final Logger logger = Logger.getLogger(UserService.class.getName());
-    
-
     @Context
     private UriInfo context;
 
-
-
     /**
-
      * Creates a new instance of GenericResource
-
      */
     public Coffee_shopService() {
-
     }
 
 
 
     /**
-
      * Retrieves representation of an instance of services.GenericResource
-
      * @return an instance of java.lang.String
-
      */
     @GET
     @Produces(MediaType.TEXT_HTML)
@@ -94,24 +69,15 @@ public class Coffee_shopService {
         return sb.toString();
     }
 
- /**
-
+    /**
      * PUT method for updating or creating an instance of GenericResource
-
      * @param content representation for the resource
-
      */
-
     @PUT
-
     @Produces(MediaType.TEXT_PLAIN)
-
     @Consumes(MediaType.APPLICATION_JSON)
-
     public String updateCoffeeShop(String jobj) throws IOException
-
     {
-
         ObjectMapper mapper = new ObjectMapper();
         Coffee_Shop cs = mapper.readValue(jobj.toString(), Coffee_Shop.class);
         StringBuilder text = new StringBuilder();
@@ -139,8 +105,8 @@ public class Coffee_shopService {
     @DELETE
     @Produces(MediaType.TEXT_PLAIN)
     @Consumes(MediaType.APPLICATION_JSON)
+    // NEEDS UPDATING
     public String deleteCoffeeShop(String jobj) throws IOException
-
     {
         ObjectMapper mapper = new ObjectMapper();
         Coffee_Shop cs = mapper.readValue(jobj.toString(), Coffee_Shop.class);
@@ -165,7 +131,6 @@ public class Coffee_shopService {
         }
         return text.toString();
     }
-
     
 
    @POST
