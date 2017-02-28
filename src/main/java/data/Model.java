@@ -23,13 +23,15 @@ import objects.Review;
 /**
  *
  * @author wlloyd
+ * 
+ * @author reid, tim, gabriel, chris
  */
 
 public class Model {
     static final Logger logger = Logger.getLogger(Model.class.getName());
     private static Model instance;
     private Connection conn;
-    private LinkedList<Coffee_Shop> csList = new LinkedList<Coffee_Shop>();
+    //private LinkedList<Coffee_Shop> csList = new LinkedList<Coffee_Shop>();
     
 
     public static Model singleton() throws Exception {
@@ -52,14 +54,10 @@ public class Model {
         logger.log(Level.INFO, "db connection ok.");
     }
 
-    
-
     private Connection getConnection()
     {
         return conn;
-    }
-
-    
+    }  
 
     private Statement createStatement() throws SQLException
     {
@@ -102,7 +100,7 @@ public class Model {
 
     public int newUser(User usr) throws SQLException
     {
-        String sqlInsert="insert into users (name, age) values ('" + usr.getName() + "'" + "," + usr.getAge() + ");";
+        String sqlInsert="insert into users (username, password, email, Fname, Lname, utype) values ('" + usr.getUsername() + "', '" + usr.getPassword() + "', '" + usr.getEmail() +"', '" + usr.getFname() +"', '" + usr.getLname() +"', " + usr.getUtype() + ");";
         Statement s = createStatement();
         logger.log(Level.INFO, "attempting statement execute");
         s.execute(sqlInsert,Statement.RETURN_GENERATED_KEYS);
@@ -111,7 +109,7 @@ public class Model {
         logger.log(Level.INFO, "retrieved keys from statement");
         int userid = -1;
         while (rs.next())
-            userid = rs.getInt(3);   // assuming 3rd column is userid
+            userid = rs.getInt(4);   // assuming 4th column is userid
         logger.log(Level.INFO, "The new user id=" + userid);
         return userid;
 
@@ -139,9 +137,14 @@ public class Model {
         {
             logger.log(Level.INFO, "Reading row...");
             User usr = new User();
-            usr.setName(rows.getString("name"));
+            usr.setUsername(rows.getString("username"));
+            usr.setPassword(rows.getString("password"));
+            usr.setEmail(rows.getString("email"));
+            usr.setFname(rows.getString("Fname"));
+            usr.setLname(rows.getString("Lname"));
+            usr.setUtype(rows.getString("utype").charAt(0));
             usr.setUserId(rows.getInt("userid"));
-            usr.setAge(rows.getInt("age"));
+            
             logger.log(Level.INFO, "Adding user to list with id=" + usr.getUserid());
             ll.add(usr);
         }
@@ -154,8 +157,11 @@ public class Model {
     {
         StringBuilder sqlQuery = new StringBuilder();
         sqlQuery.append("update users ");
-        sqlQuery.append("set name='" + usr.getName() + "', ");
-        sqlQuery.append("age=" + usr.getAge() + " ");
+        sqlQuery.append("set username='" + usr.getUsername() + "', ");
+        sqlQuery.append("set password='" + usr.getPassword() + "', ");
+        sqlQuery.append("set email='" + usr.getEmail() + "', ");
+        sqlQuery.append("set Fname='" + usr.getFname() + "', ");
+        sqlQuery.append("set Lname='" + usr.getLname() + "', ");
         sqlQuery.append("where userid=" + usr.getUserid() + ";");
         Statement st = createStatement();
         logger.log(Level.INFO, "UPDATE SQL=" + sqlQuery.toString());
@@ -213,11 +219,11 @@ public class Model {
         StringBuilder sqlQuery = new StringBuilder();
 
         sqlQuery.append("update shops ");
-        sqlQuery.append("coffeeName=" + cs.getCoffeeName() + ", ");
-        sqlQuery.append("coffeeAddress=" + cs.getCoffeeAddress() + ", ");
-        sqlQuery.append("rawReview=" + cs.getRawReview() + ", ");
+        sqlQuery.append("coffee_name=" + cs.getCoffeeName() + ", ");
+        sqlQuery.append("coffee_address=" + cs.getCoffeeAddress() + ", ");
+        sqlQuery.append("raw_review=" + cs.getRawReview() + ", ");
         sqlQuery.append("phone=" + cs.getPhone() + ", ");
-        sqlQuery.append("url=" + cs.getUrl() + ", ");
+        sqlQuery.append("website=" + cs.getUrl() + ", ");
         sqlQuery.append("where cid=" + cs.getCid() +";");
         Statement st = createStatement();
         logger.log(Level.INFO, "UPDATE SQL=" + sqlQuery.toString());

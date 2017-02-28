@@ -5,42 +5,65 @@
  */
 package objects;
 
-import java.util.List;
-
 /**
  *
- * @author wlloyd
+ * @author Reid
  */
 public class User {
 
-    private String name;
+    private String username;
+    private String password;
+    private String email;
+    private String Fname;
+    private String Lname;
+    private char utype;
 
-    public String getName() {
-        return name;
+    public String getUsername() {
+        return username;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setUsername(String username) {
+        this.username = username;
     }
 
-    private int age;
-
-    public int getAge() {
-        return age;
+    public String getPassword() {
+        return password;
     }
 
-    public void setAge(int age) {
-        this.age = age;
+    public void setPassword(String password) {
+        this.password = password;
     }
 
-    private List<String> messages;
-
-    public List<String> getMessages() {
-        return messages;
+    public String getEmail() {
+        return email;
     }
 
-    public void setMessages(List<String> messages) {
-        this.messages = messages;
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getFname() {
+        return Fname;
+    }
+
+    public void setFname(String Fname) {
+        this.Fname = Fname;
+    }
+
+    public String getLname() {
+        return Lname;
+    }
+
+    public void setLname(String Lname) {
+        this.Lname = Lname;
+    }
+
+    public char getUtype() {
+        return utype;
+    }
+
+    public void setUtype(char utype) {
+        this.utype = utype;
     }
     
     private int userid;
