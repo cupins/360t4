@@ -215,12 +215,12 @@ public class Model {
         StringBuilder sqlQuery = new StringBuilder();
 
         sqlQuery.append("update shops ");
-        sqlQuery.append("cid='" + cs.getCid() + "', ");
-        sqlQuery.append("coffeeName=" + cs.getCoffeeName() + " ");
-        sqlQuery.append("coffeeAddress=" + cs.getCoffeeAddress() + ",");
-        sqlQuery.append("rawReview=" + cs.getRawReview() + ",");
-        sqlQuery.append("phone=" + cs.getPhone() + ",");
-        sqlQuery.append("url=" + cs.getUrl() + ";");
+        sqlQuery.append("coffeeName=" + cs.getCoffeeName() + ", ");
+        sqlQuery.append("coffeeAddress=" + cs.getCoffeeAddress() + ", ");
+        sqlQuery.append("rawReview=" + cs.getRawReview() + ", ");
+        sqlQuery.append("phone=" + cs.getPhone() + ", ");
+        sqlQuery.append("url=" + cs.getUrl() + ", ");
+        sqlQuery.append("where cid=" + cs.getCid() +";");
         Statement st = createStatement();
         logger.log(Level.INFO, "UPDATE SQL=" + sqlQuery.toString());
 
@@ -234,18 +234,18 @@ public class Model {
     
     public int createReview(Review rvw) throws SQLException
     {
-        String sqlInsert="insert into users (name, age) values ('" + usr.getName() + "'" + "," + usr.getAge() + ");";
+        String sqlInsert="insert into reviews (date, text, rating, cid, userid) values (" + rvw.getDate() + "," + " '" + rvw.getText() + "', " + rvw.getRating() + ", " + rvw.getCid() + ", " + rvw.getUserid() + ");";
         Statement s = createStatement();
         logger.log(Level.INFO, "attempting statement execute");
         s.execute(sqlInsert,Statement.RETURN_GENERATED_KEYS);
         logger.log(Level.INFO, "statement executed.  atempting get generated keys");
         ResultSet rs = s.getGeneratedKeys();
         logger.log(Level.INFO, "retrieved keys from statement");
-        int userid = -1;
+        int rid = -1;
         while (rs.next())
-            userid = rs.getInt(3);   // assuming 3rd column is userid
-        logger.log(Level.INFO, "The new user id=" + userid);
-        return userid;
+            rid = rs.getInt(6);   // assuming 3rd column is userid
+        logger.log(Level.INFO, "The new rid=" + rid);
+        return rid;
 
     }
 
@@ -253,31 +253,33 @@ public class Model {
 
     public void deleteReview(int rid) throws SQLException
     {
-        String sqlDelete="delete from users where userid=?";
+        String sqlDelete="delete from reviews where rid=?";
         PreparedStatement pst = createPreparedStatement(sqlDelete);
-        pst.setInt(1, userid);
+        pst.setInt(6, rid);
         pst.execute();
     }
 
     
 
-    public Review[] getReview() throws SQLException
+    public Review[] getReviews() throws SQLException
     {
         LinkedList<Review> ll = new LinkedList<Review>();
-        String sqlQuery ="select * from users;";
+        String sqlQuery ="select * from reviews;";
         Statement st = createStatement();
         ResultSet rows = st.executeQuery(sqlQuery);
         while (rows.next())
         {
             logger.log(Level.INFO, "Reading row...");
-            User usr = new User();
-            usr.setName(rows.getString("name"));
-            usr.setUserId(rows.getInt("userid"));
-            usr.setAge(rows.getInt("age"));
-            logger.log(Level.INFO, "Adding user to list with id=" + usr.getUserid());
-            ll.add(usr);
+            Review rvw = new Review();
+            rvw.setDate(rows.getDate("date"));
+            rvw.setText(rows.getString("text"));
+            rvw.setRating(rows.getInt("rating"));
+            rvw.setUserid(rows.getInt("userid"));
+            rvw.setCid(rows.getInt("cid"));
+            logger.log(Level.INFO, "Adding review to list with id=" + rvw.getRid());
+            ll.add(rvw);
         }
-        return ll.toArray(new User[ll.size()]);
+        return ll.toArray(new Review[ll.size()]);
     }
 
     
@@ -285,12 +287,11 @@ public class Model {
     public boolean updateReview(Review rvw) throws SQLException
 
     {
-
         StringBuilder sqlQuery = new StringBuilder();
-        sqlQuery.append("update users ");
-        sqlQuery.append("set name='" + usr.getName() + "', ");
-        sqlQuery.append("age=" + usr.getAge() + " ");
-        sqlQuery.append("where userid=" + usr.getUserid() + ";");
+        sqlQuery.append("update reviews ");
+        sqlQuery.append("set text='" + rvw.getText() + "', ");
+        sqlQuery.append("rating=" + rvw.getRating() + " ");
+        sqlQuery.append("where rid=" + rvw.getRid() + ";");
         Statement st = createStatement();
         logger.log(Level.INFO, "UPDATE SQL=" + sqlQuery.toString());
         return st.execute(sqlQuery.toString());

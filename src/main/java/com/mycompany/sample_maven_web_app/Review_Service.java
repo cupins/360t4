@@ -89,10 +89,10 @@ public class Review_Service {
         StringBuilder text = new StringBuilder();
         try {
             Model db = Model.singleton();
-            int cid = user.getUserid();
-            db.updateUser(user);
-            logger.log(Level.INFO, "update user with userid=" + userid);
-            text.append("User id updated with user id=" + userid + "\n");
+            int rid = rvw.getRid();
+            db.updateReview(rvw);
+            logger.log(Level.INFO, "update review with rid=" + rid);
+            text.append("review id updated with r id=" + rid + "\n");
         } catch (SQLException sqle) {
             String errText = "Error updating user after db connection made:\n" + sqle.getMessage() + " --- " + sqle.getSQLState() + "\n";
             logger.log(Level.SEVERE, errText);
@@ -109,14 +109,14 @@ public class Review_Service {
     @Consumes(MediaType.APPLICATION_JSON)
     public String deleteReview(String jobj) throws IOException {
         ObjectMapper mapper = new ObjectMapper();
-        User user = mapper.readValue(jobj.toString(), User.class);
+        Review rvw = mapper.readValue(jobj.toString(), Review.class);
         StringBuilder text = new StringBuilder();
         try {
             Model db = Model.singleton();
-            int userid = user.getUserid();
-            db.deleteUser(userid);
-            logger.log(Level.INFO, "user deleted from db=" + userid);
-            text.append("User id deleted with id=" + userid);
+            int rid = rvw.getRid();
+            db.deleteReview(rid);
+            logger.log(Level.INFO, "review deleted from db=" + rid);
+            text.append("review id deleted with id=" + rid);
         } catch (SQLException sqle) {
             String errText = "Error deleteing user after db connection made:\n" + sqle.getMessage() + " --- " + sqle.getSQLState() + "\n";
             logger.log(Level.SEVERE, errText);
@@ -133,22 +133,17 @@ public class Review_Service {
     @Consumes(MediaType.APPLICATION_JSON)
     public String createReview(String jobj) throws IOException {
         ObjectMapper mapper = new ObjectMapper();
-        User user = mapper.readValue(jobj.toString(), User.class);
+        Review rvw = mapper.readValue(jobj.toString(), Review.class);
 
         StringBuilder text = new StringBuilder();
         text.append("The JSON obj:" + jobj.toString() + "\n");
-        text.append("Hello " + user.getName() + "\n");
-        text.append("You're only " + user.getAge() + " years old.\n");
-        text.append("Messages:\n");
-        for (Object msg : user.getMessages()) {
-            text.append(msg.toString() + "\n");
-        }
-
+        text.append("Review: " + rvw.getText() + "\n");
+        text.append("Rid " + rvw.getRid() + "\n");
         try {
             Model db = Model.singleton();
-            int userid = db.newUser(user);
-            logger.log(Level.INFO, "user persisted to db as userid=" + userid);
-            text.append("User id persisted with id=" + userid);
+            int rid = db.createReview(rvw);
+            logger.log(Level.INFO, "review persisted to db as rid=" + rid);
+            text.append("Review id persisted with id=" + rid);
         } catch (SQLException sqle) {
             String errText = "Error persisting user after db connection made:\n" + sqle.getMessage() + " --- " + sqle.getSQLState() + "\n";
             logger.log(Level.SEVERE, errText);

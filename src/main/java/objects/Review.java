@@ -19,6 +19,15 @@ public class Review {
     private int rating;
     private int cid;
     private int userid;
+    private int rid;
+
+    public int getRid() {
+        return rid;
+    }
+
+    public void setRid(int rid) {
+        this.rid = rid;
+    }
     
     public Date getDate() {
         return date;
