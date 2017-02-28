@@ -61,7 +61,7 @@ public class Review_Service {
     public String getReviews() {
         //TODO return proper representation object
         StringBuilder sb = new StringBuilder();
-        //sb.append("<html><body><style>table, th, td {font-family:Arial,Verdana,sans-serif;font-size:16px;padding: 0px;border-spacing: 0px;}</style><b>Review LIST:</b><br><br><table cellpadding=10 border=1><tr><td>date</td><td>text</td><td>rating</td><td>cid</td><td>userid</td></tr>");
+        sb.append("<html><body><style>table, th, td {font-family:Arial,Verdana,sans-serif;font-size:16px;padding: 0px;border-spacing: 0px;}</style><b>Review LIST:</b><br><br><table cellpadding=10 border=1><tr><td>date</td><td>text</td><td>rating</td><td>cid</td><td>userid</td></tr>");
         try {
             Model db = Model.singleton();
             Review[] rvws = db.getReviews();
