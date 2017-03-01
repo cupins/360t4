@@ -231,7 +231,7 @@ public class Model {
         sqlQuery.append("coffee_address='" + cs.getCoffeeAddress() + "', ");
         sqlQuery.append("raw_review=" + cs.getRawReview() + ", ");
         sqlQuery.append("phone='" + cs.getPhone() + "', ");
-        sqlQuery.append("website='" + cs.getUrl() + "', ");
+        sqlQuery.append("website='" + cs.getUrl() + "' ");
         sqlQuery.append("where cid=" + cs.getCid() +";");
         Statement st = createStatement();
         logger.log(Level.INFO, "UPDATE SQL=" + sqlQuery.toString());
