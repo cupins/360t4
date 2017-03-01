@@ -157,11 +157,11 @@ public class Model {
         StringBuilder sqlQuery = new StringBuilder();
         sqlQuery.append("update users ");
         sqlQuery.append("set username='" + usr.getUsername() + "', ");
-        sqlQuery.append("set password='" + usr.getPassword() + "', ");
-        sqlQuery.append("set email='" + usr.getEmail() + "', ");
-        sqlQuery.append("set fname='" + usr.getFname() + "', ");
-        sqlQuery.append("set lname='" + usr.getLname() + "', ");
-        sqlQuery.append("set utype='" + usr.getUtype() + "' ");
+        sqlQuery.append("password='" + usr.getPassword() + "', ");
+        sqlQuery.append("email='" + usr.getEmail() + "', ");
+        sqlQuery.append("fname='" + usr.getFname() + "', ");
+        sqlQuery.append("lname='" + usr.getLname() + "', ");
+        sqlQuery.append("utype='" + usr.getUtype() + "' ");
         sqlQuery.append("where userid=" + usr.getUserid() + ";");
         Statement st = createStatement();
         logger.log(Level.INFO, "UPDATE SQL=" + sqlQuery.toString());
