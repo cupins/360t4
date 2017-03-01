@@ -1,8 +1,7 @@
 {
-  "cid": 1,
   "coffeeName": "Test Shop 1",
   "coffeeAddress": "42 Wallaby Way, Sydney",
   "rawReview": 3,
   "phone": "111-111-1111",
-  "url": "https://www.google.com"
+  "website": "https://www.google.com"
 }
