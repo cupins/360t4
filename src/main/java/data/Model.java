@@ -259,7 +259,7 @@ public class Model {
     {
         String sqlDelete="delete from reviews where rid=?";
         PreparedStatement pst = createPreparedStatement(sqlDelete);
-        pst.setInt(6, rid);
+        pst.setInt(1, rid);
         pst.execute();
     }
 
