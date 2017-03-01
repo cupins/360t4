@@ -174,9 +174,9 @@ public class Model {
     public int newCoffeeShop(Coffee_Shop cs) throws SQLException
 
     {
-        String sqlInsert="insert into shops (coffee_name, coffee_address, raw_review, phone, website) values ("
+        String sqlInsert="insert into shops (coffee_name, coffee_address, raw_review, phone, url) values("
                 + "'" + cs.getCoffeeName() + "'" + ", " + "'" + cs.getCoffeeAddress()
-                + "'" + "," + cs.getRawReview() + "," + "'" + cs.getPhone()
+                + "'" + ", " + cs.getRawReview() + "," + "'" + cs.getPhone()
                 + "'" + "," + "'" + cs.getUrl() + "'" +");";
         Statement s = createStatement();
         logger.log(Level.INFO, "attempting statement execute");

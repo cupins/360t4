@@ -1,7 +1,7 @@
 {
-  "coffeeName": "Test Shop 1",
-  "coffeeAddress": "42 Wallaby Way, Sydney",
-  "rawReview": 3,
+  "coffee_name": "Test Shop 1",
+  "coffee_address": "42 Wallaby Way, Sydney",
+  "raw_review": 3,
   "phone": "111-111-1111",
   "website": "https://www.google.com"
 }
