@@ -2,7 +2,7 @@
   "username": "xXNO_SCOPE_420Xx",
   "password": "12345",
   "email": "fred@uw.edu",
-  "Fname": "Fred",
-  "Lname": "Meme",
-  "utype": "u"
+  "fname": "Fred",
+  "lname": "Meme",
+  "utype": 'u' 
 }

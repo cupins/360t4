@@ -76,7 +76,6 @@ public class Model {
         return null;
     }
 
-    
 
     private PreparedStatement createPreparedStatement(String sql) throws SQLException
     {
@@ -100,7 +99,7 @@ public class Model {
 
     public int newUser(User usr) throws SQLException
     {
-        String sqlInsert="insert into users (username, password, email, Fname, Lname, utype) values ('" + usr.getUsername() + "', '" + usr.getPassword() + "', '" + usr.getEmail() +"', '" + usr.getFname() +"', '" + usr.getLname() +"', " + usr.getUtype() + ");";
+        String sqlInsert="insert into users (username, password, email, fname, lname, utype) values ('" + usr.getUsername() + "', '" + usr.getPassword() + "', '" + usr.getEmail() +"', '" + usr.getFname() +"', '" + usr.getLname() +"', " + usr.getUtype() + ");";
         Statement s = createStatement();
         logger.log(Level.INFO, "attempting statement execute");
         s.execute(sqlInsert,Statement.RETURN_GENERATED_KEYS);
@@ -140,8 +139,8 @@ public class Model {
             usr.setUsername(rows.getString("username"));
             usr.setPassword(rows.getString("password"));
             usr.setEmail(rows.getString("email"));
-            usr.setFname(rows.getString("Fname"));
-            usr.setLname(rows.getString("Lname"));
+            usr.setFname(rows.getString("fname"));
+            usr.setLname(rows.getString("lname"));
             usr.setUtype(rows.getString("utype").charAt(0));
             usr.setUserId(rows.getInt("userid"));
             
@@ -160,8 +159,8 @@ public class Model {
         sqlQuery.append("set username='" + usr.getUsername() + "', ");
         sqlQuery.append("set password='" + usr.getPassword() + "', ");
         sqlQuery.append("set email='" + usr.getEmail() + "', ");
-        sqlQuery.append("set Fname='" + usr.getFname() + "', ");
-        sqlQuery.append("set Lname='" + usr.getLname() + "', ");
+        sqlQuery.append("set fname='" + usr.getFname() + "', ");
+        sqlQuery.append("set lname='" + usr.getLname() + "', ");
         sqlQuery.append("where userid=" + usr.getUserid() + ";");
         Statement st = createStatement();
         logger.log(Level.INFO, "UPDATE SQL=" + sqlQuery.toString());

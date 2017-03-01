@@ -18,7 +18,7 @@ create table users (
     userid serial primary key,
     Fname varchar(50),
     Lname varchar(50),
-    utype char
+    utype char(1)
 );
 
 create table shops (

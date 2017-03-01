@@ -18,6 +18,7 @@ public class Coffee_Shop {
     private String phone;
     private String website;
     
+    
     // Constructor
     public Coffee_Shop(){}
     
