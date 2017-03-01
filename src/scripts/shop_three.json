@@ -1,8 +1,7 @@
 {
-  "cid": 3,
   "coffeeName": "Test Shop 3",
   "coffeeAddress": "234 Lazy Street, Default Town",
   "rawReview": 4,
   "phone": "333-333-3333",
-  "url": "https://www.google.com"
+  "website": "https://www.google.com"
 }
