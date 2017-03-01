@@ -99,7 +99,7 @@ public class Model {
 
     public int newUser(User usr) throws SQLException
     {
-        String sqlInsert="insert into users (username, password, email, fname, lname, utype) values ('" + usr.getUsername() + "', '" + usr.getPassword() + "', '" + usr.getEmail() +"', '" + usr.getFname() +"', '" + usr.getLname() +"', " + usr.getUtype() + ");";
+        String sqlInsert="insert into users (username, password, email, fname, lname, utype) values ('" + usr.getUsername() + "', '" + usr.getPassword() + "', '" + usr.getEmail() +"', '" + usr.getFname() +"', '" + usr.getLname() +"', '" + usr.getUtype() + "');";
         Statement s = createStatement();
         logger.log(Level.INFO, "attempting statement execute");
         s.execute(sqlInsert,Statement.RETURN_GENERATED_KEYS);
@@ -141,7 +141,7 @@ public class Model {
             usr.setEmail(rows.getString("email"));
             usr.setFname(rows.getString("fname"));
             usr.setLname(rows.getString("lname"));
-            usr.setUtype(rows.getString("utype").charAt(0));
+            usr.setUtype(rows.getString("utype"));
             usr.setUserId(rows.getInt("userid"));
             
             logger.log(Level.INFO, "Adding user to list with id=" + usr.getUserid());

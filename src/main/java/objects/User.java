@@ -16,7 +16,7 @@ public class User {
     private String email;
     private String Fname;
     private String Lname;
-    private char utype;
+    private String utype;
 
     public String getUsername() {
         return username;
@@ -58,11 +58,11 @@ public class User {
         this.Lname = Lname;
     }
 
-    public char getUtype() {
+    public String getUtype() {
         return utype;
     }
 
-    public void setUtype(char utype) {
+    public void setUtype(String utype) {
         this.utype = utype;
     }
     
