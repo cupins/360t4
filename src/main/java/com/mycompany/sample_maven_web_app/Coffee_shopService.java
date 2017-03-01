@@ -113,7 +113,7 @@ public class Coffee_shopService {
         try {
             Model db = Model.singleton();
             int cid = cs.getCid();
-            db.deleteUser(cid);
+            db.deleteCoffeeShop(cid);
             logger.log(Level.INFO, "cs deleted from db=" + cid);
             text.append("cs id deleted with id=" + cid);
         }
