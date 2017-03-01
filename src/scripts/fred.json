@@ -1,5 +1,8 @@
 {
-  "name": "Fred Smith",
-  "age": 33,
-  "messages": [ "hello fred 1", "hello fred 2", "hello fred 3" ]
+  "username": "xXNO_SCOPE_420Xx",
+  "password": "12345",
+  "email": "fred@uw.edu",
+  "Fname": "Fred",
+  "Lname": "Meme",
+  "utype": "u"
 }
