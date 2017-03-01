@@ -70,12 +70,12 @@ public class Coffee_Shop {
     }
     
     // URL for coffee shop
-    public String getUrl() {
+    public String getWebsite() {
         return website;
     }
 
     //Determine fields getter/setters and constructors
-    public void setUrl(String website) {
+    public void setWebsite(String website) {
         this.website = website;
     }
     

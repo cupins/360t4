@@ -59,7 +59,7 @@ public class Coffee_shopService {
             Model db = Model.singleton();
             Coffee_Shop[] cs = db.getCoffeeShops();
             for (int i=0;i<cs.length;i++)
-                sb.append("<tr><td>" + cs[i].getCid() + "</td><td>" + cs[i].getCoffeeName() + "</td><td>" + cs[i].getCoffeeAddress() + "</td><td>" + cs[i].getRawReview() + "</td><td>" + cs[i].getPhone() + "</td><td>" + cs[i].getUrl() + "</td></tr>");
+                sb.append("<tr><td>" + cs[i].getCid() + "</td><td>" + cs[i].getCoffeeName() + "</td><td>" + cs[i].getCoffeeAddress() + "</td><td>" + cs[i].getRawReview() + "</td><td>" + cs[i].getPhone() + "</td><td>" + cs[i].getWebsite() + "</td></tr>");
         }
         catch (Exception e)
         {

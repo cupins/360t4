@@ -177,7 +177,7 @@ public class Model {
         String sqlInsert="insert into shops (coffee_name, coffee_address, raw_review, phone, website) values("
                 + "'" + cs.getCoffeeName() + "'" + ", " + "'" + cs.getCoffeeAddress()
                 + "'" + ", " + cs.getRawReview() + ", " + "'" + cs.getPhone()
-                + "'" + ", " + "'" + cs.getUrl() + "'" +");";
+                + "'" + ", " + "'" + cs.getWebsite() + "'" +");";
         Statement s = createStatement();
         logger.log(Level.INFO, "attempting statement execute");
         s.execute(sqlInsert,Statement.RETURN_GENERATED_KEYS);
@@ -214,7 +214,7 @@ public class Model {
             cs.setCoffeeAddress(rows.getString("coffee_address"));
             cs.setRawReview(rows.getInt("raw_review"));
             cs.setPhone(rows.getString("phone"));
-            cs.setUrl(rows.getString("website"));
+            cs.setWebsite(rows.getString("website"));
             logger.log(Level.INFO, "Adding shop to list with id=" + cs.getCid());
             ll.add(cs);
         }
@@ -231,7 +231,7 @@ public class Model {
         sqlQuery.append("coffee_address='" + cs.getCoffeeAddress() + "', ");
         sqlQuery.append("raw_review=" + cs.getRawReview() + ", ");
         sqlQuery.append("phone='" + cs.getPhone() + "', ");
-        sqlQuery.append("website='" + cs.getUrl() + "' ");
+        sqlQuery.append("website='" + cs.getWebsite() + "' ");
         sqlQuery.append("where cid=" + cs.getCid() +";");
         Statement st = createStatement();
         logger.log(Level.INFO, "UPDATE SQL=" + sqlQuery.toString());
