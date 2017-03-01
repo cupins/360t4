@@ -1,4 +1,4 @@
-ENDPOINT=https://glacial-anchorage-84282.herokuapp.com/tcss360/users
+ENDPOINT=https://team4360.herokuapp.com/tcss360/users
 # heroku
 #ENDPOINT=https://frozen-temple-15527.herokuapp.com/tcss360/users
 # local web runner deploy
