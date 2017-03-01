@@ -1,4 +1,4 @@
-ENDPOINT=https://team4360.herokuapp.com/tcss360/Coffeeshop
+ENDPOINT=https://team4360.herokuapp.com/tcss360/shops
 # local web runner deploy
 #ENDPOINT=http://localhost:8080/tcss360/users
 # net beans deploy
