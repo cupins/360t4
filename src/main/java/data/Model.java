@@ -190,6 +190,14 @@ public class Model {
         logger.log(Level.INFO, "The new shop id=" + shopid);
         return cs.getCid();
     }
+    
+    public void deleteCoffeeShop(int cid) throws SQLException
+    {
+        String sqlDelete="delete from shops where cid=?";
+        PreparedStatement pst = createPreparedStatement(sqlDelete);
+        pst.setInt(1, cid);
+        pst.execute();
+    }
 
     
 
