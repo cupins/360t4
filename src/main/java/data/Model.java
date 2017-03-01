@@ -186,7 +186,7 @@ public class Model {
         logger.log(Level.INFO, "retrieved keys from statement");
         int shopid = -1;
         while (rs.next())
-            shopid = rs.getInt(3);   // assuming 3rd column is userid
+            shopid = rs.getInt(1);   // assuming 3rd column is userid
         logger.log(Level.INFO, "The new shop id=" + shopid);
         return cs.getCid();
     }

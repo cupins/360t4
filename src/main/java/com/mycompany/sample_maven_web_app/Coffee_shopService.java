@@ -90,7 +90,7 @@ public class Coffee_shopService {
         }
         catch (SQLException sqle)
         {
-            String errText = "Error updating user after db connection made:\n" + sqle.getMessage() + " --- " + sqle.getSQLState() + "\n";
+            String errText = "Error updating cs after db connection made:\n" + sqle.getMessage() + " --- " + sqle.getSQLState() + "\n";
             logger.log(Level.SEVERE, errText);
             text.append(errText);
         }
@@ -119,7 +119,7 @@ public class Coffee_shopService {
         }
         catch (SQLException sqle)
         {
-            String errText = "Error deleteing user after db connection made:\n" + sqle.getMessage() + " --- " + sqle.getSQLState() + "\n";
+            String errText = "Error deleteing cs after db connection made:\n" + sqle.getMessage() + " --- " + sqle.getSQLState() + "\n";
             logger.log(Level.SEVERE, errText);
             text.append(errText);
         }
@@ -148,13 +148,14 @@ public class Coffee_shopService {
        try {
            Model db = Model.singleton();
            int cid = db.newCoffeeShop(shop);
+           logger.log(Level.INFO, "coffee stuff\n");
            db.newCoffeeShop(shop);
            logger.log(Level.INFO, "shop persisted to db as cid=" + cid);
            text.append("Shop id persisted with id=" + cid);
        }
        catch (SQLException sqle)
        {
-           String errText = "Error persisting user after db connection made:\n" + sqle.getMessage() + " --- " + sqle.getSQLState() + "\n";
+           String errText = "Error persisting cs after db connection made:\n" + sqle.getMessage() + " --- " + sqle.getSQLState() + "\n";
            logger.log(Level.SEVERE, errText);
            text.append(errText);
        }
