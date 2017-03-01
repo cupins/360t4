@@ -16,7 +16,7 @@ public class Coffee_Shop {
     private String coffeeAddress;
     private int rawReview;
     private String phone;
-    private String url;
+    private String website;
     
     // Constructor
     public Coffee_Shop(){}
@@ -70,12 +70,12 @@ public class Coffee_Shop {
     
     // URL for coffee shop
     public String getUrl() {
-        return url;
+        return website;
     }
 
     //Determine fields getter/setters and constructors
-    public void setUrl(String url) {
-        this.url = url;
+    public void setUrl(String website) {
+        this.website = website;
     }
     
 }
