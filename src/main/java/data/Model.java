@@ -161,6 +161,7 @@ public class Model {
         sqlQuery.append("set email='" + usr.getEmail() + "', ");
         sqlQuery.append("set fname='" + usr.getFname() + "', ");
         sqlQuery.append("set lname='" + usr.getLname() + "', ");
+        sqlQuery.append("set utype='" + usr.getUtype() + "' ");
         sqlQuery.append("where userid=" + usr.getUserid() + ";");
         Statement st = createStatement();
         logger.log(Level.INFO, "UPDATE SQL=" + sqlQuery.toString());
