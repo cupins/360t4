@@ -219,7 +219,7 @@ public class Model {
         StringBuilder sqlQuery = new StringBuilder();
 
         sqlQuery.append("update shops ");
-        sqlQuery.append("coffee_name=" + cs.getCoffeeName() + ", ");
+        sqlQuery.append("set coffee_name=" + cs.getCoffeeName() + ", ");
         sqlQuery.append("coffee_address=" + cs.getCoffeeAddress() + ", ");
         sqlQuery.append("raw_review=" + cs.getRawReview() + ", ");
         sqlQuery.append("phone=" + cs.getPhone() + ", ");
