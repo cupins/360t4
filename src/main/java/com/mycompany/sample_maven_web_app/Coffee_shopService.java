@@ -166,4 +166,37 @@ public class Coffee_shopService {
        return text.toString();
    }
 
+   @POST
+   @Produces(MediaType.TEXT_PLAIN)
+   @Consumes(MediaType.APPLICATION_JSON)
+   public String createCShops(String jobj) throws IOException {
+       Model data = Model.singleton();
+       Coffee_Shop[] shopsToAdd = data.getCoffeeShops();
+       for (Coffee_Shop shop: shopsToAdd) {
+           ObjectMapper mapper = new ObjectMapper();
+           Coffee_Shop shop = mapper.readValue(jobj.toString(), Coffee_Shop.class);
+           StringBuilder text = new StringBuilder();
+           text.append("The JSON obj:" + jobj.toString() + "\n");
+           try {
+               Model db = Model.singleton();
+               int cid = db.newCoffeeShop(shop);
+               logger.log(Level.INFO, "coffee stuff\n");
+               db.newCoffeeShop(shop);
+               logger.log(Level.INFO, "shop persisted to db as cid=" + cid);
+               text.append("Shop id persisted with id=" + cid);
+           }
+           catch (SQLException sqle)
+           {
+               String errText = "Error persisting cs after db connection made:\n" + sqle.getMessage() + " --- " + sqle.getSQLState() + "\n";
+               logger.log(Level.SEVERE, errText);
+               text.append(errText);
+           }
+           catch (Exception e)
+           {
+               logger.log(Level.SEVERE, "Error connecting to db.");
+           }
+//            return text.toString();
+       }
+   }
+    
 }
