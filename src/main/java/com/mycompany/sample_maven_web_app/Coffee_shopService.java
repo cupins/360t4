@@ -165,7 +165,7 @@ public class Coffee_shopService {
        }
        return text.toString();
    }
-
+   /*
    @POST
    @Produces(MediaType.TEXT_PLAIN)
    @Consumes(MediaType.APPLICATION_JSON)
@@ -198,5 +198,5 @@ public class Coffee_shopService {
 //            return text.toString();
        }
    }
-    
+    */
 }
