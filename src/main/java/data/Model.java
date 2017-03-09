@@ -97,7 +97,7 @@ public class Model {
     // users
     /////////////////////////////////////////////////////////////////////////
 
-    public int newUser(User usr) throws SQLException
+    public User newUser(User usr) throws SQLException
     {
         String sqlInsert="insert into users (username, password, email, fname, lname, utype) values ('" + usr.getUsername() + "', '" + usr.getPassword() + "', '" + usr.getEmail() +"', '" + usr.getFname() +"', '" + usr.getLname() +"', '" + usr.getUtype() + "');";
         Statement s = createStatement();
@@ -110,7 +110,8 @@ public class Model {
         while (rs.next())
             userid = rs.getInt(4);   // assuming 4th column is userid
         logger.log(Level.INFO, "The new user id=" + userid);
-        return userid;
+        usr.setUserId(userid);
+        return usr;
 
     }
 

@@ -148,30 +148,71 @@ public class UserService {
         return text.toString();
     }
 
+//    @POST
+//    @Produces(MediaType.TEXT_PLAIN)
+//    @Consumes(MediaType.APPLICATION_JSON)
+//    public String createUser(String jobj) throws IOException {
+//        ObjectMapper mapper = new ObjectMapper();
+//        User user = mapper.readValue(jobj.toString(), User.class);
+//
+//        StringBuilder text = new StringBuilder();
+//        text.append("The JSON obj:" + jobj.toString() + "\n");
+//        //text.append("Hello " + user.getName() + "\n");
+//        //text.append("You're only " + user.getAge() + " years old.\n");
+//        try {
+//            Model db = Model.singleton();
+//            int userid = db.newUser(user);
+//            logger.log(Level.INFO, "user persisted to db as userid=" + userid);
+//            text.append("User id persisted with id=" + userid);
+//        } catch (SQLException sqle) {
+//            String errText = "Error persisting user after db connection made:\n" + sqle.getMessage() + " --- " + sqle.getSQLState() + "\n";
+//            logger.log(Level.SEVERE, errText);
+//            text.append(errText);
+//        } catch (Exception e) {
+//            logger.log(Level.SEVERE, "Error connecting to db.");
+//        }
+//
+//        return text.toString();
+//    }
+    
     @POST
-    @Produces(MediaType.TEXT_PLAIN)
+    @Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.APPLICATION_JSON)
-    public String createUser(String jobj) throws IOException {
+    public List<User> createUser(String jobj) throws IOException {
+        logger.log(Level.INFO, "RECEIVED CREATE REQUEST FOR:\n");
+        logger.log(Level.INFO, "OBJECT:" + jobj + "\n");
+        
+        LinkedList<User> lusers = new LinkedList<User>();
+
         ObjectMapper mapper = new ObjectMapper();
         User user = mapper.readValue(jobj.toString(), User.class);
-
+        
         StringBuilder text = new StringBuilder();
         text.append("The JSON obj:" + jobj.toString() + "\n");
-        //text.append("Hello " + user.getName() + "\n");
-        //text.append("You're only " + user.getAge() + " years old.\n");
+        text.append("Hello " + user.getUsername() + "\n");
+        text.append("Messages:\n");
+//        if (user.getMessages() != null)
+//            for (Object msg : user.getMessages())
+//                text.append(msg.toString() + "\n");
+        
         try {
             Model db = Model.singleton();
-            int userid = db.newUser(user);
-            logger.log(Level.INFO, "user persisted to db as userid=" + userid);
-            text.append("User id persisted with id=" + userid);
-        } catch (SQLException sqle) {
+            User usr = db.newUser(user);
+            logger.log(Level.INFO, "user persisted to db as userid=" + usr.getUserid());
+            text.append("User id persisted with id=" + usr.getUserid());
+            lusers.add(usr);
+        }
+        catch (SQLException sqle)
+        {
             String errText = "Error persisting user after db connection made:\n" + sqle.getMessage() + " --- " + sqle.getSQLState() + "\n";
             logger.log(Level.SEVERE, errText);
             text.append(errText);
-        } catch (Exception e) {
+        }
+        catch (Exception e)
+        {
             logger.log(Level.SEVERE, "Error connecting to db.");
         }
-
-        return text.toString();
+        
+        return lusers;
     }
 }
