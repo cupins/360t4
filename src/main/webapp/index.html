@@ -123,6 +123,35 @@
            } 
         });
         
+        $('#update-user').click(function()
+            {
+                var userid = document.getElementById("userid");
+                var username = document.getElementById("username");
+                var password = document.getElementById("password");
+                var email = document.getElementById("email");
+                var Fname = document.getElementById("fname");
+                var Lname = document.getElementById("lname");
+                var utype = document.getElementById("utype");
+                var user = { 'userid': userid.value,
+                             'username': username.value,
+                             'password': password.value,
+                             'email': email.value,
+                             'fname': fname.value,
+                             'lname': lname.value,
+                             'utype': utype.value }     
+                var url='tcss360/users/';
+                if (confirm('Are you sure - UPDATE ' + username.value + '-(' + userid.value + ') ?')) {
+                  $.ajax({
+                    type: 'UPDATE',
+                    url: url,
+                    datatype: 'json',
+                    data: JSON.stringify(user),
+                    contentType: 'application/json',
+                    success: render_update
+                  }); 
+                } 
+            });
+        
         // New-User Click function
         //
         // Clears the form to allow entry of a new user record
@@ -282,6 +311,13 @@
         getusers();
     }
     
+    // i dont know.
+    function render_update(data)
+    {
+        $('#mybody').empty();
+        getusers();
+    }
+    
     // clears the table, reloads the users, clears the user id textbox
     function render_delete(data)
     {
@@ -338,6 +374,7 @@
            <input type="button" value="New User" onclick="" id="new-user"/>
            <input type="button" value="Save User" onclick="" id="save-user"/>
            <input type="button" value="Delete User" onclick="" id="delete-user"/>
+           <input type="button" value="Update user" onclick="" id="update-user"/>
        </td>        
    </tr>
    <tr>
