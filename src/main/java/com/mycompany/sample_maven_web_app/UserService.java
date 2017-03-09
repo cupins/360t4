@@ -16,12 +16,16 @@ import javax.ws.rs.PUT;
 import javax.ws.rs.core.MediaType;
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.LinkedList;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.POST;
+import javax.ws.rs.PathParam;
 import objects.User;
 import org.codehaus.jackson.map.ObjectMapper;
+import org.codehaus.jettison.json.JSONObject;
 
 /**
  * REST Web Service
@@ -46,24 +50,50 @@ public class UserService {
      *
      * @return an instance of java.lang.String
      */
+//    @GET
+//    @Produces(MediaType.TEXT_HTML)
+//    public String getUsers() {
+//        //TODO return proper representation object
+//        StringBuilder sb = new StringBuilder();
+//        sb.append("<html><body><style>table, th, td {font-family:Arial,Verdana,sans-serif;font-size:16px;padding: 0px;border-spacing: 0px;}</style><b>USERS LIST:</b><br><br><table cellpadding=10 border=1><tr><td>username</td><td>password</td><td>email</td><td>uid</td><td>Fname</td><td>Lname</td><td>utype</td></tr>");
+//        try {
+//            Model db = Model.singleton();
+//            User[] users = db.getUsers();
+//            for (int i = 0; i < users.length; i++) {
+//                sb.append("<tr><td>" + users[i].getUsername() + "</td><td>" + users[i].getPassword() + "</td><td>" + users[i].getEmail() + "</td><td>" + users[i].getUserid() + "</td><td>" + users[i].getFname() + "</td><td>" + users[i].getLname() + "</td><td>" + users[i].getUtype() + "</td></tr>");
+//            }
+//        } catch (Exception e) {
+//            sb.append("</table><br>Error getting users: " + e.toString() + "<br>");
+//        }
+//        sb.append("</table></body></html>");
+//        return sb.toString();
+//    }
     @GET
-    @Produces(MediaType.TEXT_HTML)
-    public String getUsers() {
-        //TODO return proper representation object
-        StringBuilder sb = new StringBuilder();
-        sb.append("<html><body><style>table, th, td {font-family:Arial,Verdana,sans-serif;font-size:16px;padding: 0px;border-spacing: 0px;}</style><b>USERS LIST:</b><br><br><table cellpadding=10 border=1><tr><td>username</td><td>password</td><td>email</td><td>uid</td><td>Fname</td><td>Lname</td><td>utype</td></tr>");
-        try {
+    @Path("{userid}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public List<User> getUsersJson(@PathParam("userid") String id) {
+        LinkedList<User> lusers = new LinkedList<User>();
+     
+        try
+        {
+            int userid = Integer.parseInt(id);
             Model db = Model.singleton();
             User[] users = db.getUsers();
-            for (int i = 0; i < users.length; i++) {
-                sb.append("<tr><td>" + users[i].getUsername() + "</td><td>" + users[i].getPassword() + "</td><td>" + users[i].getEmail() + "</td><td>" + users[i].getUserid() + "</td><td>" + users[i].getFname() + "</td><td>" + users[i].getLname() + "</td><td>" + users[i].getUtype() + "</td></tr>");
-            }
-        } catch (Exception e) {
-            sb.append("</table><br>Error getting users: " + e.toString() + "<br>");
+            if (userid ==0)
+                for (int i=0;i<users.length;i++)
+                    lusers.add(users[i]);
+            else
+                lusers.add(users[0]);
+            logger.log(Level.INFO, "Received request to fetch user id=" + userid);
+            return lusers;
         }
-        sb.append("</table></body></html>");
-        return sb.toString();
-    }
+        catch (Exception e)
+        {
+            JSONObject obj = new JSONObject();
+                logger.log(Level.WARNING, "Error getting users:" + e.toString());
+                return null;
+        }
+    }    
 
     /**
      * PUT method for updating or creating an instance of GenericResource
