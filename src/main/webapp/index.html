@@ -135,6 +135,7 @@
             if (document.getElementById("userid").disabled)
             {
                 // Create a new record
+                document.write("hello");
                 var username = document.getElementById("username");
                 var password = document.getElementById("password");
                 var email = document.getElementById("email");
@@ -148,7 +149,7 @@
                              'Lname': Lname.value,
                              'utype': utype.value};         
                 var url='tcss360/users/';
-                if (confirm('Are you sure - CREATE ' + username.value + ' ?')) {
+                if (confirm('Are you sure?')) {
                   $.ajax({
                     type: 'POST',
                     url: url,
