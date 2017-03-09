@@ -166,8 +166,8 @@ public class Model {
             usr.setUserId(rows.getInt("userid"));
             usr.setPassword(rows.getString("password"));
             usr.setEmail(rows.getString("email"));
-            usr.setFname(rows.getString("Fname"));
-            usr.setLname(rows.getString("Lname"));
+            usr.setFname(rows.getString("fname"));
+            usr.setLname(rows.getString("lname"));
             usr.setUtype(rows.getString("utype"));
             
             logger.log(Level.INFO, "Adding user to list with id=" + usr.getUserid());
