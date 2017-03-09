@@ -156,7 +156,9 @@
                     contentType: 'application/json',
                     success: render_newuser
                   }); 
-                }                 
+                } else {
+                    var url='tcss360/whoops/';
+                }               
             }
             else
             {
@@ -239,7 +241,6 @@
 
         $.ajax({
           type: 'GET',
-          url: url,
           datatype: 'json',
           success: render_form
         }); 
@@ -252,8 +253,8 @@
           newrow += "<td id=\"username\">" + user.username + "</td>";
           newrow += "<td id=\"password\">" + user.password + "</td>";
           newrow += "<td id=\"email\">" + user.email + "</td>";
-          newrow += "<td id=\"Fname\">" + user.fname + "</td>";
-          newrow += "<td id=\"Lname\">" + user.lname + "</td>";
+          newrow += "<td id=\"Fname\">" + user.Fname + "</td>";
+          newrow += "<td id=\"Lname\">" + user.Lname + "</td>";
           newrow += "<td id=\"utype\">" + user.utype + "</td>";
           $('#mybody').append(newrow);
       });
