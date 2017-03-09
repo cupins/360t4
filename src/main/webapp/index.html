@@ -131,7 +131,7 @@
         // If an existing user, call the PUT to update the user
         $('#save-user').click(function ()
         {
-            document.write(5+11);
+            
             if (document.getElementById("userid").disabled)
             {
                 // Create a new record
@@ -157,8 +157,9 @@
                     contentType: 'application/json',
                     success: render_newuser
                   }); 
+                document.write(54);
                 } else {
-                    var url='tcss360/whoops/';
+                    document.write(5+11);
                 }               
             }
             else
