@@ -263,8 +263,9 @@
     
     // renders the user table
     function render(data)  {
+        document.write("why does internet suck");
       $.each(data, function(index, user) { 
-          var newrow = "<tr><td id=\"userid\"" + index + "\">"+ user.userid + "</td>";
+          var newrow = "<tr><td id=\"userid\"" + index + "\">"+ user.getUserId() + "</td>";
           newrow += "<td id=\"username\">" + user.getUsername() + "</td>";
           newrow += "<td id=\"password\">" + user.getPassword() + "</td>";
           newrow += "<td id=\"email\">" + user.getEmail() + "</td>";
