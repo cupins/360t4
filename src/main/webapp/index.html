@@ -142,7 +142,7 @@
                 var url='tcss360/users/';
                 if (confirm('Are you sure - UPDATE ' + username.value + '-(' + userid.value + ') ?')) {
                   $.ajax({
-                    type: 'UPDATE',
+                    type: 'PUT',
                     url: url,
                     datatype: 'json',
                     data: JSON.stringify(user),
