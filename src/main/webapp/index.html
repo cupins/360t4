@@ -264,13 +264,13 @@
     // renders the user table
     function render(data)  {
       $.each(data, function(index, user) { 
-          var newrow = "<tr><td id=\"userid\"" + index + "\">"+ user.getUserId() + "</td>";
-          newrow += "<td id=\"username\">" + user.getUsername() + "</td>";
-          newrow += "<td id=\"password\">" + user.getPassword() + "</td>";
-          newrow += "<td id=\"email\">" + user.getEmail() + "</td>";
-          newrow += "<td id=\"fname\">" + user.getFname() + "</td>";
-          newrow += "<td id=\"lname\">" + user.getLname() + "</td>";
-          newrow += "<td id=\"utype\">" + user.getUtype() + "</td>";
+          var newrow = "<tr><td id=\"userid\"" + index + "\">"+ user.userid + "</td>";
+          newrow += "<td id=\"username\">" + user.username + "</td>";
+          newrow += "<td id=\"password\">" + user.password + "</td>";
+          newrow += "<td id=\"email\">" + user.email + "</td>";
+          newrow += "<td id=\"fname\">" + user.Fname + "</td>";
+          newrow += "<td id=\"lname\">" + user.Lname + "</td>";
+          newrow += "<td id=\"utype\">" + user.utype + "</td>";
           $('#mybody').append(newrow);
       });
     }
