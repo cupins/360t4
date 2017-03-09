@@ -126,10 +126,36 @@ public class Model {
 
     
 
-    public User[] getUsers() throws SQLException
+//    public User[] getUsers() throws SQLException
+//    {
+//        LinkedList<User> ll = new LinkedList<User>();
+//        String sqlQuery ="select * from users;";
+//        Statement st = createStatement();
+//        ResultSet rows = st.executeQuery(sqlQuery);
+//        while (rows.next())
+//        {
+//            logger.log(Level.INFO, "Reading row...");
+//            User usr = new User();
+//            usr.setUsername(rows.getString("username"));
+//            usr.setPassword(rows.getString("password"));
+//            usr.setEmail(rows.getString("email"));
+//            usr.setFname(rows.getString("fname"));
+//            usr.setLname(rows.getString("lname"));
+//            usr.setUtype(rows.getString("utype"));
+//            usr.setUserId(rows.getInt("userid"));
+//            
+//            logger.log(Level.INFO, "Adding user to list with id=" + usr.getUserid());
+//            ll.add(usr);
+//        }
+//        return ll.toArray(new User[ll.size()]);
+//    }
+
+    
+    public User[] getUsers(int userId) throws SQLException
     {
         LinkedList<User> ll = new LinkedList<User>();
-        String sqlQuery ="select * from users;";
+        String sqlQuery ="select * from users";
+        sqlQuery += (userId > 0) ? " where userid=" + userId + " order by userid;" : " order by userid;";
         Statement st = createStatement();
         ResultSet rows = st.executeQuery(sqlQuery);
         while (rows.next())
@@ -137,19 +163,18 @@ public class Model {
             logger.log(Level.INFO, "Reading row...");
             User usr = new User();
             usr.setUsername(rows.getString("username"));
+            usr.setUserId(rows.getInt("userid"));
             usr.setPassword(rows.getString("password"));
             usr.setEmail(rows.getString("email"));
-            usr.setFname(rows.getString("fname"));
-            usr.setLname(rows.getString("lname"));
+            usr.setFname(rows.getString("Fname"));
+            usr.setLname(rows.getString("Lname"));
             usr.setUtype(rows.getString("utype"));
-            usr.setUserId(rows.getInt("userid"));
             
             logger.log(Level.INFO, "Adding user to list with id=" + usr.getUserid());
             ll.add(usr);
         }
         return ll.toArray(new User[ll.size()]);
     }
-
     
 
     public boolean updateUser(User usr) throws SQLException
