@@ -78,7 +78,7 @@ public class UserService {
         {
             int userid = Integer.parseInt(id);
             Model db = Model.singleton();
-            User[] users = db.getUsers();
+            User[] users = db.getUsers(userid);
             if (userid ==0)
                 for (int i=0;i<users.length;i++)
                     lusers.add(users[i]);
