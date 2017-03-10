@@ -275,7 +275,7 @@
     function render(data)  {
       $.each(data, function(index, shop) { 
           var newrow = "<tr><td id=\"cid\"" + index + "\">"+ shop.cid + "</td>";
-          newrow += "<td id=\"coffee_name\">" + shop.coffee_name + "</td>";
+          newrow += "<td id=\"coffee_name\">" + shop.getCoffeeName() + "</td>";
           newrow += "<td id=\"coffee_address\">" + shop.coffee_address + "</td>";
           newrow += "<td id=\"raw_review\">" + shop.raw_review + "</td>";
           newrow += "<td id=\"phone\">" + shop.phone + "</td>";
