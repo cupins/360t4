@@ -249,14 +249,14 @@ public class Coffee_shopService {
         
         try {
             Model db = Model.singleton();
-            Coffee_Shop shop = db.newCoffeeShop(user);
+            Coffee_Shop shop = db.newCoffeeShop(shop);
             logger.log(Level.INFO, "shop persisted to db as cid=" + shop.getCid());
             text.append("Shop id persisted with id=" + shop.getCid());
             lshops.add(shop);
         }
         catch (SQLException sqle)
         {
-            String errText = "Error persisting user after db connection made:\n" + sqle.getMessage() + " --- " + sqle.getSQLState() + "\n";
+            String errText = "Error persisting shop after db connection made:\n" + sqle.getMessage() + " --- " + sqle.getSQLState() + "\n";
             logger.log(Level.SEVERE, errText);
             text.append(errText);
         }
