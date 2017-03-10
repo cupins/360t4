@@ -81,7 +81,7 @@ public class Coffee_shopService {
         {
             int cid = Integer.parseInt(id);
             Model db = Model.singleton();
-            Coffee_Shop[] shops = db.getShops();
+            Coffee_Shop[] shops = db.getCoffeeShops(cid);
             if (cid ==0)
                 for (int i=0;i<shops.length;i++)
                     lshops.add(shops[i]);
