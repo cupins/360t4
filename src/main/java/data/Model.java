@@ -261,7 +261,7 @@ public class Model {
             shop.setCoffeeName(rows.getString("coffee_name"));
             shop.setCid(rows.getInt("cid"));
             shop.setCoffeeAddress(rows.getString("coffee_address"));
-            shop.setRawReview(rows.getString("raw_review"));
+            shop.setRawReview(rows.getInt("raw_review"));
             shop.setPhone(rows.getString("phone"));
             shop.setWebsite(rows.getString("website"));
             
