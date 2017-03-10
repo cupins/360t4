@@ -3,62 +3,87 @@
   <head>
     <style>
         <!-- inline style sheet -->
-        #myform{
-            border: 1px solid black;
-            border-collapse: collapse;
-            padding-top: 5px;
-            padding-bottom: 5px;
-            padding-right: 20px;
-            padding-left: 20px;
-            font-family: sans-serif;
-        }
-        #mytable {
-            border: 1px solid black;
-            border-collapse: collapse;
-            padding-top: 5px;
-            padding-bottom: 5px;
-            padding-right: 20px;
-            padding-left: 20px;
-            font-family: sans-serif;
-        }
-        div {
-            font-family: sans-serif;
-            font-size: xx-large;
-            font-weight: bold;
-        }
-        .table-header {
-          background-color: yellow;
-          border: 1px solid black;
-        }
-        .userid {
-          width: 60px;
-        }
-        .username {
-          width: 200px;
-        }
-        .password {
-          width: 200px;
-        }
-        .email {
-          width: 200px;
-        }
-        .Fname {
-          width: 150px;
-        }
-        .Lname {
-          width: 150px;
-        }
-        .utype {
-          width: 60px;
-        }
-        th, td {
-          border: 1px solid black;
-          border-collapse: collapse;
-          padding-top: 5px;
-          padding-bottom: 5px;
-          padding-right: 20px;
-          padding-left: 20px;    
-        }
+      body{
+        background: #ffa500 
+      }
+      #frm{
+        border: solid gray 1px;
+        width: 20%;
+        border-radius: 5px;
+        margin: 100px auto;
+        background: white;
+        padding: 50px;
+      }
+      #btn{
+        -webkit-appearance: button;
+        -moz-appearance: button;
+        appearance: button;
+        color: #111;
+        background-color: #ff7b00;
+        padding: 5px;
+        margin-left: 69%;
+      }
+      #btn:hover{
+        box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24),0 17px 50px 0 rgba(0,0,0,0.19);
+      }
+      h1{
+        color: #111;
+        font-family: 'Helvetica Neue', sans-serif;
+        font-size: 110px;
+        font-weight: bold;
+        letter-spacing: -5px;
+        margin: 0 0 72px;
+        line-height: 1;
+        text-align: center;
+      }
+      h1.login{
+        color: #111;
+        font-family: 'Helvetica Neue', sans-serif;
+        font-size: 80px;
+        font-weight: bold;
+        letter-spacing: -1px;
+        margin: 0 0 72px;
+        line-height: 12px;
+        text-align: center;
+      }
+      h2{
+        color: #111;
+        font-family: 'Open Sans', sans-serif;
+        font-size: 30px;
+        font-weight 300;
+        line-height: 32px;
+        margin: 72px 0 42px;
+        text-align: center;
+      }
+      p{
+        color: #685206;
+        font-family: 'Helvetica Neue', sans-serif;
+        font-size: 14px;
+        font-weight: 600;
+        line-height: 24px;
+        margin: 0 0 24px;
+        text-align: center;
+      }
+      p.login{
+        color: #685206;
+        font-family: 'Helvetica Neue', sans-serif;
+        font-size: 14px;
+        font-weight: 600;
+        line-height: 24px;
+        margin: 0 0 24px;
+        text-align: center;
+      }
+      a{
+        -webkit-appearance: button;
+        -moz-appearance: button;
+        appearance: button;
+        color: #111;
+        background-color: #ff7b00;
+        padding: 5px;
+      }
+      a:hover{
+        box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24),0 17px 50px 0 rgba(0,0,0,0.19);
+      }
     </style>
     <title>Editor</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -363,6 +388,27 @@
   </script>
   </head>
   <body  onload="">
+    <div id="frm">
+      <h1 class="login">Coffee Login</h1>
+      <p class ="login">
+        <label for="mail">E-mail:</label>
+        <input type="email" id="mail" name="mail" />
+      </p>
+      <p class ="login">
+        <label for="pass">Password:</label>
+        <input type="password" id="pass" name="pass" />
+      </p>
+      <p class ="login">
+        <input type="button" value="Login" onclick="" id="check-user"/>
+      </p>
+      <p class ="login">
+        <input type="button" value="Login" onclick="" id="register-user"/>
+      </p>
+    </div>
+    
+    
+    
+    <!--
    <div id="title">
    User Editor - Coffee Shop Maven Web App
    </div>
@@ -422,5 +468,6 @@
            <tbody id="mybody" class="table-body">
            </tbody>
    </table>
+-->
   </body>
 </html>
