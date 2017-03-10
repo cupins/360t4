@@ -258,10 +258,10 @@ public class Model {
         {
             logger.log(Level.INFO, "Reading row...");
             Coffee_Shop shop = new Coffee_Shop();
-            shop.setCoffeeName(rows.getString("coffee_name"));
+            shop.setCoffeeName(rows.getString("coffeeName"));
             shop.setCid(rows.getInt("cid"));
-            shop.setCoffeeAddress(rows.getString("coffee_address"));
-            shop.setRawReview(rows.getInt("raw_review"));
+            shop.setCoffeeAddress(rows.getString("coffeeAddress"));
+            shop.setRawReview(rows.getInt("rawReview"));
             shop.setPhone(rows.getString("phone"));
             shop.setWebsite(rows.getString("website"));
             
