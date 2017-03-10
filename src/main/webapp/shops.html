@@ -1,0 +1,392 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+  <head>
+    <style>
+        <!-- inline style sheet -->
+        #myform{
+            border: 1px solid black;
+            border-collapse: collapse;
+            padding-top: 5px;
+            padding-bottom: 5px;
+            padding-right: 20px;
+            padding-left: 20px;
+            font-family: sans-serif;
+        }
+        #mytable {
+            border: 1px solid black;
+            border-collapse: collapse;
+            padding-top: 5px;
+            padding-bottom: 5px;
+            padding-right: 20px;
+            padding-left: 20px;
+            font-family: sans-serif;
+        }
+        div {
+            font-family: sans-serif;
+            font-size: xx-large;
+            font-weight: bold;
+        }
+        .table-header {
+          background-color: yellow;
+          border: 1px solid black;
+        }
+        .cid {
+          width: 30px;
+        }
+        .coffee_name {
+          width: 150px;
+        }
+        .coffee_address {
+          width 200px;
+        }
+        .raw_review {
+          width: 60px;
+        }
+        .phone {
+          width: 100px;
+        }
+        .website {
+          width: 20px;
+        }
+        th, td {
+          border: 1px solid black;
+          border-collapse: collapse;
+          padding-top: 5px;
+          padding-bottom: 5px;
+          padding-right: 20px;
+          padding-left: 20px;    
+        }
+    </style>
+    <title>Editor</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>    
+    <script language="javascript">
+    $(document).ready(function () { 
+        var old_cid = document.getElementById("cid").value;
+        
+        // Get-Data Click function
+        //
+        // Calls the GET service to lookup a currently entered userid
+        $('#get-data').click(function () 
+        {
+          var userid = document.getElementById("userid");
+          var url='tcss360/shops/'+cid.value;
+          $.ajax({
+            type: 'GET',
+            url: url,
+            datatype: 'json',
+            success: render_form
+          });        
+        });
+        $('#cid').focusin(function () {
+            old_cid = document.getElementById("cid").value;    
+        });
+        // If the user exits the cid textbox and places focus on another
+        // GUI control on the screen, and if the shop id had changed since
+        // the user entered the box, then reload the shop form
+        $('#userid').focusout(function () {
+            var curr_cid = document.getElementById("cid").value;    
+            //alert(curr_cid + '---' + old_cid)
+            if (curr_cid != old_cid)
+                getshop();
+        });
+        
+        // Delete-Shop Click function
+        //
+        // Calls the DELETE service to delete the selected shop
+        $('#delete-shop').click(function ()
+        {
+           var cid = document.getElementById("cid");
+           var coffee_name = document.getElementById("coffee_name");
+           var coffee_address = document.getElementById("coffee_address");
+           var raw_review = document.getElementById("raw_review");
+           var phone = document.getElementById("phone");
+           var website = document.getElementById("website");
+           var shop = { 'cid': cid.value };           
+           var url='tcss360/shops/';
+           if (confirm('Are you sure - DELETE ' + coffee_name.value + '-(' + cid.value + ') ?')) {
+             $.ajax({
+               type: 'DELETE',
+               url: url,
+               datatype: 'json',
+               data: JSON.stringify(shop),
+               contentType: 'application/json',
+               success: render_delete
+             }); 
+           } 
+        });
+        
+        // New-Shop Click function
+        //
+        // Clears the form to allow entry of a new shop record
+        $('#new-shop').click(function ()
+        {
+           document.getElementById("cid").disabled = true;
+           document.getElementById("coffee_name").value = "";
+           document.getElementById("coffee_address").value = "";
+           document.getElementById("raw_review").value = "";
+           document.getElementById("phone").value = "";
+           document.getElementById("website").value = "";
+        });        
+        
+        // Update-Shop click function
+        //
+        // Calls PUT to update shop, same functionality as in
+        // save-shop if existing shop.
+        $('#update-shop').click(function ()
+        {
+           document.getElementById("cid").disabled = true;
+           document.getElementById("coffee_name").value = "";
+           document.getElementById("coffee_address").value = "";
+           document.getElementById("raw_review").value = "";
+           document.getElementById("phone").value = "";
+           document.getElementById("website").value = "";
+           var shop = { 'cid': cid.value,
+                        'coffee_name': coffee_name.value,
+                        'coffee_address': coffee_address.value,
+                        'raw_review': raw_review.value,
+                        'phone': phone.value,
+                        'website': website.value};        
+           var url='tcss360/shops/';
+           if (confirm('Are you sure - UPDATE ' + coffee_name.value + ' ?')) {
+             $.ajax({
+               type: 'PUT',
+               url: url,
+               datatype: 'json',
+               data: JSON.stringify(shop),
+               contentType: 'application/json',
+               success: render_clear
+             }); 
+           }  
+        });
+        
+        
+        // Save-shop Click function
+        //
+        // If a new shop, calls the POST to create a new shop
+        // If an existing shop, call the PUT to update the shop
+        $('#save-shop').click(function ()
+        {
+            if (document.getElementById("cid").disabled)
+            {
+                // Create a new record
+                var coffee_name = document.getElementById("coffee_name");
+                var coffee_address = document.getElementById("coffee_address");
+                var raw_review = document.getElementById("raw_review");
+                var phone = document.getElementById("phone");
+                var website = document.getElementById("website");
+                var shop = { 'coffee_name': coffee_name.value,
+                             'coffee_address': coffee_address.value,
+                             'raw_review': raw_review.value,
+                             'phone': phone.value,
+                             'website': website.value};         
+                var url='tcss360/shops/';
+                if (confirm('Are you sure - CREATE ' + coffee_name.value + ' ?')) {
+                  $.ajax({
+                    type: 'POST',
+                    url: url,
+                    datatype: 'json',
+                    data: JSON.stringify(shop),
+                    contentType: 'application/json',
+                    success: render_newshop
+                  }); 
+                }                 
+            }
+            else
+            {
+                // Update an existing record
+                var cid = document.getElementById("cid");
+                var coffee_name = document.getElementById("coffee_name");
+                var coffee_address = document.getElementById("coffee_address");
+                var raw_review = document.getElementById("raw_review");
+                var phone = document.getElementById("phone");
+                var website = document.getElementById("website");
+                var shop = { 'cid': cid.value,
+                             'coffee_name': coffee_name.value,
+                             'coffee_address': coffee_address.value,
+                             'raw_review': raw_review.value,
+                             'phone': phone.value,
+                             'website': website.value};        
+                var url='tcss360/shops/';
+                if (confirm('Are you sure - UPDATE ' + coffee_name.value + ' ?')) {
+                  $.ajax({
+                    type: 'PUT',
+                    url: url,
+                    datatype: 'json',
+                    data: JSON.stringify(shop),
+                    contentType: 'application/json',
+                    success: render_clear
+                  }); 
+                }                 
+            }
+        });
+        
+        // Dynamic table event handler
+        // 
+        // Gets the selected shop row from the database and puts it
+        // display the user in the form.  Note, technically we could just
+        // read the static table content but this approach would allow
+        // you to read the entire user record including fields which may
+        // not be displayed in the HTML table.
+        // 
+        // Use .text() as td doesn't have method .val()
+        // Empty first time as the td has no text until clicked.
+        $(".table-body").on('click', 'tr', function() {
+            var clicked_cid=$(this).find('td:first').text();
+            old_cid = clicked_cid;
+            var url='tcss360/shops/'+clicked_cid;
+             $.ajax({
+               type: 'GET',
+               url: url,
+               datatype: 'json',
+               success: render_form
+             });        
+         });
+        // get and display users when the form is first loaded
+        getshops();
+        
+    } );
+    // gets and displays all shops by calling render
+    function getshops() {
+        // Form load
+        var url='tcss360/shops/0';
+        $.ajax({
+          type: 'GET',
+          url: url,
+          datatype: 'json',
+          success: render
+        }); 
+    }
+    
+    // gets and displays a shop by calling render
+    function getshop() {
+        // Form load
+        var cid = document.getElementById("cid"); 
+        var url='tcss360/shops/' + shops.value;
+        $.ajax({
+          type: 'GET',
+          url: url,
+          datatype: 'json',
+          success: render_form
+        }); 
+    }    
+    
+    // renders the shop table
+    function render(data)  {
+      $.each(data, function(index, shop) { 
+          var newrow = "<tr><td id=\"cid\"" + index + "\">"+ shop.cid + "</td>";
+          newrow += "<td id=\"coffee_name\">" + shop.coffee_name + "</td>";
+          newrow += "<td id=\"coffee_address\">" + shop.coffee_address + "</td>";
+          newrow += "<td id=\"raw_review\">" + shop.raw_review + "</td>";
+          newrow += "<td id=\"phone\">" + shop.phone + "</td>";
+          newrow += "<td id=\"website\">" + shop.website + "</td>";
+          $('#mybody').append(newrow);
+      });
+    }
+    
+    // clears the table, reloads the shops
+    function render_clear(data)
+    {
+        $('#mybody').empty();
+        getshops();
+    }
+    
+    // clears the table, reloads the shops, clears the cid textbox
+    function render_delete(data)
+    {
+        $('#mybody').empty();
+        getshops();
+        document.getElementById("cid").value = "";
+    }
+    
+    // display the cid of a newly created shop as supplied from the service
+    function render_newshop(data)
+    {
+        $.each(data, function(index, shop) { 
+          document.getElementById("cid").value = shop.cid;
+        });
+        document.getElementById("cid").disabled = false;
+        $('#mybody').empty();
+        getshops();
+    }
+    
+    // displays a selected shop in the form
+    function render_form(data)  {
+      var list = data;
+      if (list)
+        $.each(list, function(index, shop) { 
+            $('#cid').val(shop.cid);
+            $('#coffee_address').val(shop.coffee_address);
+            $('#raw_review').val(shop.raw_review);
+            $('#phone').val(shop.phone);
+            $('#utype').val(shop.website);
+            $('#coffee_name').val(shop.coffee_name);
+        });
+      else
+      {
+        document.getElementById("coffee_name").value = "";
+        document.getElementById("coffee_address").value = "";
+        document.getElementById("raw_review").value = "";
+        document.getElementById("phone").value = "";
+        document.getElementById("website").value = "";
+      }
+    }    
+  </script>
+  </head>
+  <body  onload="">
+   <div id="title">
+   User Editor - Coffee Shop Maven Web App
+   </div>
+   <br>
+   <table id="myform">
+   <tr>
+       <td>
+           <input type="button" value="Get Shop" onclick="" id="get-shop"/>
+           <input type="button" value="New Shop" onclick="" id="new-shop"/>
+           <input type="button" value="Save Shop" onclick="" id="save-shop"/>
+           <input type="button" value="Delete Shop" onclick="" id="delete-shop"/>
+           <input type="button" value="Update Shop" onclick="" id="update-shop"/>
+       </td>        
+   </tr>
+   <tr>
+       <td>Coffee Shop ID :  </td>
+       <td><input type="text" id="cid" size="10"/>  
+   </tr>
+   <tr>
+       <td>Shop Name :  </td>
+       <td><input type="text" id="coffee_name" size="20"/> </td>
+   </tr>
+   <tr>
+       <td>Address : </td>
+       <td><input type="text" id="coffee_address" size="20"/> </td>
+   </tr>
+   <tr>
+       <td>Cumilitive Review : </td>
+       <td><input type="text" id="raw_review" size="5"/> </td>
+   </tr>
+   <tr>
+       <td>Phone Number : </td>
+       <td><input type="text" id="phone" size="10"/> </td>
+   </tr>
+   <tr>
+       <td>Website : </td>
+       <td><input type="text" id="website" size="20"/> </td>
+   </tr>
+   </table>
+   <br>
+   <table id="mytable" class="table">
+           <thead>
+             <tr class="table-header">
+                 <td class="cid">Coffee Shop ID</td>
+                 <td class="coffee_name">Shop Name</td>
+                 <td class="coffee_address">Address</td>
+                 <td class="raw_review">Cumulitive Review</td>
+                 <td class="phone">Phone Number</td>
+                 <td class="website">Website url</td>
+             </tr>               
+           </thead>
+           <tbody id="mybody" class="table-body">
+           </tbody>
+   </table>
+  </body>
+</html>
