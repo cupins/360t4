@@ -1,3 +1,6 @@
-Running echo $JDBC_DATABASE_URL on glacial-anchorage-84282... starting, run.8395 (Free)
-Running echo $JDBC_DATABASE_URL on glacial-anchorage-84282... connecting, run.8395 (Free)
-Running echo $JDBC_DATABASE_URL on glacial-anchorage-84282... up, run.8395 (Free)
+ ▸    Error: No app specified
+ ▸    Usage: heroku run --app APP
+ ▸    We don't know which app to run this on.
+ ▸    Run this command from inside an app folder or specify which app to use with --app APP
+ ▸    
+ ▸    https://devcenter.heroku.com/articles/using-the-cli#app-commands

@@ -1,0 +1,426 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+  <head>
+    <style>
+        <!-- inline style sheet -->
+        #myform{
+            border: 1px solid black;
+            border-collapse: collapse;
+            padding-top: 5px;
+            padding-bottom: 5px;
+            padding-right: 20px;
+            padding-left: 20px;
+            font-family: sans-serif;
+        }
+        #mytable {
+            border: 1px solid black;
+            border-collapse: collapse;
+            padding-top: 5px;
+            padding-bottom: 5px;
+            padding-right: 20px;
+            padding-left: 20px;
+            font-family: sans-serif;
+        }
+        div {
+            font-family: sans-serif;
+            font-size: xx-large;
+            font-weight: bold;
+        }
+        .table-header {
+          background-color: yellow;
+          border: 1px solid black;
+        }
+        .userid {
+          width: 60px;
+        }
+        .username {
+          width: 200px;
+        }
+        .password {
+          width: 200px;
+        }
+        .email {
+          width: 200px;
+        }
+        .Fname {
+          width: 150px;
+        }
+        .Lname {
+          width: 150px;
+        }
+        .utype {
+          width: 60px;
+        }
+        th, td {
+          border: 1px solid black;
+          border-collapse: collapse;
+          padding-top: 5px;
+          padding-bottom: 5px;
+          padding-right: 20px;
+          padding-left: 20px;    
+        }
+    </style>
+    <title>Editor</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>    
+    <script language="javascript">
+    $(document).ready(function () { 
+        var old_userid = document.getElementById("userid").value;
+        
+        // Get-Data Click function
+        //
+        // Calls the GET service to lookup a currently entered userid
+        $('#get-data').click(function () 
+        {
+          var userid = document.getElementById("userid");
+          var url='tcss360/users/'+userid.value;
+
+          $.ajax({
+            type: 'GET',
+            url: url,
+            datatype: 'json',
+            success: render_form
+          });        
+        });
+
+        $('#userid').focusin(function () {
+            old_userid = document.getElementById("userid").value;    
+        });
+
+        // If the user exits the userid textbox and places focus on another
+        // GUI control on the screen, and if the user id had changed since
+        // the user entered the box, then reload the user form
+        $('#userid').focusout(function () {
+            var curr_userid = document.getElementById("userid").value;    
+            //alert(curr_userid + '---' + old_userid)
+            if (curr_userid != old_userid)
+                getuser();
+        });
+        
+        // Delete-User Click function
+        //
+        // Calls the DELETE service to delete the selected user
+        $('#delete-user').click(function ()
+        {
+            var userid = document.getElementById("userid");
+//            var username = document.getElementById("username");
+//            var password = document.getElementById("password");
+//            var email = document.getElementById("email");
+//            var Fname = document.getElementById("fname");
+//            var Lname = document.getElementById("lname");
+//            var utype = document.getElementById("utype");
+           var user = { 'userid': userid.value };           
+           var url='tcss360/users/';
+           if (confirm('Are you sure - DELETE ' + username.value + '-(' + userid.value + ') ?')) {
+             $.ajax({
+               type: 'DELETE',
+               url: url,
+               datatype: 'json',
+               data: JSON.stringify(user),
+               contentType: 'application/json',
+               success: render_delete
+             }); 
+           } 
+        });
+        
+        $('#update-user').click(function()
+            {
+                var userid = document.getElementById("userid");
+                var username = document.getElementById("username");
+                var password = document.getElementById("password");
+                var email = document.getElementById("email");
+                var Fname = document.getElementById("fname");
+                var Lname = document.getElementById("lname");
+                var utype = document.getElementById("utype");
+                var user = { 'userid': userid.value,
+                             'username': username.value,
+                             'password': password.value,
+                             'email': email.value,
+                             'fname': fname.value,
+                             'lname': lname.value,
+                             'utype': utype.value }     
+                var url='tcss360/users/';
+                if (confirm('Are you sure - UPDATE ' + username.value + '-(' + userid.value + ') ?')) {
+                  $.ajax({
+                    type: 'PUT',
+                    url: url,
+                    datatype: 'json',
+                    data: JSON.stringify(user),
+                    contentType: 'application/json',
+                    success: render_update
+                  }); 
+                } 
+            });
+        
+        // New-User Click function
+        //
+        // Clears the form to allow entry of a new user record
+        $('#new-user').click(function ()
+        {
+           document.getElementById("userid").disabled = true;
+           document.getElementById("username").value = "";
+           document.getElementById("password").value = "";
+           document.getElementById("email").value = "";
+           document.getElementById("fname").value = "";
+           document.getElementById("lname").value = "";
+           document.getElementById("utype").value = "";
+        });        
+
+        // Save-User Click function
+        //
+        // If a new user, calls the POST to create a new user
+        // If an existing user, call the PUT to update the user
+        $('#save-user').click(function ()
+        {
+            
+            if (document.getElementById("userid").disabled)
+            {
+                // Create a new record
+                //document.write("hello");
+                var username = document.getElementById("username");
+                var password = document.getElementById("password");
+                var email = document.getElementById("email");
+                var Fname = document.getElementById("fname");
+                var Lname = document.getElementById("lname");
+                var utype = document.getElementById("utype");
+                var user = { 'username': username.value,
+                             'password': password.value,
+                             'email': email.value,
+                             'fname': Fname.value,
+                             'lname': Lname.value,
+                             'utype': utype.value};         
+                var url='tcss360/users/';
+                if (confirm('Are you sure?')) {
+                  $.ajax({
+                    type: 'POST',
+                    url: url,
+                    datatype: 'json',
+                    data: JSON.stringify(user),
+                    contentType: 'application/json',
+                    success: render_newuser
+                  }); 
+                //document.write(54);
+                } else {
+                    document.write(5+11);
+                }               
+            }
+            else
+            {
+                // Update an existing record
+                var userid = document.getElementById("userid");
+                var username = document.getElementById("username");
+                var password = document.getElementById("password");
+                var email = document.getElementById("email");
+                var Fname = document.getElementById("fname");
+                var Lname = document.getElementById("lname");
+                var utype = document.getElementById("utype");
+                var user = { 'userid': userid.value,
+                             'username': username.value,
+                             'password': password.value,
+                             'email': email.value,
+                             'Fname': Fname.value,
+                             'Lname': Lname.value,
+                             'utype': utype.value};        
+                var url='tcss360/users/';
+                if (confirm('Are you sure - UPDATE ' + username.value + ' ?')) {
+                  $.ajax({
+                    type: 'PUT',
+                    url: url,
+                    datatype: 'json',
+                    data: JSON.stringify(user),
+                    contentType: 'application/json',
+                    success: render_clear
+                  }); 
+                }                 
+            }
+        });
+        
+        // Dynamic table event handler
+        // 
+        // Gets the selected user row from the database and puts it
+        // display the user in the form.  Note, technically we could just
+        // read the static table content but this approach would allow
+        // you to read the entire user record including fields which may
+        // not be displayed in the HTML table.
+        // 
+        // Use .text() as td doesn't have method .val()
+        // Empty first time as the td has no text until clicked.
+        $(".table-body").on('click', 'tr', function() {
+            var clicked_userid=$(this).find('td:first').text();
+            old_userid = clicked_userid;
+            var url='tcss360/users/'+clicked_userid;
+             $.ajax({
+               type: 'GET',
+               url: url,
+               datatype: 'json',
+               success: render_form
+             });        
+         });
+         
+
+        
+        // get and display users when the form is first loaded
+        getusers();
+        
+    } );
+
+    // gets and displays users by calling render
+    function getusers() {
+        // Form load
+        var url='tcss360/users/0';
+
+        $.ajax({
+          type: 'GET',
+          url: url,
+          datatype: 'json',
+          success: render
+        }); 
+    }
+    
+    // gets and displays users by calling render
+    function getuser() {
+        // Form load
+        var userid = document.getElementById("userid"); 
+        var url='tcss360/users/' + userid.value;
+
+        $.ajax({
+          type: 'GET',
+          datatype: 'json',
+          success: render_form
+        }); 
+    }    
+    
+    // renders the user table
+    function render(data)  {
+      $.each(data, function(index, user) { 
+          var newrow = "<tr><td id=\"userid\"" + index + "\">"+ user.userid + "</td>";
+          newrow += "<td id=\"username\">" + user.username + "</td>";
+          newrow += "<td id=\"password\">" + user.password + "</td>";
+          newrow += "<td id=\"email\">" + user.email + "</td>";
+          newrow += "<td id=\"fname\">" + user.fname + "</td>";
+          newrow += "<td id=\"lname\">" + user.lname + "</td>";
+          newrow += "<td id=\"utype\">" + user.utype + "</td>";
+          $('#mybody').append(newrow);
+      });
+    }
+    
+    // clears the table, reloads the users
+    function render_clear(data)
+    {
+        $('#mybody').empty();
+        getusers();
+    }
+    
+    // i dont know.
+    function render_update(data)
+    {
+        $('#mybody').empty();
+        getusers();
+    }
+    
+    // clears the table, reloads the users, clears the user id textbox
+    function render_delete(data)
+    {
+        $('#mybody').empty();
+        getusers();
+        document.getElementById("userid").value = "";
+    }
+    
+    // display the userid of a newly created user as supplied from the service
+    function render_newuser(data)
+    {
+        $.each(data, function(index, user) { 
+          document.getElementById("userid").value = user.userid;
+        });
+        document.getElementById("userid").disabled = false;
+        $('#mybody').empty();
+        getusers();
+    }
+    
+    // displays a selected user in the form
+    function render_form(data)  {
+      var list = data;
+      if (list)
+        $.each(list, function(index, user) { 
+            $('#userid').val(user.userid);
+            $('#password').val(user.password);
+            $('#email').val(user.email);
+            $('#fname').val(user.fname);
+            $('#lname').val(user.lname);
+            $('#utype').val(user.utype);
+            $('#username').val(user.username);
+        });
+      else
+      {
+        document.getElementById("username").value = "";
+        document.getElementById("password").value = "";
+        document.getElementById("email").value = "";
+        document.getElementById("fname").value = "";
+        document.getElementById("lname").value = "";
+        document.getElementById("utype").value = "";
+      }
+    }    
+  </script>
+  </head>
+  <body  onload="">
+   <div id="title">
+   User Editor - Coffee Shop Maven Web App
+   </div>
+   <br>
+   <table id="myform">
+   <tr>
+       <td>
+           <input type="button" value="Get User" onclick="" id="get-data"/>
+           <input type="button" value="New User" onclick="" id="new-user"/>
+           <input type="button" value="Save User" onclick="" id="save-user"/>
+           <input type="button" value="Delete User" onclick="" id="delete-user"/>
+           <input type="button" value="Update user" onclick="" id="update-user"/>
+       </td>        
+   </tr>
+   <tr>
+       <td>Enter User ID :  </td>
+       <td><input type="text" id="userid" size="10"/>  
+   </tr>
+   <tr>
+       <td>Enter User Name :  </td>
+       <td><input type="text" id="username" size="20"/> </td>
+   </tr>
+   <tr>
+       <td>User Password : </td>
+       <td><input type="text" id="password" size="20"/> </td>
+   </tr>
+   <tr>
+       <td>Email : </td>
+       <td><input type="text" id="email" size="20"/> </td>
+   </tr>
+   <tr>
+       <td>User Fname : </td>
+       <td><input type="text" id="fname" size="20"/> </td>
+   </tr>
+   <tr>
+       <td>User Lname : </td>
+       <td><input type="text" id="lname" size="20"/> </td>
+   </tr>
+   <tr>
+       <td>User type : </td>
+       <td><input type="text" id="utype" size="1"/> </td>
+   </tr>
+   </table>
+   <br>
+   <table id="mytable" class="table">
+           <thead>
+             <tr class="table-header">
+                 <td class="userid">User Id</td>
+                 <td class="username">Username</td>
+                 <td class="password">Password</td>
+                 <td class="email">Email</td>
+                 <td class="Fname">First Name</td>
+                 <td class="Lname">Last Name</td>
+                 <td class="utype">User Type</td>
+             </tr>               
+           </thead>
+           <tbody id="mybody" class="table-body">
+           </tbody>
+   </table>
+  </body>
+</html>
