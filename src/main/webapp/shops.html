@@ -96,12 +96,12 @@
         // Calls the DELETE service to delete the selected shop
         $('#delete-shop').click(function ()
         {
-           var cid = document.getElementById("cid");
-           var coffee_name = document.getElementById("coffee_name");
+           var cid            = document.getElementById("cid");
+           var coffee_name    = document.getElementById("coffee_name");
            var coffee_address = document.getElementById("coffee_address");
-           var raw_review = document.getElementById("raw_review");
-           var phone = document.getElementById("phone");
-           var website = document.getElementById("website");
+           var raw_review     = document.getElementById("raw_review");
+           var phone          = document.getElementById("phone");
+           var website        = document.getElementById("website");
            var shop = { 'cid': cid.value };           
            var url='tcss360/shops/';
            if (confirm('Are you sure - DELETE ' + coffee_name.value + '-(' + cid.value + ') ?')) {
@@ -135,16 +135,17 @@
         // save-shop if existing shop.
         $('#update-shop').click(function ()
         {
-           document.getElementById("cid").disabled = true;
-           document.getElementById("coffee_name").value = "";
-           document.getElementById("coffee_address").value = "";
-           document.getElementById("raw_review").value = "";
-           document.getElementById("phone").value = "";
-           document.getElementById("website").value = "";
+                // Update an existing record
+           var cid             = document.getElementById("cid");
+           var coffee_name     = document.getElementById("coffee_name");
+           var coffee_address  = document.getElementById("coffee_address");
+           var raw_review      = document.getElementById("raw_review");
+           var phone           = document.getElementById("phone");
+           var website         = document.getElementById("website");
            var shop = { 'cid': cid.value,
-                        'coffee_name': coffee_name.value,
-                        'coffee_address': coffee_address.value,
-                        'raw_review': raw_review.value,
+                        'coffeeName': coffee_name.value,
+                        'coffeeAddress': coffee_address.value,
+                        'rawReview': raw_review.value,
                         'phone': phone.value,
                         'website': website.value};        
            var url='tcss360/shops/';
@@ -170,14 +171,14 @@
             if (document.getElementById("cid").disabled)
             {
                 // Create a new record
-                var coffee_name = document.getElementById("coffee_name");
-                var coffee_address = document.getElementById("coffee_address");
-                var raw_review = document.getElementById("raw_review");
-                var phone = document.getElementById("phone");
-                var website = document.getElementById("website");
-                var shop = { 'coffee_name': coffee_name.value,
-                             'coffee_address': coffee_address.value,
-                             'raw_review': raw_review.value,
+                var coffee_name     = document.getElementById("coffee_name");
+                var coffee_address  = document.getElementById("coffee_address");
+                var raw_review      = document.getElementById("raw_review");
+                var phone           = document.getElementById("phone");
+                var website         = document.getElementById("website");
+                var shop = { 'coffeeName': coffee_name.value,
+                             'coffeeAddress': coffee_address.value,
+                             'rawReview': raw_review.value,
                              'phone': phone.value,
                              'website': website.value};         
                 var url='tcss360/shops/';
@@ -195,16 +196,16 @@
             else
             {
                 // Update an existing record
-                var cid = document.getElementById("cid");
-                var coffee_name = document.getElementById("coffee_name");
-                var coffee_address = document.getElementById("coffee_address");
-                var raw_review = document.getElementById("raw_review");
-                var phone = document.getElementById("phone");
-                var website = document.getElementById("website");
+                var cid             = document.getElementById("cid");
+                var coffee_name     = document.getElementById("coffee_name");
+                var coffee_address  = document.getElementById("coffee_address");
+                var raw_review      = document.getElementById("raw_review");
+                var phone           = document.getElementById("phone");
+                var website         = document.getElementById("website");
                 var shop = { 'cid': cid.value,
-                             'coffee_name': coffee_name.value,
-                             'coffee_address': coffee_address.value,
-                             'raw_review': raw_review.value,
+                             'coffeeName': coffee_name.value,
+                             'coffeeAddress': coffee_address.value,
+                             'rawReview': raw_review.value,
                              'phone': phone.value,
                              'website': website.value};        
                 var url='tcss360/shops/';
