@@ -32,7 +32,7 @@ import org.codehaus.jackson.map.ObjectMapper;
 @Path("shops")
 public class Coffee_shopService {
 
-    static final Logger logger = Logger.getLogger(UserService.class.getName());
+    static final Logger logger = Logger.getLogger(Coffee_shopService.class.getName());
     @Context
     private UriInfo context;
 
@@ -249,10 +249,10 @@ public class Coffee_shopService {
         
         try {
             Model db = Model.singleton();
-            User usr = db.newCoffeeShop(user);
-            logger.log(Level.INFO, "shop persisted to db as cid=" + usr.getCid());
-            text.append("Shop id persisted with id=" + usr.getCid());
-            lusers.add(usr);
+            Coffee_Shop shop = db.newCoffeeShop(user);
+            logger.log(Level.INFO, "shop persisted to db as cid=" + shop.getCid());
+            text.append("Shop id persisted with id=" + shop.getCid());
+            lshops.add(shop);
         }
         catch (SQLException sqle)
         {
