@@ -265,7 +265,7 @@ public class Model {
             shop.setPhone(rows.getString("phone"));
             shop.setWebsite(rows.getString("website"));
             
-            logger.log(Level.INFO, "Adding shop to list with id=" + usr.getCid());
+            logger.log(Level.INFO, "Adding shop to list with id=" + shop.getCid());
             ll.add(shop);
         }
         return ll.toArray(new Coffee_Shop[ll.size()]);
