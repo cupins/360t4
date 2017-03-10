@@ -247,7 +247,7 @@ public class Model {
         return ll.toArray(new Coffee_Shop[ll.size()]);
     
     }*/
-    public User[] getCoffeeShops(int cId) throws SQLException
+    public Coffee_Shop[] getCoffeeShops(int cId) throws SQLException
     {
         LinkedList<Coffee_Shop> ll = new LinkedList<Coffee_Shop>();
         String sqlQuery ="select * from shops";
