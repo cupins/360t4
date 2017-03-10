@@ -226,7 +226,7 @@ public class Model {
     }
 
     
-
+    /*
     public Coffee_Shop[] getCoffeeShops() throws SQLException {
         LinkedList<Coffee_Shop> ll = new LinkedList<Coffee_Shop>();
         String sqlQuery = "select * from shops;";
@@ -246,6 +246,29 @@ public class Model {
         }
         return ll.toArray(new Coffee_Shop[ll.size()]);
     
+    }*/
+    public User[] getCoffeeShops(int cId) throws SQLException
+    {
+        LinkedList<Coffee_Shop> ll = new LinkedList<Coffee_Shop>();
+        String sqlQuery ="select * from shops";
+        sqlQuery += (cId > 0) ? " where cid=" + cId + " order by cid;" : " order by cid;";
+        Statement st = createStatement();
+        ResultSet rows = st.executeQuery(sqlQuery);
+        while (rows.next())
+        {
+            logger.log(Level.INFO, "Reading row...");
+            Coffee_Shop shop = new Coffee_Shop();
+            shop.setCoffeeName(rows.getString("coffee_name"));
+            shop.setCid(rows.getInt("cid"));
+            shop.setCoffeeAddress(rows.getString("coffee_address"));
+            shop.setRawReview(rows.getString("raw_review"));
+            shop.setPhone(rows.getString("phone"));
+            shop.setWebsite(rows.getString("website"));
+            
+            logger.log(Level.INFO, "Adding shop to list with id=" + usr.getCid());
+            ll.add(shop);
+        }
+        return ll.toArray(new Coffee_Shop[ll.size()]);
     }
 
 
