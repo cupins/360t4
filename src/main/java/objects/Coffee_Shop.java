@@ -12,9 +12,9 @@ package objects;
 public class Coffee_Shop {
     
     private int cid;
-    private String coffee_name;
-    private String coffee_address;
-    private int raw_review;
+    private String coffeeName;
+    private String coffeeAddress;
+    private int rawReview;
     private String phone;
     private String website;
     
@@ -35,29 +35,29 @@ public class Coffee_Shop {
     
     //Coffee shop name
     public String getCoffeeName() {
-        return coffee_name;
+        return coffeeName;
     }
 
-    public void setCoffeeName(String coffee_name) {
-        this.coffee_name = coffee_name;
+    public void setCoffeeName(String coffeeName) {
+        this.coffeeName = coffeeName;
     }
     
     // Coffee shop address
     public String getCoffeeAddress() {
-        return coffee_address;
+        return coffeeAddress;
     }
 
-    public void setCoffeeAddress(String coffee_address) {
-        this.coffee_address = coffee_address;
+    public void setCoffeeAddress(String coffeeAddress) {
+        this.coffeeAddress = coffeeAddress;
     }
     
     // raw score for all reviews for this (cid) coffee shop
     public int getRawReview() {
-        return raw_review;
+        return rawReview;
     }
 
-    public void setRawReview(int raw_review) {
-        this.raw_review = raw_review;
+    public void setRawReview(int rawReview) {
+        this.rawReview = rawReview;
     }
     
     // phone number for coffee shop
