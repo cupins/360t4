@@ -214,7 +214,7 @@ public class Model {
         while (rs.next())
             shopid = rs.getInt(1);   // assuming 3rd column is userid
         logger.log(Level.INFO, "The new shop id=" + shopid);
-        return cs.getCid();
+        return cs;
     }
     
     public void deleteCoffeeShop(int cid) throws SQLException
