@@ -253,8 +253,8 @@ public class Coffee_shopService {
         try {
             Model db = Model.singleton();
             Coffee_Shop shp = db.newCoffeeShop(shop);
-            logger.log(Level.INFO, "shop persisted to db as cid=" + shop.getCid());
-            text.append("Shop id persisted with id=" + shop.getCid());
+            logger.log(Level.INFO, "shop persisted to db as cid=" + shp.getCid());
+            text.append("Shop id persisted with id=" + shp.getCid());
             lshops.add(shp);
         }
         catch (SQLException sqle)
