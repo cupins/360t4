@@ -48,6 +48,7 @@ public class Coffee_shopService {
      * Retrieves representation of an instance of services.GenericResource
      * @return an instance of java.lang.String
      */
+    /*
     @GET
     @Produces(MediaType.TEXT_HTML)
     public String getCShops() {
@@ -68,6 +69,33 @@ public class Coffee_shopService {
         sb.append("</table></body></html>");
         return sb.toString();
     }
+    */
+    @GET
+    @Path("{cid}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public List<Coffee_Shop> getShopsJson(@PathParam("cid") String id) {
+        LinkedList<Coffee_Shop> lshops = new LinkedList<Coffee_Shop>();
+     
+        try
+        {
+            int cid = Integer.parseInt(id);
+            Model db = Model.singleton();
+            Coffee_Shop[] shops = db.getShops();
+            if (cid ==0)
+                for (int i=0;i<shops.length;i++)
+                    lshops.add(shops[i]);
+            else
+                lshops.add(shops[0]);
+            logger.log(Level.INFO, "Received request to fetch shop id=" + cid);
+            return lshops;
+        }
+        catch (Exception e)
+        {
+            JSONObject obj = new JSONObject();
+                logger.log(Level.WARNING, "Error getting shops:" + e.toString());
+                return null;
+        }
+    } 
 
     /**
      * PUT method for updating or creating an instance of GenericResource
@@ -132,39 +160,39 @@ public class Coffee_shopService {
     }
     
 
-   @POST
-   @Produces(MediaType.TEXT_PLAIN)
-   @Consumes(MediaType.APPLICATION_JSON)
-   public String createCShop(String jobj) throws IOException {
-       ObjectMapper mapper = new ObjectMapper();
-       Coffee_Shop shop = mapper.readValue(jobj.toString(), Coffee_Shop.class);
-       StringBuilder text = new StringBuilder();
-       text.append("The JSON obj:" + jobj.toString() + "\n");
-//         text.append("Hello " + user.getName() + "\n");
-//         text.append("You're only " + user.getAge() + " years old.\n");
-//         text.append("Messages:\n");
-//         for (Object msg : user.getMessages())
-//             text.append(msg.toString() + "\n");
-       try {
-           Model db = Model.singleton();
-           int cid = db.newCoffeeShop(shop);
-           logger.log(Level.INFO, "coffee stuff\n");
-           db.newCoffeeShop(shop);
-           logger.log(Level.INFO, "shop persisted to db as cid=" + cid);
-           text.append("Shop id persisted with id=" + cid);
-       }
-       catch (SQLException sqle)
-       {
-           String errText = "Error persisting cs after db connection made:\n" + sqle.getMessage() + " --- " + sqle.getSQLState() + "\n";
-           logger.log(Level.SEVERE, errText);
-           text.append(errText);
-       }
-       catch (Exception e)
-       {
-           logger.log(Level.SEVERE, "Error connecting to db.");
-       }
-       return text.toString();
-   }
+//   @POST
+//   @Produces(MediaType.TEXT_PLAIN)
+//   @Consumes(MediaType.APPLICATION_JSON)
+//   public String createCShop(String jobj) throws IOException {
+//       ObjectMapper mapper = new ObjectMapper();
+//       Coffee_Shop shop = mapper.readValue(jobj.toString(), Coffee_Shop.class);
+//       StringBuilder text = new StringBuilder();
+//       text.append("The JSON obj:" + jobj.toString() + "\n");
+////         text.append("Hello " + user.getName() + "\n");
+////         text.append("You're only " + user.getAge() + " years old.\n");
+////         text.append("Messages:\n");
+////         for (Object msg : user.getMessages())
+////             text.append(msg.toString() + "\n");
+//       try {
+//           Model db = Model.singleton();
+//           int cid = db.newCoffeeShop(shop);
+//           logger.log(Level.INFO, "coffee stuff\n");
+//           db.newCoffeeShop(shop);
+//           logger.log(Level.INFO, "shop persisted to db as cid=" + cid);
+//           text.append("Shop id persisted with id=" + cid);
+//       }
+//       catch (SQLException sqle)
+//       {
+//           String errText = "Error persisting cs after db connection made:\n" + sqle.getMessage() + " --- " + sqle.getSQLState() + "\n";
+//           logger.log(Level.SEVERE, errText);
+//           text.append(errText);
+//       }
+//       catch (Exception e)
+//       {
+//           logger.log(Level.SEVERE, "Error connecting to db.");
+//       }
+//       return text.toString();
+//   }
    /*
    @POST
    @Produces(MediaType.TEXT_PLAIN)
@@ -199,4 +227,44 @@ public class Coffee_shopService {
        }
    }
     */
+    @POST
+    @Produces(MediaType.APPLICATION_JSON)
+    @Consumes(MediaType.APPLICATION_JSON)
+    public List<Coffee_Shop> createShop(String jobj) throws IOException {
+        logger.log(Level.INFO, "RECEIVED CREATE REQUEST FOR:\n");
+        logger.log(Level.INFO, "OBJECT:" + jobj + "\n");
+        
+        LinkedList<Coffee_Shop> lshops = new LinkedList<Coffee_Shop>();
+
+        ObjectMapper mapper = new ObjectMapper();
+        Coffee_Shop shop = mapper.readValue(jobj.toString(), Coffee_Shop.class);
+        
+        StringBuilder text = new StringBuilder();
+        text.append("The JSON obj:" + jobj.toString() + "\n");
+        text.append("Hello " + shop.getCoffeeName() + "\n");
+        text.append("Messages:\n");
+//        if (user.getMessages() != null)
+//            for (Object msg : user.getMessages())
+//                text.append(msg.toString() + "\n");
+        
+        try {
+            Model db = Model.singleton();
+            User usr = db.newCoffeeShop(user);
+            logger.log(Level.INFO, "shop persisted to db as cid=" + usr.getCid());
+            text.append("Shop id persisted with id=" + usr.getCid());
+            lusers.add(usr);
+        }
+        catch (SQLException sqle)
+        {
+            String errText = "Error persisting user after db connection made:\n" + sqle.getMessage() + " --- " + sqle.getSQLState() + "\n";
+            logger.log(Level.SEVERE, errText);
+            text.append(errText);
+        }
+        catch (Exception e)
+        {
+            logger.log(Level.SEVERE, "Error connecting to db.");
+        }
+        
+        return lshops;
+}
 }
