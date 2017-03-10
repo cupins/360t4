@@ -26,6 +26,7 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.UriInfo;
 import objects.Coffee_Shop;
 import org.codehaus.jackson.map.ObjectMapper;
+import org.codehaus.jettison.json.JSONObject;
 
 /**
  * REST Web Service
@@ -251,10 +252,10 @@ public class Coffee_shopService {
         
         try {
             Model db = Model.singleton();
-            Coffee_Shop shop = db.newCoffeeShop(shop);
+            Coffee_Shop shp = db.newCoffeeShop(shop);
             logger.log(Level.INFO, "shop persisted to db as cid=" + shop.getCid());
             text.append("Shop id persisted with id=" + shop.getCid());
-            lshops.add(shop);
+            lshops.add(shp);
         }
         catch (SQLException sqle)
         {
