@@ -197,7 +197,7 @@ public class Model {
     // Shops
     /////////////////////////////////////////////////////////////////////////
 
-    public int newCoffeeShop(Coffee_Shop cs) throws SQLException
+    public Coffee_Shop newCoffeeShop(Coffee_Shop cs) throws SQLException
 
     {
         String sqlInsert="insert into shops (coffee_name, coffee_address, raw_review, phone, website) values("
