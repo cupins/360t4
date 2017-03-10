@@ -69,7 +69,7 @@
         // Calls the GET service to lookup a currently entered userid
         $('#get-shop').click(function () 
         {
-          var userid = document.getElementById("userid");
+          var cid = document.getElementById("cid");
           var url='tcss360/shops/'+cid.value;
           $.ajax({
             type: 'GET',
@@ -84,7 +84,7 @@
         // If the user exits the cid textbox and places focus on another
         // GUI control on the screen, and if the shop id had changed since
         // the user entered the box, then reload the shop form
-        $('#userid').focusout(function () {
+        $('#cid').focusout(function () {
             var curr_cid = document.getElementById("cid").value;    
             //alert(curr_cid + '---' + old_cid)
             if (curr_cid != old_cid)
