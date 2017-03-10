@@ -263,7 +263,7 @@
     function getshop() {
         // Form load
         var cid = document.getElementById("cid"); 
-        var url='tcss360/shops/' + shops.value;
+        var url='tcss360/shops/' + cid.value;
         $.ajax({
           type: 'GET',
           url: url,
