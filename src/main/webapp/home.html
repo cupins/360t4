@@ -174,7 +174,7 @@
       });
       $('#review-shop').click(function ()
       {
-        document.getElementById("review_form").style.display="initial";
+        document.getElementById("review_form").style.visibility="visible";
       });
       $(".table-body").on('click', 'tr', function() {
          var clicked_cid=$(this).find('td:first').text();
@@ -201,9 +201,9 @@
     }
     // renders the shop table
     function render(data)  {
-      document.getElementById("shop_table").style.display="initial";
+      document.getElementById("shop_table").style.visibility="visible";
       document.getElementById("hiddenbuttons").style.visibility="hidden";
-      document.getElementById("review_form").style.display="none";
+      document.getElementById("review_form").style.visibility="hidden";
       $.each(data, function(index, shop) { 
           var newrow = "<tr><td id=\"cid\"" + index + "\">"+ shop.cid + "</td>";
           newrow += "<td id=\"coffee_name\">" + shop.coffeeName + "</td>";
@@ -229,7 +229,7 @@
     // displays a selected shop in the form
     function render_shop(data)  {
       var list = data;
-      document.getElementById("shop_table").style.display="none";
+      document.getElementById("shop_table").style.visibility="hidden";
       if (list)
         $.each(list, function(index, shop) { 
             document.getElementById("myshop").innerHTML="";
