@@ -208,7 +208,7 @@ public class Review_Service {
         
         try {
             Model db = Model.singleton();
-            Review rvw = db.newReview(review);
+            Review rvw = db.createReview(review);
             logger.log(Level.INFO, "review persisted to db as rid=" + rvw.getRid());
             text.append("Review id persisted with id=" + rvw.getRid());
             lreviews.add(rvw);
