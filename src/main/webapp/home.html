@@ -147,7 +147,27 @@
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>    
     <script language="javascript">
     $(document).ready(function () {
-      $("#review-shop").click(function ()
+      $('#new-shop').click(function ()
+      {
+          location.href = "https://still-fjord-79022.herokuapp.com/add_shop.html";
+      });        
+      $('#delete-shop').click(function ()
+        {
+           var cid = document.getElementById("secretcid");
+           var shop = { 'cid': cid.value };           
+           var url='tcss360/shops/';
+           if (confirm('Are you sure - DELETE ' + coffee_name.value + '-(' + cid.value + ') ?')) {
+             $.ajax({
+               type: 'DELETE',
+               url: url,
+               datatype: 'json',
+               data: JSON.stringify(shop),
+               contentType: 'application/json',
+               success: render_delete
+             }); 
+           } 
+        });
+      $('#review-shop').click(function ()
       {
          document.write("review shop : " + document.getElementById("secretcid").value);
       });
@@ -186,6 +206,13 @@
           $('#mybody').append(newrow);
       });
     }
+    function render_delete(data)
+    {
+        $('#mybody').empty();
+        getshops();
+        document.getElementById("secretcid").value = "";
+        $('#myshop').empty();
+    }
     // displays a selected shop in the form
     function render_shop(data)  {
       var list = data;
@@ -200,6 +227,7 @@
             $('#myshop').append("<div id=\"secretcid\" value=\""+shop.cid+"\"></div>");
             document.getElementById("secretcid").style.visibility="hidden";
             $('#myshop').append("<input type=\"button\" value=\"Review Shop\" onclick=\"\" id=\"review-shop\"/>");
+            $('#myshop').append("<input type=\"button\" value=\"Delete Shop\" onclick=\"\" id=\"delete-shop\"/>");
       });
     } 
   </script>
@@ -220,6 +248,9 @@
               <tbody id="mybody" class="table-body">
            </tbody>
       </table>
+      <div>
+        <input type="button" value="Add New Shop" onclick="" id="new-shop"/>
+      </div>
       <div id="myshop"></div>
   </body>
 </html>
