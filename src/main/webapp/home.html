@@ -144,6 +144,10 @@
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>    
     <script language="javascript">
     $(document).ready(function () {
+      $('#new-shop').click(function ()
+      {
+         document.write("review shop : " + document.getElementById("secretcid"));
+      });
       $(".table-body").on('click', 'tr', function() {
          var clicked_cid=$(this).find('td:first').text();
          old_cid = clicked_cid;
@@ -152,7 +156,7 @@
             type: 'GET',
             url: url,
             datatype: 'json',
-            success: render_form
+            success: render_shop
           });        
       });
       getshops();
@@ -180,6 +184,22 @@
           $('#mybody').append(newrow);
       });
     }
+    // displays a selected shop in the form
+    function render_form(data)  {
+      var list = data;
+      if (list)
+        $.each(list, function(index, shop) { 
+            document.getElementById("myshop").innerHTML="";
+            $('#myshop').append("<p>Name of Shop : " + shop.coffeeName + "</p>");
+            $('#myshop').append("<p>Address : " + shop.coffeeAddress + "</p>");
+            $('#myshop').append("<p>Phone Number : " + shop.phone + "</p>");
+            $('#myshop').append("<p>Website : " + shop.website + "</p>");
+            $('#myshop').append("<p>Review : " + shop.review + "</p>");
+            $('#myshop').append("<div id=\"secretcid\" value=\""+shop.cid+"\"></div>");
+            document.getElementById("secretcid").style.visibility="hidden";
+            $('#myshop').append("<input type=\"button\" value=\"Save Shop\" onclick=\"\" id=\"review-shop\""/>
+      });
+    } 
   </script>
   </head>
   <body  id="cof_body">
@@ -198,6 +218,6 @@
               <tbody id="mybody" class="table-body">
            </tbody>
       </table>
-    </div>
+      <div id="myshop"></div>
   </body>
 </html>
