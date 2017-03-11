@@ -293,9 +293,9 @@ public class Model {
 
     // Reviews
     /////////////////////////////////////////////////////////////////////////
+
     
-    
-    public int createReview(Review rvw) throws SQLException
+    public Review createReview(Review rvw) throws SQLException
     {
         String sqlInsert="insert into reviews (date, text, rating, cid, userid) values (" + rvw.getDate() + "," + " '" + rvw.getText() + "', " + rvw.getRating() + ", " + rvw.getCid() + ", " + rvw.getUserid() + ");";
         Statement s = createStatement();
@@ -306,9 +306,9 @@ public class Model {
         logger.log(Level.INFO, "retrieved keys from statement");
         int rid = -1;
         while (rs.next())
-            rid = rs.getInt(6);   // assuming 3rd column is userid
+            rid = rs.getInt(6);   // assuming 6rd column is userid
         logger.log(Level.INFO, "The new rid=" + rid);
-        return rid;
+        return rvw;
 
     }
 
@@ -322,9 +322,8 @@ public class Model {
         pst.execute();
     }
 
-    
 
-    public Review[] getReviews() throws SQLException
+    public Review[] getReviews(int rId) throws SQLException
     {
         LinkedList<Review> ll = new LinkedList<Review>();
         String sqlQuery ="select * from reviews;";
