@@ -266,7 +266,7 @@
             $('#myshop').append("<div id=\"secretcid\" value=\""+shop.cid+"\"></div>");
             
             //add reviews
-          var url = "tcss360/reviews/'+shop.cid
+          var url = "tcss360/reviews/"+shop.cid;
            $.ajax({
              type: 'GET',
              url: url,
