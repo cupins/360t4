@@ -89,7 +89,7 @@ public class Review_Service {
      
         try
         {
-            int cid = Integer.parseInt(id);
+            int rid = Integer.parseInt(id);
             Model db = Model.singleton();
             Review[] reviews = db.getReviews(rid);
             if (rid ==0)
@@ -224,7 +224,7 @@ public class Review_Service {
             logger.log(Level.SEVERE, "Error connecting to db.");
         }
         
-        return lreview;
+        return lreviews;
    }
 }
 
