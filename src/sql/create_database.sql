@@ -22,12 +22,14 @@ create table users (
 );
 
 create table shops (
-    cid serial primary key,
+    cid serial primary key,    
     coffee_name varchar(50),
-    coffee_address varchar(100),
-    raw_review integer,
-    phone varchar(20),
-    website varchar(512)
+    city varchar(30),
+    stat varchar(30),
+    zip varchar(20),
+    phone varchar(13),
+    opentime int,
+    clostime int
 );
 
 create table reviews(
@@ -38,3 +40,15 @@ create table reviews(
     userid integer,
     rid serial primary key
 );
+
+create table share(
+    name varchar(50),
+    city varchar(30),
+    state varchar(30),
+    zip varchar(10),
+    phone varchar(13),
+    opentime int,
+    closetime int,
+    sid serial primary key
+);
+    

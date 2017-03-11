@@ -5,6 +5,7 @@
  */
 
 package data;
+import static data.Model.logger;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -17,6 +18,7 @@ import java.util.logging.Logger;
 import objects.User;
 import objects.Coffee_Shop;
 import objects.Review;
+import objects.Share;
 
 
 
@@ -358,5 +360,105 @@ public class Model {
         return st.execute(sqlQuery.toString());
     }
 
-    
+    // Share
+    /////////////////////////////////////////////////////////////////////////
+
+
+    public Share[] getShare(int sId) throws SQLException
+    {
+        LinkedList<Share> ll = new LinkedList<Share>();
+        String sqlQuery ="select * from share";
+        sqlQuery += (sId > 0) ? " where sid=" + sId + " order by sid;" : " order by sid;";
+        Statement st = createStatement();
+        ResultSet rows = st.executeQuery(sqlQuery);
+        while (rows.next())
+        {
+            logger.log(Level.INFO, "Reading row...");
+            Share shop = new Share();
+            shop.setName(rows.getString("name"));
+            shop.setCity(rows.getString("city"));
+            shop.setState(rows.getString("state"));
+            shop.setZip(rows.getString("zip"));
+            shop.setPhone(rows.getString("phone"));
+            shop.setOpentime(rows.getInt("opentime"));
+            shop.setClosetime(rows.getInt("closetime"));
+            shop.setSid(rows.getInt("sid"));
+            
+            logger.log(Level.INFO, "Adding shop to list with id=" + shop.getSid());
+            ll.add(shop);
+        }
+        return ll.toArray(new Share[ll.size()]);
+    }
+//    
+//    public void deleteCoffeeShop(int cid) throws SQLException
+//    {
+//        String sqlDelete="delete from shops where cid=?";
+//        PreparedStatement pst = createPreparedStatement(sqlDelete);
+//        pst.setInt(1, cid);
+//        pst.execute();
+//    }
+//
+//    
+//    /*
+//    public Coffee_Shop[] getCoffeeShops() throws SQLException {
+//        LinkedList<Coffee_Shop> ll = new LinkedList<Coffee_Shop>();
+//        String sqlQuery = "select * from shops;";
+//        Statement st = createStatement();
+//        ResultSet rows = st.executeQuery(sqlQuery);
+//        while (rows.next()) {
+//            logger.log(Level.INFO, "Reading row...");
+//            Coffee_Shop cs = new Coffee_Shop();
+//            cs.setCid(rows.getInt("cid"));
+//            cs.setCoffeeName(rows.getString("coffee_name"));
+//            cs.setCoffeeAddress(rows.getString("coffee_address"));
+//            cs.setRawReview(rows.getInt("raw_review"));
+//            cs.setPhone(rows.getString("phone"));
+//            cs.setWebsite(rows.getString("website"));
+//            logger.log(Level.INFO, "Adding shop to list with id=" + cs.getCid());
+//            ll.add(cs);
+//        }
+//        return ll.toArray(new Coffee_Shop[ll.size()]);
+//    
+//    }*/
+//    public Coffee_Shop[] getCoffeeShops(int cId) throws SQLException
+//    {
+//        LinkedList<Coffee_Shop> ll = new LinkedList<Coffee_Shop>();
+//        String sqlQuery ="select * from shops";
+//        sqlQuery += (cId > 0) ? " where cid=" + cId + " order by cid;" : " order by cid;";
+//        Statement st = createStatement();
+//        ResultSet rows = st.executeQuery(sqlQuery);
+//        while (rows.next())
+//        {
+//            logger.log(Level.INFO, "Reading row...");
+//            Coffee_Shop shop = new Coffee_Shop();
+//            shop.setCoffeeName(rows.getString("coffee_name"));
+//            shop.setCid(rows.getInt("cid"));
+//            shop.setCoffeeAddress(rows.getString("coffee_address"));
+//            shop.setRawReview(rows.getInt("raw_review"));
+//            shop.setPhone(rows.getString("phone"));
+//            shop.setWebsite(rows.getString("website"));
+//            
+//            logger.log(Level.INFO, "Adding shop to list with id=" + shop.getCid());
+//            ll.add(shop);
+//        }
+//        return ll.toArray(new Coffee_Shop[ll.size()]);
+//    }
+//
+//
+//    public boolean updateCoffeeShop(Coffee_Shop cs) throws SQLException {
+//        StringBuilder sqlQuery = new StringBuilder();
+//
+//        sqlQuery.append("update shops ");
+//        sqlQuery.append("set coffee_name='" + cs.getCoffeeName() + "', ");
+//        sqlQuery.append("coffee_address='" + cs.getCoffeeAddress() + "', ");
+//        sqlQuery.append("raw_review=" + cs.getRawReview() + ", ");
+//        sqlQuery.append("phone='" + cs.getPhone() + "', ");
+//        sqlQuery.append("website='" + cs.getWebsite() + "' ");
+//        sqlQuery.append("where cid=" + cs.getCid() +";");
+//        Statement st = createStatement();
+//        logger.log(Level.INFO, "UPDATE SQL=" + sqlQuery.toString());
+//
+//        return st.execute(sqlQuery.toString());
+//
+//    }
 }
