@@ -152,21 +152,21 @@
           location.href = "https://still-fjord-79022.herokuapp.com/add_shop.html";
       });        
       $('#delete-shop').click(function ()
-        {
-           var cid = document.getElementById("secretcid");
-           var shop = { 'cid': cid.value };           
-           var url='tcss360/shops/';
-           if (confirm('Are you sure - DELETE ' + coffee_name.value + '-(' + cid.value + ') ?')) {
-             $.ajax({
-               type: 'DELETE',
-               url: url,
-               datatype: 'json',
-               data: JSON.stringify(shop),
-               contentType: 'application/json',
-               success: render_delete
-             }); 
-           } 
-        });
+      {
+         var cid = document.getElementById("secretcid");
+         var shop = { 'cid': cid.value };           
+         var url='tcss360/shops/';
+         if (confirm('Are you sure - DELETE ' + coffee_name.value + '-(' + cid.value + ') ?')) {
+           $.ajax({
+             type: 'DELETE',
+             url: url,
+             datatype: 'json',
+             data: JSON.stringify(shop),
+             contentType: 'application/json',
+             success: render_delete
+           }); 
+         } 
+      });
       $('#review-shop').click(function ()
       {
          document.write("review shop : " + document.getElementById("secretcid").value);
@@ -212,6 +212,11 @@
         getshops();
         document.getElementById("secretcid").value = "";
         $('#myshop').empty();
+        document.getElementById("hiddenbuttons").style.visibility="hidden";
+        var btn = document.getElementById("delete-shop");
+        btn.disabled = true;
+        btn = document.getElementById("review-shop");
+        btn.disabled = true;
     }
     // displays a selected shop in the form
     function render_shop(data)  {
@@ -226,8 +231,11 @@
             $('#myshop').append("<p>Review : " + shop.rawReview + "</p>");
             $('#myshop').append("<div id=\"secretcid\" value=\""+shop.cid+"\"></div>");
             document.getElementById("secretcid").style.visibility="hidden";
-            $('#myshop').append("<input type=\"button\" value=\"Review Shop\" onclick=\"\" id=\"review-shop\"/>");
-            $('#myshop').append("<input type=\"button\" value=\"Delete Shop\" onclick=\"\" id=\"delete-shop\"/>");
+            document.getElementById("hiddenbuttons").style.visibility="visible";
+            var btn = document.getElementById("delete-shop");
+            btn.disabled = false;
+            btn = document.getElementById("review-shop");
+            btn.disabled = false;
       });
     } 
   </script>
@@ -252,5 +260,9 @@
         <input type="button" value="Add New Shop" onclick="" id="new-shop"/>
       </div>
       <div id="myshop"></div>
+      <div id="hiddenbuttons">
+        <input type="button" value="Review Shop" onclick="" id="review-shop"/>
+        <input type="button" value="Delete Shop" onclick="" id="delete-shop"/>
+      </div>
   </body>
 </html>
