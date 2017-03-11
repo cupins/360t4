@@ -152,6 +152,31 @@
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>    
     <script language="javascript">
     $(document).ready(function () {
+      
+        $('#save-review').click(function ()
+        {
+            // Create a new record
+            var review  = document.getElementById("review");
+            var rating  = document.getElementById("rating");
+            var cid     = document.getElementById("cid");
+            var rvw  = { 'text': review.value,
+                         'rating': rating.value,
+                         'cid': cid.value,
+                         'userid': '1'};         
+            var url='tcss360/reviews/';
+            if (confirm('Are you sure - CREATE ' + '?')) {
+              $.ajax({
+                type: 'POST',
+                url: url,
+                datatype: 'json',
+                data: JSON.stringify(rvw),
+                contentType: 'application/json',
+                success: render_newreview
+              });               
+           }
+        });
+      
+      
       $('#save-review').click(function ()
       {
           var review  = document.getElementById("review");
@@ -159,6 +184,9 @@
           var cid     = document.getElementById("cid");
           document.write("<p>Saving review with :</p><p>"+review.value+"</p><p>"+rating.value+"</p><p>"+cid.value+"</p>");
       }); 
+      
+      
+      
       $('#new-shop').click(function ()
       {
           location.href = "https://still-fjord-79022.herokuapp.com/add_shop.html";
@@ -232,6 +260,9 @@
         btn.disabled = true;
         btn = document.getElementById("review-shop");
         btn.disabled = true;
+    }
+    function render_newreview(data) {
+        getshops();
     }
     // displays a selected shop in the form
     function render_shop(data)  {
