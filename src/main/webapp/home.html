@@ -152,7 +152,6 @@
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>    
     <script language="javascript">
     $(document).ready(function () {
-      
         $('#save-review').click(function ()
         {
             // Create a new record
@@ -174,19 +173,7 @@
                 success: render_newreview
               });               
            }
-        });
-      
-      
-      $('#save-review').click(function ()
-      {
-          var review  = document.getElementById("review");
-          var rating  = document.getElementById("rating");
-          var cid     = document.getElementById("cid");
-          document.write("<p>Saving review with :</p><p>"+review.value+"</p><p>"+rating.value+"</p><p>"+cid.value+"</p>");
-      }); 
-      
-      
-      
+      });
       $('#new-shop').click(function ()
       {
           location.href = "https://still-fjord-79022.herokuapp.com/add_shop.html";
@@ -278,6 +265,17 @@
             $('#myshop').append("<p>Review : " + shop.rawReview + "</p>");
             $('#myshop').append("<div id=\"secretcid\" value=\""+shop.cid+"\"></div>");
             
+            //add reviews
+          var url = "tcss360/reviews/'+shop.cid
+           $.ajax({
+             type: 'GET',
+             url: url,
+             datatype: 'json',
+             data: JSON.stringify(shop),
+             contentType: 'application/json',
+             success: render_getReviews
+           }); 
+          
             document.getElementById("cid").value = shop.cid;
             document.getElementById("secretcid").style.visibility="hidden";
             document.getElementById("hiddenbuttons").style.visibility="visible";
@@ -286,7 +284,18 @@
             btn = document.getElementById("review-shop");
             btn.disabled = false;
       });
-    } 
+    }
+    function render_getReview(data) {
+      var list = data;
+      $('#myshop').append("<p>Reviews :</p>");
+      if (list)
+        $.each(list, function(index, review) {
+          $('#myshop').append("<p>Text : "+review.text+"</p>");
+          $('#myshop').append("<p>Rating : "+review.rating+"</p>");
+          $('#myshop').append("<p>~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~</p>");
+        }
+      });
+    }
   </script>
   </head>
   <body  id="cof_body">
@@ -309,6 +318,7 @@
       <div>
         <input type="button" value="Add New Shop" onclick="" id="new-shop"/>
       </div>
+    </div>
       <div id="myshop"></div>
       <div id="hiddenbuttons">
         <input type="button" value="Review Shop" onclick="" id="review-shop"/>
@@ -340,6 +350,5 @@
            </tr>
         </table>
       </div>
-    </div>
   </body>
 </html>
