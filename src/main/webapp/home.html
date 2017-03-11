@@ -221,6 +221,15 @@
           success: render
         }); 
     }
+    function getshop() {
+      var url='tcss360/shops/'+document.getElementById("cid").value;
+        $.ajax({
+          type: 'GET',
+          url: url,
+          datatype: 'json',
+          success: render_shop
+        }); 
+    }
     // renders the shop table
     function render(data)  {
       document.getElementById("shop_table").style.visibility="visible";
@@ -249,7 +258,14 @@
         btn.disabled = true;
     }
     function render_newreview(data) {
+        $('#mybody').empty();
         getshops();
+        $('#myshop').empty();
+        //document.getElementById("hiddenbuttons").style.visibility="hidden";
+        var btn = document.getElementById("delete-shop");
+        btn.disabled = true;
+        btn = document.getElementById("review-shop");
+        btn.disabled = true;
     }
     // displays a selected shop in the form
     function render_shop(data)  {
@@ -265,6 +281,14 @@
             $('#myshop').append("<p>Review : " + shop.rawReview + "</p>");
             $('#myshop').append("<div id=\"secretcid\" value=\""+shop.cid+"\"></div>");
             
+          
+            document.getElementById("cid").value = shop.cid;
+            document.getElementById("secretcid").style.visibility="hidden";
+            document.getElementById("hiddenbuttons").style.visibility="visible";
+            var btn = document.getElementById("delete-shop");
+            btn.disabled = false;
+            btn = document.getElementById("review-shop");
+            btn.disabled = false;
             //add reviews
           var url = "tcss360/reviews/"+shop.cid;
            $.ajax({
@@ -275,14 +299,6 @@
              contentType: 'application/json',
              success: render_getReviews
            }); 
-          
-            document.getElementById("cid").value = shop.cid;
-            document.getElementById("secretcid").style.visibility="hidden";
-            document.getElementById("hiddenbuttons").style.visibility="visible";
-            var btn = document.getElementById("delete-shop");
-            btn.disabled = false;
-            btn = document.getElementById("review-shop");
-            btn.disabled = false;
       });
     }
     function render_getReviews(data) {
@@ -290,6 +306,7 @@
       $('#myshop').append("<p>Reviews :</p>");
       if (list)
         $.each(list, function(index, review) {
+          $('#myshop').append("<p>~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~</p>");
           $('#myshop').append("<p>Text : "+review.text+"</p>");
           $('#myshop').append("<p>Rating : "+review.rating+"</p>");
           $('#myshop').append("<p>~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~</p>");
@@ -328,7 +345,7 @@
            <table id="myform">
            <tr>
                <td>
-                   <input type="button" value="Save Shop" onclick="" id="save-review"/>
+                   <input type="button" value="Submit Review" onclick="" id="save-review"/>
                </td>        
            </tr>
            <tr>
