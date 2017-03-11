@@ -91,8 +91,6 @@
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>    
     <script language="javascript">
     $(document).ready(function () { 
-        
-       
         $('#check-user').click(function ()
         {
             var name = document.getElementById("mail");
@@ -104,8 +102,11 @@
               datatype: 'json',
               success: render_login
             });
-        });  
-        
+        }); 
+        $('#register-user').click(function ()
+        {
+          location.href = "https://still-fjord-79022.herokuapp.com/register.html";
+        });
     } );  
     
     // Checks the user in.
