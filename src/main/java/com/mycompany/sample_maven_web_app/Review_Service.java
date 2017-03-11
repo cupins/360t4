@@ -56,6 +56,7 @@ public class Review_Service {
      *
      * @return an instance of java.lang.String
      */
+ /*
     @GET
     @Produces(MediaType.TEXT_HTML)
     public String getReviews() {
@@ -74,7 +75,33 @@ public class Review_Service {
         sb.append("</table></body></html>");
         return sb.toString();
     }
-
+*/
+ @GET
+    @Path("{rid}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public List<Review> getReviewsJson(@PathParam("rid") String id) {
+        LinkedList<Review> lreviews = new LinkedList<Review>();
+     
+        try
+        {
+            int cid = Integer.parseInt(id);
+            Model db = Model.singleton();
+            Review[] reviews = db.getReviews(rid);
+            if (rid ==0)
+                for (int i=0;i<reviews.length;i++)
+                    lreviews.add(reviews[i]);
+            else
+                lreviews.add(reviews[0]);
+            logger.log(Level.INFO, "Received request to fetch review id=" + rid);
+            return lreviews;
+        }
+        catch (Exception e)
+        {
+            JSONObject obj = new JSONObject();
+                logger.log(Level.WARNING, "Error getting reviews:" + e.toString());
+                return null;
+        }
+} 
     /**
      * PUT method for updating or creating an instance of GenericResource
      *
@@ -127,7 +154,7 @@ public class Review_Service {
         }
         return text.toString();
     }
-
+/*
     @POST
     @Produces(MediaType.TEXT_PLAIN)
     @Consumes(MediaType.APPLICATION_JSON)
@@ -153,7 +180,47 @@ public class Review_Service {
         }
 
         return text.toString();
-    }
+    }*/
+    @POST
+    @Produces(MediaType.APPLICATION_JSON)
+    @Consumes(MediaType.APPLICATION_JSON)
+    public List<Review> createReview(String jobj) throws IOException {
+        logger.log(Level.INFO, "RECEIVED CREATE REQUEST FOR:\n");
+        logger.log(Level.INFO, "OBJECT:" + jobj + "\n");
+        
+        LinkedList<Review> lreviews = new LinkedList<Review>();
+
+        ObjectMapper mapper = new ObjectMapper();
+        Review review = mapper.readValue(jobj.toString(), Review.class);
+        
+        StringBuilder text = new StringBuilder();
+        text.append("The JSON obj:" + jobj.toString() + "\n");
+        //text.append("Hello " + shop.getCoffeeName() + "\n");
+        text.append("Messages:\n");
+//        if (user.getMessages() != null)
+//            for (Object msg : user.getMessages())
+//                text.append(msg.toString() + "\n");
+        
+        try {
+            Model db = Model.singleton();
+            Review rvw = db.newReview(review);
+            logger.log(Level.INFO, "review persisted to db as rid=" + rvw.getRid());
+            text.append("Review id persisted with id=" + rvw.getRid());
+            lreviews.add(rvw);
+        }
+        catch (SQLException sqle)
+        {
+            String errText = "Error persisting review after db connection made:\n" + sqle.getMessage() + " --- " + sqle.getSQLState() + "\n";
+            logger.log(Level.SEVERE, errText);
+            text.append(errText);
+        }
+        catch (Exception e)
+        {
+            logger.log(Level.SEVERE, "Error connecting to db.");
+        }
+        
+        return lreview;
+   }
 }
 
 
