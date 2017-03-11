@@ -18,7 +18,7 @@
       #btn{
         -webkit-appearance: button;
         -moz-appearance: button;
-        appearance: button;
+        <!-- appearance: button; -->
         color: #111;
         background-color: #ff7b00;
         padding: 5px;
@@ -51,7 +51,7 @@
         color: #111;
         font-family: 'Open Sans', sans-serif;
         font-size: 30px;
-        font-weight 300;
+        font-weight: 300;
         line-height: 32px;
         margin: 72px 0 42px;
         text-align: center;
@@ -118,6 +118,7 @@
           location.href = "https://still-fjord-79022.herokuapp.com/shops.html";
         }
       });
+      $('#myerr').append("Email or password incorrect.");
     }
   </script>
   </head>
@@ -138,6 +139,11 @@
       <p class ="login">
         <input type="button" value="Register" onclick="" id="register-user"/>
       </p>
+      <div>
+        <p class ="login" id ="myerr">
+          
+        </p>
+      </div>
     </div>
   </body>
 </html>
