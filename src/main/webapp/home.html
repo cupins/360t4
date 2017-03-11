@@ -1,0 +1,203 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+  <head>
+    <style>
+        <!-- inline style sheet -->
+      #cof_body{
+        background-image: url("http://wallpapersdsc.net/wp-content/uploads/2016/09/Coffee-Beans-Wallpaper.jpg") #00d repeat-y fixed;
+        background-color: rgba(0,0,0,0.3);
+      }
+      #frm{
+        border: solid gray 1px;
+        width: 20%;
+        border-radius: 5px;
+        margin: 100px auto;
+        background: white;
+        padding: 50px;
+      }
+      #btn{
+        -webkit-appearance: button;
+        -moz-appearance: button;
+        <!-- appearance: button; -->
+        color: #111;
+        background-color: #ff7b00;
+        padding: 5px;
+        margin-left: 69%;
+      }
+      #btn:hover{
+        box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24),0 17px 50px 0 rgba(0,0,0,0.19);
+      }
+      h1{
+        color: #111;
+        font-family: 'Helvetica Neue', sans-serif;
+        font-size: 110px;
+        font-weight: bold;
+        letter-spacing: -5px;
+        margin: 100px 0 72px;
+        line-height: 1;
+        text-align: center;
+      }
+      h1.login{
+        color: #111;
+        font-family: 'Helvetica Neue', sans-serif;
+        font-size: 80px;
+        font-weight: bold;
+        letter-spacing: -1px;
+        margin: 100px 0 50px;
+        line-height: 12px;
+        text-align: center;
+      }
+      h2{
+        color: #111;
+        font-family: 'Open Sans', sans-serif;
+        font-size: 30px;
+        font-weight: 300;
+        line-height: 32px;
+        margin: 72px 0 42px;
+        text-align: center;
+      }
+      p{
+        color: #685206;
+        font-family: 'Helvetica Neue', sans-serif;
+        font-size: 14px;
+        font-weight: 600;
+        line-height: 24px;
+        margin: 0 0 24px;
+        text-align: center;
+      }
+      p.login{
+        color: #685206;
+        font-family: 'Helvetica Neue', sans-serif;
+        font-size: 14px;
+        font-weight: 600;
+        line-height: 24px;
+        margin: 0 0 24px;
+        text-align: center;
+      }
+      a{
+        -webkit-appearance: button;
+        -moz-appearance: button;
+        appearance: button;
+        color: #111;
+        background-color: #ff7b00;
+        padding: 5px;
+      }
+      a:hover{
+        box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24),0 17px 50px 0 rgba(0,0,0,0.19);
+      }
+      #myform{
+        border: 1px solid black;
+        border-collapse: collapse;
+        padding-top: 5px;
+        padding-bottom: 5px;
+        padding-right: 20px;
+        padding-left: 20px;
+        font-family: sans-serif;
+      }
+      #mytable {
+        border: 1px solid black;
+        border-collapse: collapse;
+        padding-top: 5px;
+        padding-bottom: 5px;
+        padding-right: 20px;
+        padding-left: 20px;
+        font-family: sans-serif;
+      }
+      div {
+        font-family: sans-serif;
+        font-size: xx-large;
+        font-weight: bold;
+      }
+      .table-header {
+          background-color: yellow;
+          border: 1px solid black;
+      }
+      .cid {
+          width: 30px;
+      }
+      .coffee_name {
+          width: 150px;
+      }
+      .coffee_address {
+        width: 200px;
+      }
+      .raw_review {
+        width: 60px;
+      }
+      .phone {
+        width: 100px;
+      }
+      .website {
+        width: 20px;
+      }
+      th, td {
+        border: 1px solid black;
+        border-collapse: collapse;
+        padding-top: 5px;
+        padding-bottom: 5px;
+        padding-right: 20px;
+        padding-left: 20px;    
+      }
+    </style>
+    <title>Shops</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>    
+    <script language="javascript">
+    $(document).ready(function () {
+      $(".table-body").on('click', 'tr', function() {
+         var clicked_cid=$(this).find('td:first').text();
+         old_cid = clicked_cid;
+         var url='tcss360/shops/'+clicked_cid;
+          $.ajax({
+            type: 'GET',
+            url: url,
+            datatype: 'json',
+            success: render_form
+          });        
+      });
+      getshops();
+    } );
+    // gets and displays all shops by calling render
+    function getshops() {
+        // Form load
+        var url='tcss360/shops/0';
+        $.ajax({
+          type: 'GET',
+          url: url,
+          datatype: 'json',
+          success: render
+        }); 
+    }
+    // renders the shop table
+    function render(data)  {
+      $.each(data, function(index, shop) { 
+          var newrow = "<tr><td id=\"cid\"" + index + "\">"+ shop.cid + "</td>";
+          newrow += "<td id=\"coffee_name\">" + shop.coffeeName + "</td>";
+          newrow += "<td id=\"coffee_address\">" + shop.coffeeAddress + "</td>";
+          newrow += "<td id=\"raw_review\">" + shop.rawReview + "</td>";
+          newrow += "<td id=\"phone\">" + shop.phone + "</td>";
+          newrow += "<td id=\"website\">" + shop.website + "</td>";
+          $('#mybody').append(newrow);
+      });
+    }
+  </script>
+  </head>
+  <body  id="cof_body">
+    <h1 class="login">The Shops</h1>
+    <table id="mytable" class="table">
+           <thead>
+             <tr class="table-header">
+                 <td class="cid">Coffee Shop ID</td>
+                 <td class="coffee_name">Shop Name</td>
+                 <td class="coffee_address">Address</td>
+                 <td class="raw_review">Cumulitive Review</td>
+                 <td class="phone">Phone Number</td>
+                 <td class="website">Website url</td>
+             </tr>               
+           </thead>
+              <tbody id="mybody" class="table-body">
+           </tbody>
+      </table>
+    </div>
+  </body>
+</html>
