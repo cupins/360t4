@@ -57,13 +57,12 @@
         text-align: center;
       }
       p{
-        color: #685206;
+        color: #111;
         font-family: 'Helvetica Neue', sans-serif;
         font-size: 14px;
         font-weight: 600;
         line-height: 24px;
         margin: 0 0 24px;
-        text-align: center;
       }
       p.login{
         color: #685206;
@@ -147,6 +146,12 @@
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>    
     <script language="javascript">
     $(document).ready(function () {
+      $('#save-review').click(function ()
+      {
+          var review = document.getElementById("review");
+          var rating = document.getElementById("rating");
+          document.write("<p>Saving review with :</p><p>"+review+"</p><p>"+rating.value+"</p>");
+      }); 
       $('#new-shop').click(function ()
       {
           location.href = "https://still-fjord-79022.herokuapp.com/add_shop.html";
@@ -169,7 +174,7 @@
       });
       $('#review-shop').click(function ()
       {
-         document.write("review shop : " + document.getElementById("cid").value);
+        document.getElementById("review_form").style.display="initial";
       });
       $(".table-body").on('click', 'tr', function() {
          var clicked_cid=$(this).find('td:first').text();
@@ -196,6 +201,9 @@
     }
     // renders the shop table
     function render(data)  {
+      document.getElementById("shop_table").style.display="initial";
+      document.getElementById("hiddenbuttons").style.visibility="hidden";
+      document.getElementById("review_form").style.display="none";
       $.each(data, function(index, shop) { 
           var newrow = "<tr><td id=\"cid\"" + index + "\">"+ shop.cid + "</td>";
           newrow += "<td id=\"coffee_name\">" + shop.coffeeName + "</td>";
@@ -205,7 +213,6 @@
           newrow += "<td id=\"website\">" + shop.website + "</td>";
           $('#mybody').append(newrow);
       });
-      document.getElementById("hiddenbuttons").style.visibility="hidden";
     }
     function render_delete(data)
     {
@@ -222,6 +229,7 @@
     // displays a selected shop in the form
     function render_shop(data)  {
       var list = data;
+      document.getElementById("shop_table").style.display="none";
       if (list)
         $.each(list, function(index, shop) { 
             document.getElementById("myshop").innerHTML="";
@@ -244,6 +252,7 @@
   </script>
   </head>
   <body  id="cof_body">
+    <div id="shop_table">
     <h1 class="login">The Shops</h1>
     <table id="mytable" class="table">
            <thead>
@@ -268,5 +277,32 @@
         <input type="button" value="Delete Shop" onclick="" id="delete-shop"/>
         <input type="text" id="cid" size="10" hidden/> 
       </div>
+      <div id="review_form">
+           <table id="myform">
+           <tr>
+               <td>
+                   <input type="button" value="Save Shop" onclick="" id="save-review"/>
+               </td>        
+           </tr>
+           <tr>
+               <td>Review :  </td>
+               <td><input type="text" id="review" size="160"/> </td>
+           </tr>
+           <tr>
+               <td>Rating : </td>
+               <td>
+                 <select name="rating" id="rating">
+                   <option value="1">1</option>
+                   <option value="2">2</option>
+                   <option value="3">3</option>
+                   <option value="4">4</option>
+                   <option value="5">5</option>
+                 </select>
+                 <input type="text" id="rating" size="5"/> 
+               </td>
+           </tr>
+        </table>
+      </div>
+    </div>
   </body>
 </html>
