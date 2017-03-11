@@ -132,6 +132,10 @@
       .website {
         width: 20px;
       }
+      .resizedTextBox {
+        width: 100px;
+        height: 20px;
+      }
       th, td {
         border: 1px solid black;
         border-collapse: collapse;
@@ -140,8 +144,8 @@
         padding-right: 20px;
         padding-left: 20px;    
       }
-      tr:hover {
-        box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24),0 17px 50px 0 rgba(0,0,0,0.19); 
+      .shtable:hover {
+        box-shadow: 0 12px 16px 0 rgba(0.15,0.15,0.15,0.24),0 17px 50px 0 rgba(0.15,0.15,0.15,0.19); 
       }
     </style>
     <title>Shops</title>
@@ -209,7 +213,7 @@
       document.getElementById("hiddenbuttons").style.visibility="hidden";
       document.getElementById("review_form").style.visibility="hidden";
       $.each(data, function(index, shop) { 
-          var newrow = "<tr><td id=\"cid\"" + index + "\">"+ shop.cid + "</td>";
+          var newrow = "<tr id=\"shtable\"><td id=\"cid\"" + index + "\">"+ shop.cid + "</td>";
           newrow += "<td id=\"coffee_name\">" + shop.coffeeName + "</td>";
           newrow += "<td id=\"coffee_address\">" + shop.coffeeAddress + "</td>";
           newrow += "<td id=\"raw_review\">" + shop.rawReview + "</td>";
