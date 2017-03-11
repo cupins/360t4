@@ -114,10 +114,10 @@
       var name = document.getElementById("mail");
       var pass = document.getElementById("pass");
       $.each(data, function(index, user) { 
-        if (user.email == name && user.password == pass) {
+        if (user.email == name.value && user.password == pass.value) {
           location.href = "https://still-fjord-79022.herokuapp.com/shops.html";
         }
-        $('#myerr').append("<p>" + name + " " + user.email + " " + pass + " " + user.passsword + "</p>");
+        $('#myerr').append("<p>" + name.value + " " + user.email + " " + pass.value + " " + user.password + "</p>");
       });
       $('#myerr').append("Email or password incorrect.");
     }
