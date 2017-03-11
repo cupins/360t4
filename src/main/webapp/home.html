@@ -174,7 +174,7 @@
       });
       $('#review-shop').click(function ()
       {
-        document.getElementById("review_form").style.display="";
+        document.getElementById("review_form").style.display="initial";
       });
       $(".table-body").on('click', 'tr', function() {
          var clicked_cid=$(this).find('td:first').text();
@@ -201,7 +201,7 @@
     }
     // renders the shop table
     function render(data)  {
-      document.getElementById("shop_table").style.display="";
+      document.getElementById("shop_table").style.display="initial";
       document.getElementById("hiddenbuttons").style.visibility="hidden";
       document.getElementById("review_form").style.display="none";
       $.each(data, function(index, shop) { 
@@ -230,7 +230,6 @@
     function render_shop(data)  {
       var list = data;
       document.getElementById("shop_table").style.display="none";
-      document.getElementById("myshop").style.display="";
       if (list)
         $.each(list, function(index, shop) { 
             document.getElementById("myshop").innerHTML="";
