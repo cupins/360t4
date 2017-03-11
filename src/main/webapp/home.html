@@ -174,7 +174,7 @@
       });
       $('#review-shop').click(function ()
       {
-        document.getElementById("review_form").style.display="initial";
+        document.getElementById("review_form").style.display="unset";
       });
       $(".table-body").on('click', 'tr', function() {
          var clicked_cid=$(this).find('td:first').text();
@@ -201,7 +201,7 @@
     }
     // renders the shop table
     function render(data)  {
-      document.getElementById("shop_table").style.display="initial";
+      document.getElementById("shop_table").style.display="unset";
       document.getElementById("hiddenbuttons").style.visibility="hidden";
       document.getElementById("review_form").style.display="none";
       $.each(data, function(index, shop) { 
