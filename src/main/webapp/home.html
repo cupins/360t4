@@ -144,6 +144,15 @@
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>    
     <script language="javascript">
     $(document).ready(function () {
+      var old_cid = document.getElementById("cid").value;
+      $('#cid').focusin(function () {
+          old_cid = document.getElementById("cid").value;    
+      });
+      $('#cid').focusout(function () {
+          var curr_cid = document.getElementById("cid").value;
+          if (curr_cid != old_cid)
+              getshop();
+      });
       $('#review-shop').click(function ()
       {
          document.write("review shop : " + document.getElementById("secretcid"));
@@ -163,7 +172,6 @@
     } );
     // gets and displays all shops by calling render
     function getshops() {
-        // Form load
         var url='tcss360/shops/0';
         $.ajax({
           type: 'GET',
@@ -172,10 +180,22 @@
           success: render
         }); 
     }
+    function getshop() {
+        // Form load
+        var cid = document.getElementById("cid"); 
+        var url='tcss360/shops/' + cid.value;
+        $.ajax({
+          type: 'GET',
+          url: url,
+          datatype: 'json',
+          success: render_shop
+        }); 
+    } 
     // renders the shop table
     function render(data)  {
       $.each(data, function(index, shop) { 
-          var newrow = "<tr><td id=\"coffee_name\">" + shop.coffeeName + "</td>";
+          var newrow = "<tr><td id=\"cid\"" + index + "\">"+ shop.cid + "</td>";
+          newrow += "<td id=\"coffee_name\">" + shop.coffeeName + "</td>";
           newrow += "<td id=\"coffee_address\">" + shop.coffeeAddress + "</td>";
           newrow += "<td id=\"raw_review\">" + shop.rawReview + "</td>";
           newrow += "<td id=\"phone\">" + shop.phone + "</td>";
@@ -184,7 +204,7 @@
       });
     }
     // displays a selected shop in the form
-    function render_form(data)  {
+    function render_shop(data)  {
       var list = data;
       if (list)
         $.each(list, function(index, shop) { 
@@ -206,6 +226,7 @@
     <table id="mytable" class="table">
            <thead>
              <tr class="table-header">
+                 <td class="cid">Shop Id</td>
                  <td class="coffee_name">Shop Name</td>
                  <td class="coffee_address">Address</td>
                  <td class="raw_review">Cumulitive Review</td>
