@@ -117,6 +117,7 @@
         if (user.email == name && user.password == pass) {
           location.href = "https://still-fjord-79022.herokuapp.com/shops.html";
         }
+        $('#myerr').append(name + " " + user.email + " " + pass + " " + user.passsword);
       });
       $('#myerr').append("Email or password incorrect.");
     }
