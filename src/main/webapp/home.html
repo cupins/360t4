@@ -229,7 +229,7 @@
     // displays a selected shop in the form
     function render_shop(data)  {
       var list = data;
-      document.getElementById("shop_table").style.visibility="hidden";
+      //document.getElementById("shop_table").style.visibility="hidden";
       if (list)
         $.each(list, function(index, shop) { 
             document.getElementById("myshop").innerHTML="";
@@ -297,8 +297,7 @@
                    <option value="3">3</option>
                    <option value="4">4</option>
                    <option value="5">5</option>
-                 </select>
-                 <input type="text" id="rating" size="5"/> 
+                 </select> 
                </td>
            </tr>
         </table>
