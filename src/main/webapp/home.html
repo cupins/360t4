@@ -230,6 +230,7 @@
     function render_shop(data)  {
       var list = data;
       document.getElementById("shop_table").style.display="none";
+      document.getElementById("myshop").style.display="";
       if (list)
         $.each(list, function(index, shop) { 
             document.getElementById("myshop").innerHTML="";
