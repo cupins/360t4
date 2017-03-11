@@ -151,9 +151,10 @@
     $(document).ready(function () {
       $('#save-review').click(function ()
       {
-          var review = document.getElementById("review");
-          var rating = document.getElementById("rating");
-          document.write("<p>Saving review with :</p><p>"+review+"</p><p>"+rating.value+"</p>");
+          var review  = document.getElementById("review");
+          var rating  = document.getElementById("rating");
+          var cid     = document.getElementById("cid");
+          document.write("<p>Saving review with :</p><p>"+review.value+"</p><p>"+rating.value+"</p><p>"+cid.value+"</p>");
       }); 
       $('#new-shop').click(function ()
       {
