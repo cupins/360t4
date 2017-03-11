@@ -144,7 +144,7 @@
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>    
     <script language="javascript">
     $(document).ready(function () {
-      $('#new-shop').click(function ()
+      $('#review-shop').click(function ()
       {
          document.write("review shop : " + document.getElementById("secretcid"));
       });
@@ -175,8 +175,7 @@
     // renders the shop table
     function render(data)  {
       $.each(data, function(index, shop) { 
-          var newrow = "<tr><td id=\"cid\"" + index + "\">"+ shop.cid + "</td>";
-          newrow += "<td id=\"coffee_name\">" + shop.coffeeName + "</td>";
+          var newrow = "<tr><td id=\"coffee_name\">" + shop.coffeeName + "</td>";
           newrow += "<td id=\"coffee_address\">" + shop.coffeeAddress + "</td>";
           newrow += "<td id=\"raw_review\">" + shop.rawReview + "</td>";
           newrow += "<td id=\"phone\">" + shop.phone + "</td>";
