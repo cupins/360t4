@@ -153,10 +153,10 @@
       });        
       $('#delete-shop').click(function ()
       {
-         var cid = document.getElementById("secretcid");
+         var cid = document.getElementById("cid");
          var shop = { 'cid': cid.value };           
          var url='tcss360/shops/';
-         if (confirm('Are you sure - DELETE ' + coffee_name.value + '-(' + cid.value + ') ?')) {
+         if (confirm('Are you sure - DELETE ' + '-(' + cid.value + ') ?')) {
            $.ajax({
              type: 'DELETE',
              url: url,
@@ -169,11 +169,11 @@
       });
       $('#review-shop').click(function ()
       {
-         document.write("review shop : " + document.getElementById("secretcid").value);
+         document.write("review shop : " + document.getElementById("cid").value);
       });
       $(".table-body").on('click', 'tr', function() {
          var clicked_cid=$(this).find('td:first').text();
-         old_cid = clicked_cid;
+         //old_cid = clicked_cid;
          var url='tcss360/shops/'+clicked_cid;
           $.ajax({
             type: 'GET',
@@ -230,6 +230,8 @@
             $('#myshop').append("<p>Website : " + shop.website + "</p>");
             $('#myshop').append("<p>Review : " + shop.rawReview + "</p>");
             $('#myshop').append("<div id=\"secretcid\" value=\""+shop.cid+"\"></div>");
+            
+            document.getElementById("cid").value = shop.cid;
             document.getElementById("secretcid").style.visibility="hidden";
             document.getElementById("hiddenbuttons").style.visibility="visible";
             var btn = document.getElementById("delete-shop");
@@ -263,6 +265,7 @@
       <div id="hiddenbuttons">
         <input type="button" value="Review Shop" onclick="" id="review-shop"/>
         <input type="button" value="Delete Shop" onclick="" id="delete-shop"/>
+        <input type="text" id="cid" size="10"/> 
       </div>
   </body>
 </html>
