@@ -285,7 +285,7 @@
             btn = document.getElementById("review-shop");
             btn.disabled = false;
             //add reviews
-          var url = "tcss360/reviews/"+shop.cid;
+          var url = "tcss360/reviews/0";
            $.ajax({
              type: 'GET',
              url: url,
@@ -301,10 +301,12 @@
       $('#myshop').append("<p>Reviews :</p>");
       if (list)
         $.each(list, function(index, review) {
-          $('#myshop').append("<p>~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~</p>");
-          $('#myshop').append("<p>Text : "+review.text+"</p>");
-          $('#myshop').append("<p>Rating : "+review.rating+"</p>");
-          $('#myshop').append("<p>~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~</p>");
+          if (review.cid == document.getElementById("cid").value) {
+            $('#myshop').append("<p>~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~</p>");
+            $('#myshop').append("<p>Text : "+review.text+"</p>");
+            $('#myshop').append("<p>Rating : "+review.rating+"</p>");
+            $('#myshop').append("<p>~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~</p>");
+          }
       });
     }
   </script>
