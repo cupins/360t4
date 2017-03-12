@@ -383,7 +383,7 @@
         btn = document.getElementById("update-review");
         btn.disabled = false;
       $('#myrevs').append("<p>Reviews :</p>");
-      $('#myreviewselection').append("<select name=\"selection\" id=\"selection\">");
+      $('#myreviewselection').prepend("<select name=\"selection\" id=\"selection\">");
       if (list)
         $.each(list, function(index, review) {
           if (review.userid == sessionStorage.getItem("uid")) {
@@ -391,11 +391,11 @@
             $('#myrevs').append("<p>Text : "+review.text+"</p>");
             $('#myrevs').append("<p>Rating : "+review.rating+"</p>");
             $('#myrevs').append("<p>~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~</p>");
-            $('#myreviewselection').append("<option value=\"" + review.rid + "\">" + review.text + "</option>");
+            $('#myreviewselection').prepend("<option value=\"" + review.rid + "\">" + review.text + "</option>");
           }
       });
       
-      $('#myreviewselection').append("</select>");
+      //$('#myreviewselection').append("</select>");
     }
   </script>
   </head>
@@ -429,7 +429,7 @@
         <input type="text" id="cid" size="10" hidden/> 
       </div>
       <div id="hiddenbuttons2">
-        <div id="myreviewselection"></div>
+        <div id="myreviewselection"></select></div>
         <input type="button" value="Delete Review" onclick="" id="delete-review"/>
         <input type="button" value="Alter review" onclick="" id="update-review"/>
       </div>
