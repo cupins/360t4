@@ -126,7 +126,8 @@ public class Review_Service {
             logger.log(Level.INFO, "update review with rid=" + rid);
             text.append("review id updated with r id=" + rid + "\n");
         } catch (SQLException sqle) {
-            String errText = "Error updating user after db connection made:\n" + sqle.getMessage() + " --- " + sqle.getSQLState() + "\n";
+            String errText = "Error updating user after db connection made:\n" + sqle.getMessage() + 
+                             " --- " + sqle.getSQLState() + "\n";
             logger.log(Level.SEVERE, errText);
             text.append(errText);
         } catch (Exception e) {
@@ -150,7 +151,8 @@ public class Review_Service {
             logger.log(Level.INFO, "review deleted from db=" + rid);
             text.append("review id deleted with id=" + rid);
         } catch (SQLException sqle) {
-            String errText = "Error deleteing user after db connection made:\n" + sqle.getMessage() + " --- " + sqle.getSQLState() + "\n";
+            String errText = "Error deleteing user after db connection made:\n" + sqle.getMessage() + 
+                             " --- " + sqle.getSQLState() + "\n";
             logger.log(Level.SEVERE, errText);
             text.append(errText);
         } catch (Exception e) {
@@ -215,7 +217,8 @@ public class Review_Service {
         }
         catch (SQLException sqle)
         {
-            String errText = "Error persisting review after db connection made:\n" + sqle.getMessage() + " --- " + sqle.getSQLState() + "\n";
+            String errText = "Error persisting review after db connection made:\n" + sqle.getMessage() + 
+                             " --- " + sqle.getSQLState() + "\n";
             logger.log(Level.SEVERE, errText);
             text.append(errText);
         }
