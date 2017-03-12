@@ -1,0 +1,171 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+  <head>
+    <style>
+        <!-- inline style sheet -->
+      #cof_body{
+        background-image: url("http://wallpapersdsc.net/wp-content/uploads/2016/09/Coffee-Beans-Wallpaper.jpg") #00d repeat-y fixed;
+        background-color: rgba(0,0,0,0.3);
+      }
+      #frm{
+        border: solid gray 1px;
+        width: 20%;
+        border-radius: 5px;
+        margin: 100px auto;
+        background: white;
+        padding: 50px;
+      }
+      #btn{
+        -webkit-appearance: button;
+        -moz-appearance: button;
+        appearance: button;
+        color: #111;
+        background-color: #ff7b00;
+        padding: 5px;
+        margin-left: 69%;
+      }
+      #btn:hover{
+        box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24),0 17px 50px 0 rgba(0,0,0,0.19);
+      }
+      h1{
+        color: #111;
+        font-family: 'Helvetica Neue', sans-serif;
+        font-size: 110px;
+        font-weight: bold;
+        letter-spacing: -5px;
+        margin: 100px 0 72px;
+        line-height: 1;
+        text-align: center;
+      }
+      h1.login{
+        color: #111;
+        font-family: 'Helvetica Neue', sans-serif;
+        font-size: 80px;
+        font-weight: bold;
+        letter-spacing: -1px;
+        margin: 100px 0 50px;
+        line-height: 12px;
+        text-align: center;
+      }
+      h2{
+        color: #111;
+        font-family: 'Open Sans', sans-serif;
+        font-size: 30px;
+        font-weight: 300px;
+        line-height: 32px;
+        margin: 72px 0 42px;
+        text-align: center;
+      }
+      p{
+        color: #685206;
+        font-family: 'Helvetica Neue', sans-serif;
+        font-size: 14px;
+        font-weight: 600;
+        line-height: 24px;
+        margin: 0 0 24px;
+        text-align: center;
+      }
+      p.login{
+        color: #685206;
+        font-family: 'Helvetica Neue', sans-serif;
+        font-size: 14px;
+        font-weight: 600;
+        line-height: 24px;
+        margin: 0 0 24px;
+        text-align: center;
+      }
+      a{
+        -webkit-appearance: button;
+        -moz-appearance: button;
+        appearance: button;
+        color: #111;
+        background-color: #ff7b00;
+        padding: 5px;
+      }
+      a:hover{
+        box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24),0 17px 50px 0 rgba(0,0,0,0.19);
+      }
+    </style>
+    <title>Update Review</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>    
+    <script language="javascript">
+    $(document).ready(function () { 
+        $('#update-review').click(function ()
+        {
+            // Create a new record
+            var review  = document.getElementById("review");
+            var rating  = document.getElementById("rating");
+            var cid     = document.getElementById("cid");
+            if (sessionStorage.getItem("uid") !== null) {
+              var rvw  = { 'text': review.value,
+                           'rating': rating.value,
+                           'cid': cid.value,
+                           'userid': sessionStorage.getItem("uid")};         
+              var url='tcss360/reviews/';
+              if (confirm('Are you sure?')) {
+                $.ajax({
+                  type: 'POST',
+                  url: url,
+                  datatype: 'json',
+                  data: JSON.stringify(rvw),
+                  contentType: 'application/json',
+                  success: render_update
+                });               
+             }
+          }
+      });
+      getreview()
+    } );
+    function getreview() {
+      var url='tcss360/shops/'+sessionStorage.getItem("rid");
+        $.ajax({
+          type: 'GET',
+          url: url,
+          datatype: 'json',
+          success: render_review
+        }); 
+    }
+    // Checks the user in.
+    function render_update(data)  {
+      $.each(data, function(index, user) { 
+          location.href = "https://still-fjord-79022.herokuapp.com/home.html";
+      });
+    }
+    function render_review(data) {
+      $.each(data, function(index, review) {
+        $('#yousaid').append("<p>You said :</p><p>"+review.text+"</p><p>You rated :</p><p>"+review.rating+"</p>");
+        $('#yousaid').append("<input type="text" id="cid" size="160" hidden/>");
+        document.getElementById("cid").value = review.cid;
+      });
+    }
+  </script>
+  </head>
+  <body  id="cof_body">
+    <h1 class="login">Update Review</h1>
+    <div id="yousaid"></div>
+    <table id="myform">
+      <tr>
+	<td>
+          <input type="button" value="Update" onclick="" id="update-review"/>
+	</td>        
+      </tr>
+      <tr>
+	<td>Comment :  </td>
+	<td><input type="text" id="review" size="160"/> </td>
+      </tr>
+      <tr>
+	<td>Rating : </td>
+               <td>
+                 <select name="rating" id="rating">
+                   <option value="1">1</option>
+                   <option value="2">2</option>
+                   <option value="3">3</option>
+                   <option value="4">4</option>
+                   <option value="5">5</option>
+                 </select> 
+               </td>
+      </tr>
+     </table>
+  </body>
+</html>
