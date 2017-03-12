@@ -135,7 +135,7 @@
     function render_update(data)  {
           location.href = "https://still-fjord-79022.herokuapp.com/home.html";
     }
-    function render_review(data) {
+    function render_shop(data) {
       $.each(data, function(index, shop) {
         $('#frm').append("<tr><td>Change Shop Name :  </td><td><input type=\"text\" id=\"coffee_name\" size=\"20\" value=\""+shop.coffee_name+"\"/> </td></tr>");
         $('#frm').append("<tr><td>City : </td><td><input type=\"text\" id=\"city\" size=\"20\" value=\""+shop.city+"\"/> </td></tr>");
