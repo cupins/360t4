@@ -92,37 +92,41 @@
 	    
         $('#update-review').click(function ()
         {
-            var review  = document.getElementById("review");
-            var rating  = document.getElementById("rating");
-            var cid     = document.getElementById("cid");
+            var username  = document.getElementById("username");
+            var password  = document.getElementById("password");
+            var email     = document.getElementById("email");
+	    var fname	  = document.getElementById("fname");
+	    var lname	  = document.getElementById("lname");
             if (sessionStorage.getItem("uid") !== null) {
-              var rvw  = { 'rid': sessionStorage.getItem("rid"),
-		           'text': review.value,
-                           'rating': rating.value,
-                           'cid': cid.value,
-                           'userid': sessionStorage.getItem("uid")};         
-              var url='tcss360/reviews/';
+              var user = { 'username': username.value,
+		           'password': password.value,
+                           'email': email.value,
+                           'fname': fname.value,
+                           'lname': lname.value,
+			   'utype': 'u',
+                           'userid': sessionStorage.getItem("uid")};
+              var url='tcss360/users/';
               if (confirm('Are you sure?')) {
                 $.ajax({
                   type: 'PUT',
                   url: url,
                   datatype: 'json',
-                  data: JSON.stringify(rvw),
+                  data: JSON.stringify(user),
                   contentType: 'application/json',
                   success: render_update
                 });               
              }
           }
       });
-      getreview()
+      getuser()
     } );
-    function getreview() {
-      var url='tcss360/reviews/'+sessionStorage.getItem("rid");
+    function getuser() {
+      var url='tcss360/users/'+sessionStorage.getItem("uid");
         $.ajax({
           type: 'GET',
           url: url,
           datatype: 'json',
-          success: render_review
+          success: render_user
         }); 
     }
     // Checks the user in.
@@ -130,39 +134,25 @@
           location.href = "https://still-fjord-79022.herokuapp.com/home.html";
     }
     function render_review(data) {
-      $.each(data, function(index, review) {
-        $('#yousaid').append("<p>You said :</p><p>"+review.text+"</p><p>You rated :</p><p>"+review.rating+"</p>");
-        $('#yousaid').append("<input type=\"text\" id=\"cid\" size=\"160\" hidden/>");
-        document.getElementById("cid").value = review.cid;
+      $.each(data, function(index, user) {
+        $('#frm').append("<tr><td>Change User Name :  </td><td><input type=\"text\" id=\"username\" size=\"20\" value=\""+user.username+"\"/> </td></tr>");
+        $('#frm').append("<tr><td>User Password : </td><td><input type=\"password\" id=\"password\" size=\"20\" value=\""+user.password+"\"/> </td></tr>");
+        $('#frm').append("<tr><td>Email : </td><td><input type=\"email\" id=\"email\" size=\"20\" value=\""+user.email+"\"/></td></tr>");
+        $('#frm').append("<tr><td>User Fname : </td><td><input type=\"text\" id=\"fname\" size=\"20\" value=\""+user.fname+"\"/></td></tr>");
+        $('#frm').append("<tr><td>User Lname : </td><td><input type=\"text\" id=\"lname\" size=\"20\" value=\""+user.lname+"\"/></td></tr>");
       });
     }
   </script>
   </head>
-  <body  id="cof_body">
+  <body  id="frm">
     <h1 class="login">Update User</h1>
     <div id="yousaid"></div>
     <table id="myform">
-      <tr>
-	<td>
-          <input type="button" value="Update" onclick="" id="update-review"/>
-	</td>        
-      </tr>
-      <tr>
-	<td>Comment :  </td>
-	<td><input type="text" id="review" size="160"/> </td>
-      </tr>
-      <tr>
-	<td>Rating : </td>
-               <td>
-                 <select name="rating" id="rating">
-                   <option value="1">1</option>
-                   <option value="2">2</option>
-                   <option value="3">3</option>
-                   <option value="4">4</option>
-                   <option value="5">5</option>
-                 </select> 
-               </td>
-      </tr>
+	<tr>
+	    <td>
+		<input type="button" value="Update Profile" onclick="" id="update-user"/>
+	    </td>
+	</tr>
      </table>
   </body>
 </html>
