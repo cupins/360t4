@@ -16,6 +16,7 @@ public class Coffee_Shop {
     private String city;
     private String stat;
     private String zip;
+    private String description;
     private String phone;
     private int opentime;
     private int clostime;
@@ -94,5 +95,14 @@ public class Coffee_Shop {
     public void setPhone(String phone) {
         this.phone = phone;
     }
+    
+    public String getDescription() {
+        return description;
+    }
+    
+    public void setDescription(String description) {
+        this.description = description;
+    }
+   
     
 }
