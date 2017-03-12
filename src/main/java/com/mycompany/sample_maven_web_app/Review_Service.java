@@ -4,7 +4,7 @@
  * and open the template in the editor.
  
  *
- * @author Reid
+ * @author Reid, Gabriel
  */
     /*
  * To change this license header, choose License Headers in Project Properties.
@@ -45,7 +45,7 @@ import org.codehaus.jettison.json.JSONObject;
 @Path("reviews")
 public class Review_Service {
 
-    static final Logger logger = Logger.getLogger(UserService.class.getName());
+    static final Logger logger = Logger.getLogger(Review_Service.class.getName());
 
     @Context
     private UriInfo context;
