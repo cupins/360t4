@@ -8,9 +8,9 @@ def main():
 	a = str(s.replace('[', ""))
 	b = str(a.replace(']', ""))
 	b = b.split('{')
-	shops =  ',\"sid\":' + str(x)
+#	shops =  ',\"sid\":' + str(x) 
 #	print x
-	
+	shops =  '{\"shopid\":' + str(x)
 	ret = "{"+str(b[int(x)])
 	re = str(ret.replace(shops, ""))
 	print(re)
