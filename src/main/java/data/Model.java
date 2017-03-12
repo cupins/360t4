@@ -298,11 +298,31 @@ public class Model {
 
     // Reviews
     /////////////////////////////////////////////////////////////////////////
+    
+    
+    /*
+    String sqlInsert="insert into shops (coffee_name, city, stat, zip, phone, opentime, clostime) values("
+                + "'" + cs.getCoffeeName() + "'" + ", " + "'" + cs.getCity()
+                + "'" + ", " + "'" + cs.getStat() + "'" + ", " + "'" + cs.getZip() + "'" + ", " + "'" + cs.getPhone()
+                + "'" + ", " +  cs.getOpentime() + ", " + cs.getClostime() +");";
+        Statement s = createStatement();
+        logger.log(Level.INFO, "attempting statement execute");
+        s.execute(sqlInsert,Statement.RETURN_GENERATED_KEYS);
+        logger.log(Level.INFO, "statement executed.  atempting get generated keys");
+        ResultSet rs = s.getGeneratedKeys();
+        logger.log(Level.INFO, "retrieved keys from statement");
+        int shopid = -1;
+        while (rs.next())
+            shopid = rs.getInt(1);   // assuming 3rd column is userid
+        logger.log(Level.INFO, "The new shop id=" + shopid);
+        return cs;*/
 
     
     public Review createReview(Review rvw) throws SQLException
     {
-        String sqlInsert="insert into reviews (date, text, rating, cid, userid) values (" + rvw.getDate() + "," + " '" + rvw.getText() + "', " + rvw.getRating() + ", " + rvw.getCid() + ", " + rvw.getUserid() + ");";
+        String sqlInsert="insert into reviews (date, text, rating, cid, userid) values (now()" + 
+                         "," + " '" + rvw.getText() + "', " + rvw.getRating() + ", " + rvw.getCid() + 
+                         ", " + rvw.getUserid() + ");";
         Statement s = createStatement();
         logger.log(Level.INFO, "attempting statement execute");
         s.execute(sqlInsert,Statement.RETURN_GENERATED_KEYS);
