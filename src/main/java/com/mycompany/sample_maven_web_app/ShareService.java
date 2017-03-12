@@ -196,7 +196,7 @@ public class ShareService {
         String str = jobj.toString();
         String arr[] = str.split(": ");
         StringBuilder sb = new StringBuilder();
-        for (int i = 0; i < arr[1].length(); i++) {
+        for (int i = 0; i < arr[2].length(); i++) {
             if (arr[1].charAt(i) != ('\"') || arr[1].charAt(i) != ('{') || arr[1].charAt(i) != ('}')) {
                 sb.append(arr[1].charAt(i));
             }
