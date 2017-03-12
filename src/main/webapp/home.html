@@ -374,6 +374,7 @@
         document.getElementById("hiddenbuttons").style.visibility="hidden";
         document.getElementById("review_form").style.visibility="hidden";
         document.getElementById("myrevs").innerHTML="";
+        document.getElementById("myreviewselectioninner").innerHTML="";
         var btn = document.getElementById("delete-shop");
         btn.disabled = true;
         btn = document.getElementById("review-shop");
@@ -384,7 +385,6 @@
         btn = document.getElementById("update-review");
         btn.disabled = false;
       $('#myrevs').append("<p>Reviews :</p>");
-      $('#myreviewselection').append("<select name=\"selection\" id=\"selection\">");
       if (list)
         $.each(list, function(index, review) {
           if (review.userid == sessionStorage.getItem("uid")) {
@@ -392,11 +392,9 @@
             $('#myrevs').append("<p>Text : "+review.text+"</p>");
             $('#myrevs').append("<p>Rating : "+review.rating+"</p>");
             $('#myrevs').append("<p>~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~</p>");
-            $('#myreviewselection').append("<option value=\"" + review.rid + "\">" + review.text + "</option>");
+            $('#myreviewselectioninner').append("<option value=\"" + review.rid + "\">" + review.text + "</option>");
           }
       });
-      
-      $('#myreviewselection').innerHTML += "</select>";
     }
   </script>
   </head>
@@ -430,7 +428,11 @@
         <input type="text" id="cid" size="10" hidden/> 
       </div>
       <div id="hiddenbuttons2">
-        <div id="myreviewselection"></select></div>
+        <div id="myreviewselection">
+          <select name="selection" id="selection">
+            <div id="myreviewselectioninner"></div>
+          </select>
+        </div>
         <input type="button" value="Delete Review" onclick="" id="delete-review"/>
         <input type="button" value="Alter review" onclick="" id="update-review"/>
       </div>
