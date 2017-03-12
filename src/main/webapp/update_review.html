@@ -135,7 +135,7 @@
     function render_review(data) {
       $.each(data, function(index, review) {
         $('#yousaid').append("<p>You said :</p><p>"+review.text+"</p><p>You rated :</p><p>"+review.rating+"</p>");
-        $('#yousaid').append("<input type="text" id="cid" size="160" hidden/>");
+        $('#yousaid').append("<input type=\"text\" id=\"cid\" size=\"160\" hidden/>");
         document.getElementById("cid").value = review.cid;
       });
     }
