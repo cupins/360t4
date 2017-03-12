@@ -382,7 +382,7 @@ public class Model {
             shop.setPhone(rows.getString("phone"));
             shop.setOpentime(rows.getInt("opentime"));
             shop.setClosetime(rows.getInt("closetime"));
-            shop.setSid(rows.getInt("sid"));
+            //shop.setSid(rows.getInt("sid"));
             
             logger.log(Level.INFO, "Adding shop to list with id=" + shop.getSid());
             ll.add(shop);
