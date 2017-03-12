@@ -352,7 +352,7 @@ public class Model {
     {
         LinkedList<Review> ll = new LinkedList<Review>();
         String sqlQuery ="select * from reviews";
-        sqlQuery += (rId > 0) ? " where rid=" + rId + " order by rid;" : " order by rid;";
+        sqlQuery += (rId > 0) ? " where rid=" + rId + " order by rid desc;" : " order by rid desc;";
         Statement st = createStatement();
         ResultSet rows = st.executeQuery(sqlQuery);
         while (rows.next())
@@ -379,6 +379,7 @@ public class Model {
         StringBuilder sqlQuery = new StringBuilder();
         sqlQuery.append("update reviews ");
         sqlQuery.append("set text='" + rvw.getText() + "', ");
+        sqlQuery.append("set date= now(), ");
         sqlQuery.append("rating=" + rvw.getRating() + " ");
         sqlQuery.append("where rid=" + rvw.getRid() + ";");
         Statement st = createStatement();
