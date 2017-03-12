@@ -161,6 +161,7 @@
              success: render_getReviewsUser
            });
         });
+      
         $('#save-review').click(function ()
         {
             // Create a new record
@@ -191,6 +192,12 @@
       {
           location.href = "https://still-fjord-79022.herokuapp.com/add_shop.html";
       });        
+      $('#update-review').click(function ()
+      {
+          sessionStorage.setItem("rid",document.getElementById("selection").value);
+          document.write("<p> update : " + document.getElementById("selection").value + "</p>");
+          //location.href = "https://still-fjord-79022.herokuapp.com/add_shop.html";
+      });     
       $('#delete-shop').click(function ()
       {
          var cid = document.getElementById("cid");
@@ -204,6 +211,22 @@
              data: JSON.stringify(shop),
              contentType: 'application/json',
              success: render_delete
+           }); 
+         } 
+      });    
+      $('#delete-review').click(function ()
+      {
+         var cid = document.getElementById("rid");
+         var shop = { 'cid': cid.value };           
+         var url='tcss360/reviews/';
+         if (confirm('Are you sure - DELETE ' + '-(' + cid.value + ') ?')) {
+           $.ajax({
+             type: 'DELETE',
+             url: url,
+             datatype: 'json',
+             data: JSON.stringify(shop),
+             contentType: 'application/json',
+             success: render_deletereview
            }); 
          } 
       });
@@ -227,6 +250,9 @@
     // gets and displays all shops by calling render
     function getshops() {
         var url='tcss360/shops/0';
+        if (!sessionStorage.rid) {
+          sessionStorage.rid = 0;
+        }
         $.ajax({
           type: 'GET',
           url: url,
@@ -247,6 +273,7 @@
     function render(data)  {
       document.getElementById("shop_table").style.visibility="visible";
       document.getElementById("hiddenbuttons").style.visibility="hidden";
+      document.getElementById("hiddenbuttons2").style.visibility="hidden";
       document.getElementById("review_form").style.visibility="hidden";
       $.each(data, function(index, shop) { 
           var newrow = "<tr id=\"shtable\"><td id=\"cid\"" + index + "\">"+ shop.cid + "</td>";
@@ -266,6 +293,16 @@
         document.getElementById("review_form").style.visibility="hidden";
         $('#myshop').empty();
         //document.getElementById("hiddenbuttons").style.visibility="hidden";
+        var btn = document.getElementById("delete-shop");
+        btn.disabled = true;
+        btn = document.getElementById("review-shop");
+        btn.disabled = true;
+    }
+    function render_deletereview(data)
+    {
+        $('#myrevs').empty();
+        document.getElementById("review_form").style.visibility="hidden";
+        document.getElementById("hiddenbuttons2").style.visibility="hidden";
         var btn = document.getElementById("delete-shop");
         btn.disabled = true;
         btn = document.getElementById("review-shop");
@@ -301,6 +338,11 @@
             btn.disabled = false;
             btn = document.getElementById("review-shop");
             btn.disabled = false;
+            document.getElementById("hiddenbuttons2").style.visibility="hidden";
+            var btn = document.getElementById("delete-review");
+            btn.disabled = true;
+            btn = document.getElementById("update-review");
+            btn.disabled = true;
             //add reviews
           var url = "tcss360/reviews/0";
            $.ajax({
@@ -335,7 +377,13 @@
         btn.disabled = true;
         btn = document.getElementById("review-shop");
         btn.disabled = true;
+        document.getElementById("hiddenbuttons2").style.visibility="visible";
+        var btn = document.getElementById("delete-review");
+        btn.disabled = false;
+        btn = document.getElementById("update-review");
+        btn.disabled = false;
       $('#myrevs').append("<p>Reviews :</p>");
+      $('#myreviewselection').append("<select name=\"selection\" id=\"selection\">");
       if (list)
         $.each(list, function(index, review) {
           if (review.userid == sessionStorage.getItem("uid")) {
@@ -343,8 +391,10 @@
             $('#myrevs').append("<p>Text : "+review.text+"</p>");
             $('#myrevs').append("<p>Rating : "+review.rating+"</p>");
             $('#myrevs').append("<p>~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~</p>");
+            $('#myreviewselection').append("<option value=\"" + review.rid + "\">" + review.text + "</option>");
           }
       });
+      $('#myreviewselection').append("</select>");
     }
   </script>
   </head>
@@ -376,6 +426,11 @@
         <input type="button" value="Review Shop" onclick="" id="review-shop"/>
         <input type="button" value="Delete Shop" onclick="" id="delete-shop"/>
         <input type="text" id="cid" size="10" hidden/> 
+      </div>
+      <div id="hiddenbuttons2">
+        <div id="myreviewselection"></div>
+        <input type="button" value="Delete Review" onclick="" id="delete-review"/>
+        <input type="button" value="Alter review" onclick="" id="update-review"/>
       </div>
       <div id="review_form">
            <table id="myform">
