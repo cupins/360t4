@@ -1,0 +1,162 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+  <head>
+    <style>
+      #cof_body{
+        background-color: rgba(0,0,0,0.1);
+      }
+      #frm{
+        border: solid gray 1px;
+        width: 20%;
+        border-radius: 5px;
+        margin: 100px auto;
+        background: white;
+        padding: 50px;
+      }
+      #btn{
+        -webkit-appearance: button;
+        -moz-appearance: button;
+        appearance: button;
+        color: #111;
+        background-color: #ff7b00;
+        padding: 5px;
+        margin-left: 69%;
+      }
+      #btn:hover{
+        box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24),0 17px 50px 0 rgba(0,0,0,0.19);
+      }
+      h1{
+        color: #111;
+        font-family: 'Helvetica Neue', sans-serif;
+        font-size: 110px;
+        font-weight: bold;
+        letter-spacing: -5px;
+        margin: 100px 0 72px;
+        line-height: 1;
+        text-align: center;
+      }
+      h1.login{
+        color: #111;
+        font-family: 'Helvetica Neue', sans-serif;
+        font-size: 80px;
+        font-weight: bold;
+        letter-spacing: -1px;
+        margin: 100px 0 50px;
+        line-height: 12px;
+        text-align: center;
+      }
+      h2{
+        color: #111;
+        font-family: 'Open Sans', sans-serif;
+        font-size: 30px;
+        font-weight: 300px;
+        line-height: 32px;
+        margin: 72px 0 42px;
+        text-align: center;
+      }
+      p{
+        color: #685206;
+        font-family: 'Helvetica Neue', sans-serif;
+        font-size: 14px;
+        font-weight: 600;
+        line-height: 24px;
+        margin: 0 0 24px;
+        text-align: center;
+      }
+      p.login{
+        color: #685206;
+        font-family: 'Helvetica Neue', sans-serif;
+        font-size: 14px;
+        font-weight: 600;
+        line-height: 24px;
+        margin: 0 0 24px;
+        text-align: center;
+      }
+      a{
+        -webkit-appearance: button;
+        -moz-appearance: button;
+        appearance: button;
+        color: #111;
+        background-color: #ff7b00;
+        padding: 5px;
+      }
+      a:hover{
+        box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24),0 17px 50px 0 rgba(0,0,0,0.19);
+      }
+    </style>
+    <title>Update Review</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>    
+    <script language="javascript">
+    $(document).ready(function () { 
+	    
+        $('#update-shop').click(function ()
+        {
+                var coffee_name     = document.getElementById("coffee_name");
+                var city            = document.getElementById("city");
+                var stat            = document.getElementById("stat");
+                var zip             = document.getElementById("zip");
+                var phone           = document.getElementById("phone");
+                var opentime        = document.getElementById("opentime");
+                var clostime        = document.getElementById("opentime");
+                var shop = { 'cid': sessionStorage.getItem("cid"),
+                             'coffee_name': coffee_name.value,
+                             'city': city.value,
+                             'stat': stat.value,
+                             'zip': zip.value,
+                             'phone': phone.value,
+                             'clostime': clostime.value,
+                             'opentime': opentime.value};        
+                var url='tcss360/shops/';
+                if (confirm('Are you sure - UPDATE ' + coffee_name.value + ' ?')) {
+                  $.ajax({
+                    type: 'PUT',
+                    url: url,
+                    datatype: 'json',
+                    data: JSON.stringify(shop),
+                    contentType: 'application/json',
+                    success: render_update
+                  }); 
+                }
+          }
+      });
+      getshop()
+    } );
+    function getshop() {
+      var url='tcss360/shops/'+sessionStorage.getItem("cid");
+        $.ajax({
+          type: 'GET',
+          url: url,
+          datatype: 'json',
+          success: render_shop
+        }); 
+    }
+    // Checks the user in.
+    function render_update(data)  {
+          location.href = "https://still-fjord-79022.herokuapp.com/home.html";
+    }
+    function render_review(data) {
+      $.each(data, function(index, shop) {
+        $('#frm').append("<tr><td>Change Shop Name :  </td><td><input type=\"text\" id=\"coffee_name\" size=\"20\" value=\""+shop.coffee_name+"\"/> </td></tr>");
+        $('#frm').append("<tr><td>City : </td><td><input type=\"text\" id=\"city\" size=\"20\" value=\""+shop.city+"\"/> </td></tr>");
+        $('#frm').append("<tr><td>State : </td><td><input type=\"text\" id=\"stat\" size=\"20\" value=\""+shop.stat+"\"/></td></tr>");
+        $('#frm').append("<tr><td>Zip : </td><td><input type=\"text\" id=\"zip\" size=\"20\" value=\""+shop.zip+"\"/></td></tr>");
+        $('#frm').append("<tr><td>Phone : </td><td><input type=\"text\" id=\"phone\" size=\"20\" value=\""+shop.phone+"\"/></td></tr>");
+        $('#frm').append("<tr><td>Open Time : </td><td><input type=\"text\" id=\"opentime\" size=\"20\" value=\""+shop.opentime+"\"/></td></tr>");
+        $('#frm').append("<tr><td>Close TIme : </td><td><input type=\"text\" id=\"clostime\" size=\"20\" value=\""+shop.clostime+"\"/></td></tr>");
+      });
+    }
+  </script>
+  </head>
+  <body  id="mytable">
+    <h1 class="login">Update User</h1>
+    <div id="yousaid"></div>
+    <table id="frm">
+	<tr>
+	    <td>
+		<input type="button" value="Update Shop" onclick="" id="update-shop"/>
+	    </td>
+	</tr>
+     </table>
+  </body>
+</html>

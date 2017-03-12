@@ -115,18 +115,24 @@
           width: 30px;
       }
       .coffee_name {
-          width: 150px;
+          width: 125px;
       }
-      .coffee_address {
-        width: 200px;
+      .city {
+        width: 50px;
       }
-      .raw_review {
+      .state {
         width: 60px;
       }
-      .phone {
-        width: 100px;
+      .zip {
+        width: 40px;
       }
-      .website {
+      .phone {
+        width: 80px;
+      }
+      .opentime {
+        width: 20px;
+      }
+      .clostime {
         width: 20px;
       }
       .resizedTextBox {
@@ -174,7 +180,7 @@
                            'cid': cid.value,
                            'userid': sessionStorage.getItem("uid")};         
               var url='tcss360/reviews/';
-              if (confirm('Are you sure - CREATE ' + '?')) {
+              if (confirm('Are you sure?')) {
                 $.ajax({
                   type: 'POST',
                   url: url,
@@ -191,16 +197,24 @@
       $('#new-shop').click(function ()
       {
           location.href = "https://still-fjord-79022.herokuapp.com/add_shop.html";
-      });        
+      });  
+      $('#update-user').click(function ()
+      {
+          location.href = "https://still-fjord-79022.herokuapp.com/update_user.html";
+      });   
+      $('#update-shop').click(function ()
+      {
+          location.href = "https://still-fjord-79022.herokuapp.com/update_shop.html";
+      });         
       $('#update-review').click(function ()
       {
-          sessionStorage.setItem("rid",document.getElementById("selection").value);
-          document.write("<p> update : " + document.getElementById("selection").value + "</p>");
-          //location.href = "https://still-fjord-79022.herokuapp.com/add_shop.html";
+          sessionStorage.rid = document.getElementById("selection").value;
+          location.href = "https://still-fjord-79022.herokuapp.com/update_review.html";
       });     
       $('#delete-shop').click(function ()
       {
          var cid = document.getElementById("cid");
+         sessionStorage.cid = null;
          var shop = { 'cid': cid.value };           
          var url='tcss360/shops/';
          if (confirm('Are you sure - DELETE ' + '-(' + cid.value + ') ?')) {
@@ -236,7 +250,7 @@
       });
       $(".table-body").on('click', 'tr', function() {
          var clicked_cid=$(this).find('td:first').text();
-         //old_cid = clicked_cid;
+         sessionStorage.cid = clicked_cid.value
          var url='tcss360/shops/'+clicked_cid;
           $.ajax({
             type: 'GET',
@@ -250,9 +264,6 @@
     // gets and displays all shops by calling render
     function getshops() {
         var url='tcss360/shops/0';
-        if (!sessionStorage.rid) {
-          sessionStorage.rid = 0;
-        }
         $.ajax({
           type: 'GET',
           url: url,
@@ -275,13 +286,16 @@
       document.getElementById("hiddenbuttons").style.visibility="hidden";
       document.getElementById("hiddenbuttons2").style.visibility="hidden";
       document.getElementById("review_form").style.visibility="hidden";
+      sessionStorage.rid = null
       $.each(data, function(index, shop) { 
           var newrow = "<tr id=\"shtable\"><td id=\"cid\"" + index + "\">"+ shop.cid + "</td>";
           newrow += "<td id=\"coffee_name\">" + shop.coffeeName + "</td>";
-          newrow += "<td id=\"coffee_address\">" + shop.coffeeAddress + "</td>";
-          newrow += "<td id=\"raw_review\">" + shop.rawReview + "</td>";
+          newrow += "<td id=\"city\">" + shop.city + "</td>";
+          newrow += "<td id=\"stat\">" + shop.stat + "</td>";
+          newrow += "<td id=\"zip\">" + shop.zip + "</td>";
           newrow += "<td id=\"phone\">" + shop.phone + "</td>";
-          newrow += "<td id=\"website\">" + shop.website + "</td>";
+          newrow += "<td id=\"opentime\">" + shop.opentime + "</td>";
+          newrow += "<td id=\"clostime\">" + shop.clostime + "</td>";
           $('#mybody').append(newrow);
       });
     }
@@ -297,6 +311,8 @@
         btn.disabled = true;
         btn = document.getElementById("review-shop");
         btn.disabled = true;
+        btn = document.getElementById("update-shop");
+        btn.disabled = true;
     }
     function render_deletereview(data)
     {
@@ -306,6 +322,8 @@
         var btn = document.getElementById("delete-shop");
         btn.disabled = true;
         btn = document.getElementById("review-shop");
+        btn.disabled = true;
+        btn = document.getElementById("update-shop");
         btn.disabled = true;
     }
     function render_newreview(data) {
@@ -324,10 +342,12 @@
             document.getElementById("myshop").innerHTML="";
             $('#myshop').append("<p>Name of user : " + sessionStorage.getItem("uid") + "</p>");
             $('#myshop').append("<p>Name of Shop : " + shop.coffeeName + "</p>");
-            $('#myshop').append("<p>Address : " + shop.coffeeAddress + "</p>");
+            $('#myshop').append("<p>City : " + shop.city + "</p>");
+            $('#myshop').append("<p>State : " + shop.State + "</p>");
+            $('#myshop').append("<p>Zip : " + shop.zip + "</p>");
             $('#myshop').append("<p>Phone Number : " + shop.phone + "</p>");
-            $('#myshop').append("<p>Website : " + shop.website + "</p>");
-            $('#myshop').append("<p>Review : " + shop.rawReview + "</p>");
+            $('#myshop').append("<p>Opens : " + shop.opentime + "</p>");
+            $('#myshop').append("<p>Closes : " + shop.clostime + "</p>");
             $('#myshop').append("<div id=\"secretcid\" value=\""+shop.cid+"\"></div>");
             
           
@@ -337,6 +357,8 @@
             var btn = document.getElementById("delete-shop");
             btn.disabled = false;
             btn = document.getElementById("review-shop");
+            btn.disabled = false;
+            btn = document.getElementById("update-shop");
             btn.disabled = false;
             document.getElementById("hiddenbuttons2").style.visibility="hidden";
             var btn = document.getElementById("delete-review");
@@ -362,6 +384,7 @@
         $.each(list, function(index, review) {
           if (review.cid == document.getElementById("cid").value) {
             $('#myshop').append("<p>~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~</p>");
+            $('#myshop').append("<p>Date : "+review.date+"</p>");
             $('#myshop').append("<p>Text : "+review.text+"</p>");
             $('#myshop').append("<p>Rating : "+review.rating+"</p>");
             $('#myshop').append("<p>~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~</p>");
@@ -378,6 +401,8 @@
         var btn = document.getElementById("delete-shop");
         btn.disabled = true;
         btn = document.getElementById("review-shop");
+        btn.disabled = true;
+        btn = document.getElementById("update-shop");
         btn.disabled = true;
         document.getElementById("hiddenbuttons2").style.visibility="visible";
         var btn = document.getElementById("delete-review");
@@ -406,10 +431,12 @@
              <tr class="table-header">
                  <td class="cid">Shop Id</td>
                  <td class="coffee_name">Shop Name</td>
-                 <td class="coffee_address">Address</td>
-                 <td class="raw_review">Cumulitive Review</td>
+                 <td class="city">City</td>
+                 <td class="stat">State</td>
+                 <td class="zip">Zip</td>
                  <td class="phone">Phone Number</td>
-                 <td class="website">Website url</td>
+                 <td class="opentime">Open</td>
+                 <td class="clostime">Close</td>
              </tr>               
            </thead>
               <tbody id="mybody" class="table-body">
@@ -418,19 +445,20 @@
       <div>
         <input type="button" value="Add New Shop" onclick="" id="new-shop"/>
         <input type="button" value="My Reviews" onclick="" id="my-reviews"/>
+        <input type="button" value="Update Profile" onclick="" id="update-user"/>
       </div>
     </div>
       <div id="myshop"></div>
       <div id="myrevs"></div>
       <div id="hiddenbuttons">
         <input type="button" value="Review Shop" onclick="" id="review-shop"/>
+        <input type="button" value="Update Shop" onclick="" id="update-shop"/>
         <input type="button" value="Delete Shop" onclick="" id="delete-shop"/>
         <input type="text" id="cid" size="10" hidden/> 
       </div>
       <div id="hiddenbuttons2">
         <div id="myreviewselection">
-          <select name="selection" id="selection">
-          </select>
+          <select name="selection" id="selection"></select>
         </div>
         <input type="button" value="Delete Review" onclick="" id="delete-review"/>
         <input type="button" value="Alter review" onclick="" id="update-review"/>

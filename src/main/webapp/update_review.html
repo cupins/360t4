@@ -2,10 +2,8 @@
 <html>
   <head>
     <style>
-        <!-- inline style sheet -->
       #cof_body{
-        background-image: url("http://wallpapersdsc.net/wp-content/uploads/2016/09/Coffee-Beans-Wallpaper.jpg") #00d repeat-y fixed;
-        background-color: rgba(0,0,0,0.3);
+        background-color: rgba(0,0,0,0.1);
       }
       #frm{
         border: solid gray 1px;
@@ -86,85 +84,85 @@
         box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24),0 17px 50px 0 rgba(0,0,0,0.19);
       }
     </style>
-    <title>Add Shop</title>
+    <title>Update Review</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>    
     <script language="javascript">
     $(document).ready(function () { 
-        
-       
-        $('#save-shop').click(function ()
+	    
+        $('#update-review').click(function ()
         {
-            // Create a new record
-            var coffee_name     = document.getElementById("coffee_name");
-            var city            = document.getElementById("city");
-            var stat            = document.getElementById("stat");
-            var zip             = document.getElementById("zip");
-            var phone           = document.getElementById("phone");
-            var opentime        = document.getElementById("opentime");
-            var clostime        = document.getElementById("clostime");
-            var shop = { 'coffeeName': coffee_name.value,
-                         'city': city.value,
-                         'stat': stat.value,
-                         'zip': zip.value,
-                         'phone': phone.value,
-                         'opentime': opentime.value,
-                         'clostime': clostime.value,};         
-            var url='tcss360/shops/';
-            if (confirm('Are you sure - CREATE ' + coffee_name.value + ' ?')) {
-              $.ajax({
-                type: 'POST',
-                url: url,
-                datatype: 'json',
-                data: JSON.stringify(shop),
-                contentType: 'application/json',
-                success: render
-              }); 
-            }
-        });
+            var review  = document.getElementById("review");
+            var rating  = document.getElementById("rating");
+            var cid     = document.getElementById("cid");
+            if (sessionStorage.getItem("uid") !== null) {
+              var rvw  = { 'rid': sessionStorage.getItem("rid"),
+		           'text': review.value,
+                           'rating': rating.value,
+                           'cid': cid.value,
+                           'userid': sessionStorage.getItem("uid")};         
+              var url='tcss360/reviews/';
+              if (confirm('Are you sure?')) {
+                $.ajax({
+                  type: 'PUT',
+                  url: url,
+                  datatype: 'json',
+                  data: JSON.stringify(rvw),
+                  contentType: 'application/json',
+                  success: render_update
+                });               
+             }
+          }
+      });
+      getreview()
     } );
+    function getreview() {
+      var url='tcss360/reviews/'+sessionStorage.getItem("rid");
+        $.ajax({
+          type: 'GET',
+          url: url,
+          datatype: 'json',
+          success: render_review
+        }); 
+    }
     // Checks the user in.
-    function render(data)  {
+    function render_update(data)  {
           location.href = "https://still-fjord-79022.herokuapp.com/home.html";
+    }
+    function render_review(data) {
+      $.each(data, function(index, review) {
+        $('#yousaid').append("<p>You said :</p><p>"+review.text+"</p><p>You rated :</p><p>"+review.rating+"</p>");
+        $('#yousaid').append("<input type=\"text\" id=\"cid\" size=\"160\" hidden/>");
+        document.getElementById("cid").value = review.cid;
+      });
     }
   </script>
   </head>
   <body  id="cof_body">
-    <h1 class="login">Add Shop</h1>
+    <h1 class="login">Update Review</h1>
+    <div id="yousaid"></div>
     <table id="myform">
-   <tr>
-       <td>
-           <input type="button" value="Save Shop" onclick="" id="save-shop"/>
-       </td>        
-   </tr>
-   <tr>
-       <td>Shop Name :  </td>
-       <td><input type="text" id="coffee_name" size="20"/> </td>
-   </tr>
-   <tr>
-       <td>City : </td>
-       <td><input type="text" id="city" size="20"/> </td>
-   </tr>
-   <tr>
-       <td>State : </td>
-       <td><input type="text" id="stat" size="5"/> </td>
-   </tr>
-   <tr>
-       <td>Zip : </td>
-       <td><input type="text" id="zip" size="5"/> </td>
-   </tr>
-   <tr>
-       <td>Phone Number : </td>
-       <td><input type="text" id="phone" size="10"/> </td>
-   </tr>
-   <tr>
-       <td>Opens at : </td>
-       <td><input type="text" id="opentime" size="20"/> </td>
-   </tr>
-   <tr>
-       <td>Closes at : </td>
-       <td><input type="text" id="clostime" size="20"/> </td>
-   </tr>
-</table>
+      <tr>
+	<td>
+          <input type="button" value="Update" onclick="" id="update-review"/>
+	</td>        
+      </tr>
+      <tr>
+	<td>Comment :  </td>
+	<td><input type="text" id="review" size="160"/> </td>
+      </tr>
+      <tr>
+	<td>Rating : </td>
+               <td>
+                 <select name="rating" id="rating">
+                   <option value="1">1</option>
+                   <option value="2">2</option>
+                   <option value="3">3</option>
+                   <option value="4">4</option>
+                   <option value="5">5</option>
+                 </select> 
+               </td>
+      </tr>
+     </table>
   </body>
 </html>
