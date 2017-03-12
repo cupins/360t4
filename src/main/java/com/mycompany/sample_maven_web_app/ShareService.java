@@ -194,7 +194,7 @@ public class ShareService {
     @Consumes(MediaType.APPLICATION_JSON)
     public List<Share> createUser(JSONObject jobj) throws IOException {
         String str = jobj.toString();
-        String arr[] = str.split(":");
+        String arr[] = str.split(": ");
         StringBuilder sb = new StringBuilder();
         for (int i = 0; i < arr[1].length(); i++) {
             if (arr[1].charAt(i) != ('\"') || arr[1].charAt(i) != ('{') || arr[1].charAt(i) != ('}')) {
