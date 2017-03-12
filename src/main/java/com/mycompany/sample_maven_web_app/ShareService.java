@@ -5,6 +5,7 @@
  */
 package com.mycompany.sample_maven_web_app;
 
+import static com.mycompany.sample_maven_web_app.Review_Service.logger;
 import java.net.HttpURLConnection;
 import data.Model;
 import javax.ws.rs.core.Context;
@@ -35,7 +36,9 @@ import java.io.InputStreamReader;
 import java.io.Reader;
 import java.net.URL;
 import java.nio.charset.Charset;
+import objects.Review;
 import org.codehaus.jackson.annotate.JsonIgnoreProperties;
+import org.codehaus.jackson.annotate.JsonProperty;
 import org.codehaus.jettison.json.JSONArray;
 import org.codehaus.jettison.json.JSONException;
 
@@ -194,69 +197,111 @@ public class ShareService {
     @POST
     @Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.APPLICATION_JSON)
-    public List<Share> createUser(JSONObject jobj) throws IOException {
-        String str = jobj.toString();
-        String arr[] = str.split(": ");
-        StringBuilder sb = new StringBuilder();
-        for (int i = 0; i < arr[1].length(); i++) {
-            if (arr[1].charAt(i) != ('\"') || arr[1].charAt(i) != ('{') || arr[1].charAt(i) != ('}')) {
-                sb.append(arr[1].charAt(i));
-            }
-        }
-        try {
-            
-            JSONObject job = readJsonFromUrl(sb.toString());
-
-            LinkedList<Share> lshare = new LinkedList<Share>();
-            ObjectMapper mapper = new ObjectMapper();
-            Share sh[] = mapper.readValue(job.toString(), Share[].class);
-            try {
-                for (int jasb = 0; jasb < sh.length; jasb++) {
-                    Model db = Model.singleton();
-                    Share sha = db.createShare(sh[jasb]);
-                    //logger.log(Level.INFO, "user persisted to db as userid=" + usr.getUserid());
-                    //text.append("User id persisted with id=" + usr.getUserid());
-                    lshare.add(sha);
-                    return lshare;
-                }
-            } catch (SQLException sqle) {
-                String errText = "Error persisting user after db connection made:\n" + sqle.getMessage() + " --- " + sqle.getSQLState() + "\n";
-                logger.log(Level.SEVERE, errText);
-                //text.append(errText);
-            } catch (Exception e) {
-                logger.log(Level.SEVERE, "Error connecting to db.");
-            }
-        } catch (Exception e) {
-            logger.log(Level.SEVERE, "Error connecting to url.");
-        }
-
-        logger.log(Level.INFO, "RECEIVED CREATE REQUEST FOR URL:\n");
-        //logger.log(Level.INFO, "OBJECT:" + jobj + "\n");
-
-
+    public List<Review> createReview(String jobj) throws IOException {
+        logger.log(Level.INFO, "RECEIVED CREATE REQUEST FOR:\n");
+        logger.log(Level.INFO, "OBJECT:" + jobj + "\n");
         
-        return null;
-    }
-    
-    
-    private static String readAll(Reader rd) throws IOException {
-        StringBuilder sb = new StringBuilder();
-        int cp;
-        while ((cp = rd.read()) != -1) {
-            sb.append((char) cp);
-        }
-        return sb.toString();
-    }
+        LinkedList<Review> lreviews = new LinkedList<Review>();
 
-    public static JSONObject readJsonFromUrl(String url) throws IOException, JSONException {
-        InputStream is = new URL(url).openStream();
+        ObjectMapper mapper = new ObjectMapper();
+        Review review = mapper.readValue(jobj.toString(), Review.class);
+        
+        StringBuilder text = new StringBuilder();
+        text.append("The JSON obj:" + jobj.toString() + "\n");
+        //text.append("Hello " + shop.getCoffeeName() + "\n");
+        text.append("Messages:\n");
+//        if (user.getMessages() != null)
+//            for (Object msg : user.getMessages())
+//                text.append(msg.toString() + "\n");
+        
         try {
-            BufferedReader rd = new BufferedReader(new InputStreamReader(is, Charset.forName("UTF-8")));
-            String jsonText = readAll(rd);
-            JSONObject json = new JSONObject(jsonText);
-            return json;
-        } finally {
-            is.close();
+            Model db = Model.singleton();
+            Review rvw = db.createReview(review);
+            logger.log(Level.INFO, "review persisted to db as rid=" + rvw.getRid());
+            text.append("Review id persisted with id=" + rvw.getRid());
+            lreviews.add(rvw);
         }
-    }
+        catch (SQLException sqle)
+        {
+            String errText = "Error persisting review after db connection made:\n" + sqle.getMessage() + " --- " + sqle.getSQLState() + "\n";
+            logger.log(Level.SEVERE, errText);
+            text.append(errText);
+        }
+        catch (Exception e)
+        {
+            logger.log(Level.SEVERE, "Error connecting to db.");
+        }
+        
+        return lreviews;
+   }
+    
+//    @POST
+//    @Produces(MediaType.APPLICATION_JSON)
+//    @Consumes(MediaType.APPLICATION_JSON)
+//    public List<Share> createUser(JSONObject jobj) throws IOException {
+//        String str = jobj.toString();
+//        String arr[] = str.split(": ");
+//        StringBuilder sb = new StringBuilder();
+//        for (int i = 0; i < arr[1].length(); i++) {
+//            if (arr[1].charAt(i) != ('\"') || arr[1].charAt(i) != ('{') || arr[1].charAt(i) != ('}')) {
+//                sb.append(arr[1].charAt(i));
+//            }
+//        }
+//        try {
+//            
+//            JSONObject job = readJsonFromUrl(sb.toString());
+//
+//            LinkedList<Share> lshare = new LinkedList<Share>();
+//            ObjectMapper mapper = new ObjectMapper();
+//            Share sh[] = mapper.readValue(job.toString(), Share[].class);
+//            try {
+//                for (int jasb = 0; jasb < sh.length; jasb++) {
+//                    Model db = Model.singleton();
+//                    Share sha = db.createShare(sh[jasb]);
+//                    //logger.log(Level.INFO, "user persisted to db as userid=" + usr.getUserid());
+//                    //text.append("User id persisted with id=" + usr.getUserid());
+//                    lshare.add(sha);
+//                    return lshare;
+//                }
+//            } catch (SQLException sqle) {
+//                String errText = "Error persisting user after db connection made:\n" + sqle.getMessage() + " --- " + sqle.getSQLState() + "\n";
+//                logger.log(Level.SEVERE, errText);
+//                //text.append(errText);
+//            } catch (Exception e) {
+//                logger.log(Level.SEVERE, "Error connecting to db.");
+//            }
+//        } catch (Exception e) {
+//            logger.log(Level.SEVERE, "Error connecting to url.");
+//        }
+//
+//        logger.log(Level.INFO, "RECEIVED CREATE REQUEST FOR URL:\n");
+//        //logger.log(Level.INFO, "OBJECT:" + jobj + "\n");
+//
+//
+//        
+//        return null;
+//    }
+//    
+//    
+//    private String readAll(Reader rd) throws IOException {
+//        StringBuilder sb = new StringBuilder();
+//        int cp;
+//        while ((cp = rd.read()) != -1) {
+//            sb.append((char) cp);
+//        }
+//        return sb.toString();
+//    }
+//    
+//    private JSONObject readJsonFromUrl(String url) throws IOException, JSONException {
+//        
+//        InputStream is = new URL(url).openStream();
+//        try {
+//            BufferedReader rd = new BufferedReader(new InputStreamReader(is, Charset.forName("UTF-8")));
+//            String jsonText = readAll(rd);
+//            JSONObject json = new JSONObject(jsonText);
+//            return json;
+//        } finally {
+//            is.close();
+//        }
+//    }
 }
