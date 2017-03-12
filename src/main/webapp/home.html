@@ -263,6 +263,7 @@
         $('#mybody').empty();
         getshops();
         document.getElementById("secretcid").value = "";
+        document.getElementById("review_form").style.visibility="hidden";
         $('#myshop').empty();
         //document.getElementById("hiddenbuttons").style.visibility="hidden";
         var btn = document.getElementById("delete-shop");
@@ -272,12 +273,14 @@
     }
     function render_newreview(data) {
         $('#myshop').empty();
+        document.getElementById("review_form").style.visibility="hidden";
         getshop();
         
     }
     // displays a selected shop in the form
     function render_shop(data)  {
       var list = data;
+      document.getElementById("review_form").style.visibility="hidden";
       document.getElementById("myrevs").innerHTML="";
       if (list)
         $.each(list, function(index, shop) { 
@@ -327,6 +330,7 @@
       var list = data;
         $('#myshop').empty();
         document.getElementById("hiddenbuttons").style.visibility="hidden";
+        document.getElementById("review_form").style.visibility="hidden";
         var btn = document.getElementById("delete-shop");
         btn.disabled = true;
         btn = document.getElementById("review-shop");
