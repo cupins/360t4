@@ -269,6 +269,7 @@
       if (list)
         $.each(list, function(index, shop) { 
             document.getElementById("myshop").innerHTML="";
+            $('#myshop').append("<p>Name of user : " + sessionStorage.getItem("uid") + "</p>");
             $('#myshop').append("<p>Name of Shop : " + shop.coffeeName + "</p>");
             $('#myshop').append("<p>Address : " + shop.coffeeAddress + "</p>");
             $('#myshop').append("<p>Phone Number : " + shop.phone + "</p>");
