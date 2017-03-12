@@ -214,6 +214,7 @@
       $('#delete-shop').click(function ()
       {
          var cid = document.getElementById("cid");
+         sessionStorage.cid = null;
          var shop = { 'cid': cid.value };           
          var url='tcss360/shops/';
          if (confirm('Are you sure - DELETE ' + '-(' + cid.value + ') ?')) {
@@ -249,7 +250,7 @@
       });
       $(".table-body").on('click', 'tr', function() {
          var clicked_cid=$(this).find('td:first').text();
-         //old_cid = clicked_cid;
+         sessionStorage.cid = clicked_cid.value
          var url='tcss360/shops/'+clicked_cid;
           $.ajax({
             type: 'GET',
