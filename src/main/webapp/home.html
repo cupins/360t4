@@ -194,7 +194,7 @@
       });        
       $('#update-review').click(function ()
       {
-          sessionStorage.setItem("rid",document.getElementById("selection").value);
+          sessionStorage.rid = document.getElementById("selection").value;
           location.href = "https://still-fjord-79022.herokuapp.com/update_review.html";
       });     
       $('#delete-shop').click(function ()
@@ -249,9 +249,7 @@
     // gets and displays all shops by calling render
     function getshops() {
         var url='tcss360/shops/0';
-        if (!sessionStorage.rid) {
-          sessionStorage.rid = 0;
-        }
+        sessionStorage.rid = null
         $.ajax({
           type: 'GET',
           url: url,
@@ -274,6 +272,7 @@
       document.getElementById("hiddenbuttons").style.visibility="hidden";
       document.getElementById("hiddenbuttons2").style.visibility="hidden";
       document.getElementById("review_form").style.visibility="hidden";
+      sessionStorage.rid = null
       $.each(data, function(index, shop) { 
           var newrow = "<tr id=\"shtable\"><td id=\"cid\"" + index + "\">"+ shop.cid + "</td>";
           newrow += "<td id=\"coffee_name\">" + shop.coffeeName + "</td>";
