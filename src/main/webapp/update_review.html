@@ -104,7 +104,7 @@
               var url='tcss360/reviews/';
               if (confirm('Are you sure?')) {
                 $.ajax({
-                  type: 'POST',
+                  type: 'PUT',
                   url: url,
                   datatype: 'json',
                   data: JSON.stringify(rvw),
