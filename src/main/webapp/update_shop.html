@@ -137,13 +137,13 @@
     }
     function render_shop(data) {
       $.each(data, function(index, shop) {
-        $('#frm').append("<tr><td>Change Shop Name :  </td><td><input type=\"text\" id=\"coffee_name\" size=\"20\" value=\""+shop.coffee_name+"\"/> </td></tr>");
-        $('#frm').append("<tr><td>City : </td><td><input type=\"text\" id=\"city\" size=\"20\" value=\""+shop.city+"\"/> </td></tr>");
-        $('#frm').append("<tr><td>State : </td><td><input type=\"text\" id=\"stat\" size=\"20\" value=\""+shop.stat+"\"/></td></tr>");
-        $('#frm').append("<tr><td>Zip : </td><td><input type=\"text\" id=\"zip\" size=\"20\" value=\""+shop.zip+"\"/></td></tr>");
-        $('#frm').append("<tr><td>Phone : </td><td><input type=\"text\" id=\"phone\" size=\"20\" value=\""+shop.phone+"\"/></td></tr>");
-        $('#frm').append("<tr><td>Open Time : </td><td><input type=\"text\" id=\"opentime\" size=\"20\" value=\""+shop.opentime+"\"/></td></tr>");
-        $('#frm').append("<tr><td>Close TIme : </td><td><input type=\"text\" id=\"clostime\" size=\"20\" value=\""+shop.clostime+"\"/></td></tr>");
+        $('#frm2').append("<tr><td>Change Shop Name :  </td><td><input type=\"text\" id=\"coffee_name\" size=\"20\" value=\""+shop.coffee_name+"\"/> </td></tr>");
+        $('#frm2').append("<tr><td>City : </td><td><input type=\"text\" id=\"city\" size=\"20\" value=\""+shop.city+"\"/> </td></tr>");
+        $('#frm2').append("<tr><td>State : </td><td><input type=\"text\" id=\"stat\" size=\"20\" value=\""+shop.stat+"\"/></td></tr>");
+        $('#frm2').append("<tr><td>Zip : </td><td><input type=\"text\" id=\"zip\" size=\"20\" value=\""+shop.zip+"\"/></td></tr>");
+        $('#frm2').append("<tr><td>Phone : </td><td><input type=\"text\" id=\"phone\" size=\"20\" value=\""+shop.phone+"\"/></td></tr>");
+        $('#frm2').append("<tr><td>Open Time : </td><td><input type=\"text\" id=\"opentime\" size=\"20\" value=\""+shop.opentime+"\"/></td></tr>");
+        $('#frm2').append("<tr><td>Close TIme : </td><td><input type=\"text\" id=\"clostime\" size=\"20\" value=\""+shop.clostime+"\"/></td></tr>");
       });
     }
   </script>
@@ -152,11 +152,13 @@
     <h1 class="login">Update User</h1>
     <div id="yousaid"></div>
     <table id="frm">
+	<tbody id="frm2">
 	<tr>
 	    <td>
 		<input type="button" value="Update Shop" onclick="" id="update-shop"/>
 	    </td>
 	</tr>
+	</tbody>
      </table>
   </body>
 </html>
