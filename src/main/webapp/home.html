@@ -127,7 +127,7 @@
         width: 40px;
       }
       .description {
-        width: 40px;
+        width: 80px;
       }
       .phone {
         width: 80px;
@@ -293,14 +293,14 @@
       sessionStorage.rid = null
       $.each(data, function(index, shop) { 
           var newrow = "<tr id=\"shtable\"><td id=\"cid\"" + index + "\">"+ shop.cid + "</td>";
-          newrow += "<td id=\"coffee_name\">" + shop.coffeeName + "</td>";
+          newrow += "<td id=\"name\">" + shop.name + "</td>";
           newrow += "<td id=\"city\">" + shop.city + "</td>";
-          newrow += "<td id=\"stat\">" + shop.stat + "</td>";
+          newrow += "<td id=\"state\">" + shop.state + "</td>";
           newrow += "<td id=\"zip\">" + shop.zip + "</td>";
           newrow += "<td id=\"description\">" + shop.description + "</td>";
           newrow += "<td id=\"phone\">" + shop.phone + "</td>";
           newrow += "<td id=\"opentime\">" + shop.opentime + "</td>";
-          newrow += "<td id=\"clostime\">" + shop.clostime + "</td>";
+          newrow += "<td id=\"closetime\">" + shop.closetime + "</td>";
           $('#mybody').append(newrow);
       });
     }
@@ -346,14 +346,14 @@
         $.each(list, function(index, shop) { 
             document.getElementById("myshop").innerHTML="";
             $('#myshop').append("<p>Name of user : " + sessionStorage.getItem("uid") + "</p>");
-            $('#myshop').append("<p>Name of Shop : " + shop.coffeeName + "</p>");
+            $('#myshop').append("<p>Name of Shop : " + shop.name + "</p>");
             $('#myshop').append("<p>City : " + shop.city + "</p>");
-            $('#myshop').append("<p>State : " + shop.State + "</p>");
+            $('#myshop').append("<p>State : " + shop.state + "</p>");
             $('#myshop').append("<p>Zip : " + shop.zip + "</p>");
             $('#myshop').append("<p>Description : " + shop.description + "</p>");
             $('#myshop').append("<p>Phone Number : " + shop.phone + "</p>");
             $('#myshop').append("<p>Opens : " + shop.opentime + "</p>");
-            $('#myshop').append("<p>Closes : " + shop.clostime + "</p>");
+            $('#myshop').append("<p>Closes : " + shop.closetime + "</p>");
             $('#myshop').append("<div id=\"secretcid\" value=\""+shop.cid+"\"></div>");
             
           
@@ -436,14 +436,14 @@
            <thead>
              <tr class="table-header">
                  <td class="cid">Shop Id</td>
-                 <td class="coffee_name">Shop Name</td>
+                 <td class="name">Shop Name</td>
                  <td class="city">City</td>
-                 <td class="stat">State</td>
+                 <td class="state">State</td>
                  <td class="zip">Zip</td>
-                 <td class="Description">Description</td>
+                 <td class="description">Description</td>
                  <td class="phone">Phone Number</td>
                  <td class="opentime">Open</td>
-                 <td class="clostime">Close</td>
+                 <td class="closetime">Close</td>
              </tr>               
            </thead>
               <tbody id="mybody" class="table-body">
