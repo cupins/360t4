@@ -92,12 +92,12 @@
 	    
         $('#update-review').click(function ()
         {
-            // Create a new record
             var review  = document.getElementById("review");
             var rating  = document.getElementById("rating");
             var cid     = document.getElementById("cid");
             if (sessionStorage.getItem("uid") !== null) {
-              var rvw  = { 'text': review.value,
+              var rvw  = { 'rid': sessionStorage.getItem("rid"),
+		           'text': review.value,
                            'rating': rating.value,
                            'cid': cid.value,
                            'userid': sessionStorage.getItem("uid")};         
