@@ -16,7 +16,6 @@
       #btn{
         -webkit-appearance: button;
         -moz-appearance: button;
-        <!-- appearance: button; -->
         color: #111;
         background-color: #ff7b00;
         padding: 5px;
@@ -152,6 +151,18 @@
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>    
     <script language="javascript">
     $(document).ready(function () {
+        $('#my-review').click(function ()
+        {
+          var url = "tcss360/reviews/0";
+           $.ajax({
+             type: 'GET',
+             url: url,
+             datatype: 'json',
+             data: JSON.stringify(shop),
+             contentType: 'application/json',
+             success: render_getReviewsUser
+           });
+        });
         $('#save-review').click(function ()
         {
             // Create a new record
@@ -265,7 +276,7 @@
     // displays a selected shop in the form
     function render_shop(data)  {
       var list = data;
-      //document.getElementById("shop_table").style.visibility="hidden";
+      document.getElementbyId("myrevs").innerHTML="";
       if (list)
         $.each(list, function(index, shop) { 
             document.getElementById("myshop").innerHTML="";
@@ -310,6 +321,25 @@
           }
       });
     }
+    function render_getReviewsUser(data) {
+      var list = data;
+        $('#myshop').empty();
+        document.getElementById("hiddenbuttons").style.visibility="hidden";
+        var btn = document.getElementById("delete-shop");
+        btn.disabled = true;
+        btn = document.getElementById("review-shop");
+        btn.disabled = true;
+      $('#myrevs').append("<p>Reviews :</p>");
+      if (list)
+        $.each(list, function(index, review) {
+          if (review.uid == sessionStorage.getItem("uid")) {
+            $('#myrevs').append("<p>~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~</p>");
+            $('#myrevs').append("<p>Text : "+review.text+"</p>");
+            $('#myrevs').append("<p>Rating : "+review.rating+"</p>");
+            $('#myrevs').append("<p>~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~</p>");
+          }
+      });
+    }
   </script>
   </head>
   <body  id="cof_body">
@@ -331,9 +361,11 @@
       </table>
       <div>
         <input type="button" value="Add New Shop" onclick="" id="new-shop"/>
+        <input type="button" value="My Review" onclick="" id="my-reviews"/>
       </div>
     </div>
       <div id="myshop"></div>
+      <div id="myrevs"></div>
       <div id="hiddenbuttons">
         <input type="button" value="Review Shop" onclick="" id="review-shop"/>
         <input type="button" value="Delete Shop" onclick="" id="delete-shop"/>
