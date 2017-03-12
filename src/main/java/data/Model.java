@@ -202,10 +202,10 @@ public class Model {
     public Coffee_Shop newCoffeeShop(Coffee_Shop cs) throws SQLException
 
     {
-        String sqlInsert="insert into shops (coffee_name, city, stat, zip, phone, opentime, clostime, description) values("
+        String sqlInsert="insert into shops (coffee_name, city, stat, zip, description, phone, opentime, clostime) values("
                 + "'" + cs.getCoffeeName() + "'" + ", " + "'" + cs.getCity()
-                + "'" + ", " + "'" + cs.getStat() + "'" + ", " + "'" + cs.getZip() + "'" + ", " + "'" + cs.getPhone()
-                + "'" + ", " +  cs.getOpentime() + ", " + cs.getClostime() + ", " + cs.getDescription() + ");";
+                + "'" + ", " + "'" + cs.getStat() + "'" + ", " + "'" + cs.getZip() + "'" + ", " + "'" + cs.getDescription() + "'" + ", " + "'" + cs.getPhone()
+                + "'" + ", " +  cs.getOpentime() + ", " + cs.getClostime() +  ");";
         Statement s = createStatement();
         logger.log(Level.INFO, "attempting statement execute");
         s.execute(sqlInsert,Statement.RETURN_GENERATED_KEYS);
@@ -289,7 +289,7 @@ public class Model {
         sqlQuery.append("phone='" + cs.getPhone() + "', ");
         sqlQuery.append("stat='" + cs.getStat() + "' ");
         sqlQuery.append("zip='" + cs.getZip() + "' ");
-        sqlQuery.append("description=" + cs.getDescription() + "' ");
+        sqlQuery.append("description='" + cs.getDescription() + "' ");
         sqlQuery.append("where cid=" + cs.getCid() +";");
         Statement st = createStatement();
         logger.log(Level.INFO, "UPDATE SQL=" + sqlQuery.toString());
