@@ -255,7 +255,6 @@
     // gets and displays all shops by calling render
     function getshops() {
         var url='tcss360/shops/0';
-        sessionStorage.rid = null
         $.ajax({
           type: 'GET',
           url: url,
@@ -370,6 +369,7 @@
         $.each(list, function(index, review) {
           if (review.cid == document.getElementById("cid").value) {
             $('#myshop').append("<p>~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~</p>");
+            $('#myshop').append("<p>Date : "+review.date+"</p>");
             $('#myshop').append("<p>Text : "+review.text+"</p>");
             $('#myshop').append("<p>Rating : "+review.rating+"</p>");
             $('#myshop').append("<p>~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~</p>");
