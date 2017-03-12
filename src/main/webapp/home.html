@@ -338,7 +338,7 @@
       $('#myrevs').append("<p>Reviews :</p>");
       if (list)
         $.each(list, function(index, review) {
-          if (review.uid == sessionStorage.getItem("uid")) {
+          if (review.userid == sessionStorage.getItem("uid")) {
             $('#myrevs').append("<p>~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~</p>");
             $('#myrevs').append("<p>Text : "+review.text+"</p>");
             $('#myrevs').append("<p>Rating : "+review.rating+"</p>");
