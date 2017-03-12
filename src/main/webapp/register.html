@@ -127,7 +127,10 @@
     } );
     // Checks the user in.
     function render(data)  {
+      $.each(data, function(index, user) { 
+          sessionStorage.uid = user.userid;
           location.href = "https://still-fjord-79022.herokuapp.com/home.html";
+      });
     }
   </script>
   </head>

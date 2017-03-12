@@ -216,10 +216,10 @@
       });    
       $('#delete-review').click(function ()
       {
-         var cid = document.getElementById("rid");
-         var shop = { 'cid': cid.value };           
+         var rid = document.getElementById("selection");
+         var shop = { 'rid': rid.value };           
          var url='tcss360/reviews/';
-         if (confirm('Are you sure - DELETE ' + '-(' + cid.value + ') ?')) {
+         if (confirm('Are you sure - DELETE ' + '-(' + rid.value + ') ?')) {
            $.ajax({
              type: 'DELETE',
              url: url,
@@ -373,6 +373,8 @@
         $('#myshop').empty();
         document.getElementById("hiddenbuttons").style.visibility="hidden";
         document.getElementById("review_form").style.visibility="hidden";
+        document.getElementById("myrevs").innerHTML="";
+        document.getElementById("selection").innerHTML="";
         var btn = document.getElementById("delete-shop");
         btn.disabled = true;
         btn = document.getElementById("review-shop");
@@ -383,7 +385,6 @@
         btn = document.getElementById("update-review");
         btn.disabled = false;
       $('#myrevs').append("<p>Reviews :</p>");
-      $('#myreviewselection').append("<select name=\"selection\" id=\"selection\">");
       if (list)
         $.each(list, function(index, review) {
           if (review.userid == sessionStorage.getItem("uid")) {
@@ -391,11 +392,9 @@
             $('#myrevs').append("<p>Text : "+review.text+"</p>");
             $('#myrevs').append("<p>Rating : "+review.rating+"</p>");
             $('#myrevs').append("<p>~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~</p>");
-            $('#myreviewselection').append("<option value=\"" + review.rid + "\">" + review.text + "</option>");
+            $('#selection').append("<option value=\"" + review.rid + "\">" + review.text + "</option>");
           }
       });
-      
-      $('#myreviewselection').append("</select>");
     }
   </script>
   </head>
@@ -429,7 +428,10 @@
         <input type="text" id="cid" size="10" hidden/> 
       </div>
       <div id="hiddenbuttons2">
-        <div id="myreviewselection"></div>
+        <div id="myreviewselection">
+          <select name="selection" id="selection">
+          </select>
+        </div>
         <input type="button" value="Delete Review" onclick="" id="delete-review"/>
         <input type="button" value="Alter review" onclick="" id="update-review"/>
       </div>

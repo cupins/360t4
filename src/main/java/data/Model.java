@@ -307,7 +307,7 @@ public class Model {
         logger.log(Level.INFO, "retrieved keys from statement");
         int rid = -1;
         while (rs.next())
-            rid = rs.getInt(6);   // assuming 6rd column is userid
+            rid = rs.getInt(7);   // assuming 6rd column is userid
         logger.log(Level.INFO, "The new rid=" + rid);
         return rvw;
 
