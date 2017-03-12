@@ -202,10 +202,10 @@ public class Model {
     public Coffee_Shop newCoffeeShop(Coffee_Shop cs) throws SQLException
 
     {
-        String sqlInsert="insert into shops (coffee_name, coffee_address, raw_review, phone, website) values("
-                + "'" + cs.getCoffeeName() + "'" + ", " + "'" + cs.getCoffeeAddress()
-                + "'" + ", " + cs.getRawReview() + ", " + "'" + cs.getPhone()
-                + "'" + ", " + "'" + cs.getWebsite() + "'" +");";
+        String sqlInsert="insert into shops (coffee_name, city, stat, zip, phone, opentime, clostime) values("
+                + "'" + cs.getCoffeeName() + "'" + ", " + "'" + cs.getCity()
+                + "'" + ", " + "'" + cs.getStat() + "'" + ", " + "'" + cs.getZip() + "'" + ", " + "'" + cs.getPhone()
+                + "'" + ", " +  cs.getOpentime() + ", " + cs.getClostime() +");";
         Statement s = createStatement();
         logger.log(Level.INFO, "attempting statement execute");
         s.execute(sqlInsert,Statement.RETURN_GENERATED_KEYS);
@@ -262,10 +262,12 @@ public class Model {
             Coffee_Shop shop = new Coffee_Shop();
             shop.setCoffeeName(rows.getString("coffee_name"));
             shop.setCid(rows.getInt("cid"));
-            shop.setCoffeeAddress(rows.getString("coffee_address"));
-            shop.setRawReview(rows.getInt("raw_review"));
+            shop.setCity(rows.getString("city"));
+            shop.setStat(rows.getString("stat"));
+            shop.setZip(rows.getString("zip"));
+            shop.setOpentime(rows.getInt("opentime"));
+            shop.setClostime(rows.getInt("clostime"));
             shop.setPhone(rows.getString("phone"));
-            shop.setWebsite(rows.getString("website"));
             
             logger.log(Level.INFO, "Adding shop to list with id=" + shop.getCid());
             ll.add(shop);
@@ -280,10 +282,12 @@ public class Model {
 
         sqlQuery.append("update shops ");
         sqlQuery.append("set coffee_name='" + cs.getCoffeeName() + "', ");
-        sqlQuery.append("coffee_address='" + cs.getCoffeeAddress() + "', ");
-        sqlQuery.append("raw_review=" + cs.getRawReview() + ", ");
+        sqlQuery.append("city='" + cs.getCity() + "', ");
+        sqlQuery.append("opentime=" + cs.getOpentime() + ", ");
+        sqlQuery.append("clostime=" + cs.getClostime() + ", ");
         sqlQuery.append("phone='" + cs.getPhone() + "', ");
-        sqlQuery.append("website='" + cs.getWebsite() + "' ");
+        sqlQuery.append("stat='" + cs.getStat() + "' ");
+        sqlQuery.append("zip='" + cs.getZip() + "' ");
         sqlQuery.append("where cid=" + cs.getCid() +";");
         Statement st = createStatement();
         logger.log(Level.INFO, "UPDATE SQL=" + sqlQuery.toString());
