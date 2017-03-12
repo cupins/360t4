@@ -272,7 +272,8 @@ public class Model {
         }
         return ll.toArray(new Coffee_Shop[ll.size()]);
     }
-
+    
+    
 
     public boolean updateCoffeeShop(Coffee_Shop cs) throws SQLException {
         StringBuilder sqlQuery = new StringBuilder();
@@ -387,6 +388,24 @@ public class Model {
             ll.add(shop);
         }
         return ll.toArray(new Share[ll.size()]);
+    }
+    
+    public Share createShare(Share shr) throws SQLException
+    {
+        //wrong
+        String sqlInsert="insert into share (name, city, state, zip, phone, opentime, closetime) values ('" + shr.getName() + "'," + " '" + shr.getCity() + "', '" + shr.getState() + "', '" + shr.getZip() + "', '"+ "', '" + shr.getPhone()+ "', " + shr.getOpentime()+ ", " + shr.getClosetime() + ");";
+        Statement s = createStatement();
+        logger.log(Level.INFO, "attempting statement execute");
+        s.execute(sqlInsert, Statement.RETURN_GENERATED_KEYS);
+        logger.log(Level.INFO, "statement executed.  atempting get generated keys");
+        ResultSet rs = s.getGeneratedKeys();
+        logger.log(Level.INFO, "retrieved keys from statement");
+        int rid = -1;
+        while (rs.next())
+            rid = rs.getInt(8);   // assuming 8th column is sid
+        logger.log(Level.INFO, "The new rid=" + rid);
+        return shr;
+
     }
 //    
 //    public void deleteCoffeeShop(int cid) throws SQLException
