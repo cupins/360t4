@@ -216,10 +216,10 @@
       });    
       $('#delete-review').click(function ()
       {
-         var cid = document.getElementById("rid");
-         var shop = { 'cid': cid.value };           
+         var rid = document.getElementById("rid");
+         var shop = { 'rid': rid.value };           
          var url='tcss360/reviews/';
-         if (confirm('Are you sure - DELETE ' + '-(' + cid.value + ') ?')) {
+         if (confirm('Are you sure - DELETE ' + '-(' + rid.value + ') ?')) {
            $.ajax({
              type: 'DELETE',
              url: url,
