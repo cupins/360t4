@@ -374,7 +374,7 @@
         document.getElementById("hiddenbuttons").style.visibility="hidden";
         document.getElementById("review_form").style.visibility="hidden";
         document.getElementById("myrevs").innerHTML="";
-        document.getElementById("myreviewselectioninner").innerHTML="";
+        document.getElementById("selection").innerHTML="";
         var btn = document.getElementById("delete-shop");
         btn.disabled = true;
         btn = document.getElementById("review-shop");
@@ -392,7 +392,7 @@
             $('#myrevs').append("<p>Text : "+review.text+"</p>");
             $('#myrevs').append("<p>Rating : "+review.rating+"</p>");
             $('#myrevs').append("<p>~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~</p>");
-            $('#myreviewselectioninner').append("<option value=\"" + review.rid + "\">" + review.text + "</option>");
+            $('#selection').append("<option value=\"" + review.rid + "\">" + review.text + "</option>");
           }
       });
     }
@@ -430,7 +430,6 @@
       <div id="hiddenbuttons2">
         <div id="myreviewselection">
           <select name="selection" id="selection">
-            <div id="myreviewselectioninner"></div>
           </select>
         </div>
         <input type="button" value="Delete Review" onclick="" id="delete-review"/>
