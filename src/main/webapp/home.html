@@ -373,6 +373,7 @@
         $('#myshop').empty();
         document.getElementById("hiddenbuttons").style.visibility="hidden";
         document.getElementById("review_form").style.visibility="hidden";
+        document.getElementById("myrevs").innerHTML="";
         var btn = document.getElementById("delete-shop");
         btn.disabled = true;
         btn = document.getElementById("review-shop");
@@ -383,7 +384,7 @@
         btn = document.getElementById("update-review");
         btn.disabled = false;
       $('#myrevs').append("<p>Reviews :</p>");
-      $('#myreviewselection').prepend("<select name=\"selection\" id=\"selection\">");
+      $('#myreviewselection').append("<select name=\"selection\" id=\"selection\">");
       if (list)
         $.each(list, function(index, review) {
           if (review.userid == sessionStorage.getItem("uid")) {
@@ -391,11 +392,11 @@
             $('#myrevs').append("<p>Text : "+review.text+"</p>");
             $('#myrevs').append("<p>Rating : "+review.rating+"</p>");
             $('#myrevs').append("<p>~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~</p>");
-            $('#myreviewselection').prepend("<option value=\"" + review.rid + "\">" + review.text + "</option>");
+            $('#myreviewselection').append("<option value=\"" + review.rid + "\">" + review.text + "</option>");
           }
       });
       
-      //$('#myreviewselection').append("</select>");
+      $('#myreviewselection').innerHTML += "</select>";
     }
   </script>
   </head>
