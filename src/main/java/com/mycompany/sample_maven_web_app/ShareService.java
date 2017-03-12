@@ -35,6 +35,7 @@ import java.io.InputStreamReader;
 import java.io.Reader;
 import java.net.URL;
 import java.nio.charset.Charset;
+import org.codehaus.jackson.annotate.JsonIgnoreProperties;
 import org.codehaus.jettison.json.JSONArray;
 import org.codehaus.jettison.json.JSONException;
 
@@ -45,6 +46,7 @@ import org.codehaus.jettison.json.JSONException;
  * @author reid
  */
 @Path("share")
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class ShareService {
 
     static final Logger logger = Logger.getLogger(ShareService.class.getName());
@@ -196,12 +198,13 @@ public class ShareService {
         String str = jobj.toString();
         String arr[] = str.split(": ");
         StringBuilder sb = new StringBuilder();
-        for (int i = 0; i < arr[2].length(); i++) {
+        for (int i = 0; i < arr[1].length(); i++) {
             if (arr[1].charAt(i) != ('\"') || arr[1].charAt(i) != ('{') || arr[1].charAt(i) != ('}')) {
                 sb.append(arr[1].charAt(i));
             }
         }
         try {
+            
             JSONObject job = readJsonFromUrl(sb.toString());
 
             LinkedList<Share> lshare = new LinkedList<Share>();
