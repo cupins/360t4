@@ -197,14 +197,14 @@ public class ShareService {
     @POST
     @Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.APPLICATION_JSON)
-    public List<Review> createReview(String jobj) throws IOException {
+    public List<Share> createShare(String jobj) throws IOException {
         logger.log(Level.INFO, "RECEIVED CREATE REQUEST FOR:\n");
         logger.log(Level.INFO, "OBJECT:" + jobj + "\n");
         
-        LinkedList<Review> lreviews = new LinkedList<Review>();
+        LinkedList<Share> lshares = new LinkedList<Share>();
 
         ObjectMapper mapper = new ObjectMapper();
-        Review review = mapper.readValue(jobj.toString(), Review.class);
+        Share share = mapper.readValue(jobj.toString(), Share.class);
         
         StringBuilder text = new StringBuilder();
         text.append("The JSON obj:" + jobj.toString() + "\n");
@@ -216,14 +216,14 @@ public class ShareService {
         
         try {
             Model db = Model.singleton();
-            Review rvw = db.createReview(review);
-            logger.log(Level.INFO, "review persisted to db as rid=" + rvw.getRid());
-            text.append("Review id persisted with id=" + rvw.getRid());
-            lreviews.add(rvw);
+            Share shr = db.createShare(share);
+            logger.log(Level.INFO, "share persisted to db as sid=" + shr.getSid());
+            text.append("Share id persisted with id=" + shr.getSid());
+            lshares.add(shr);
         }
         catch (SQLException sqle)
         {
-            String errText = "Error persisting review after db connection made:\n" + sqle.getMessage() + " --- " + sqle.getSQLState() + "\n";
+            String errText = "Error persisting share after db connection made:\n" + sqle.getMessage() + " --- " + sqle.getSQLState() + "\n";
             logger.log(Level.SEVERE, errText);
             text.append(errText);
         }
@@ -232,7 +232,7 @@ public class ShareService {
             logger.log(Level.SEVERE, "Error connecting to db.");
         }
         
-        return lreviews;
+        return lshares;
    }
     
 //    @POST
