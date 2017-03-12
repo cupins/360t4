@@ -258,14 +258,9 @@
         btn.disabled = true;
     }
     function render_newreview(data) {
-        $('#mybody').empty();
-        getshops();
         $('#myshop').empty();
-        //document.getElementById("hiddenbuttons").style.visibility="hidden";
-        var btn = document.getElementById("delete-shop");
-        btn.disabled = true;
-        btn = document.getElementById("review-shop");
-        btn.disabled = true;
+        getshop();
+        
     }
     // displays a selected shop in the form
     function render_shop(data)  {
