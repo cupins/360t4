@@ -10,7 +10,7 @@ do
     json=$(python jp.py $chris $c)
     echo $json
     echo "we json"
-    curl -X POST -H "Content-Type: application/json" --data @./hey.json $ENDPOINT
+    curl -X POST -H "Content-Type: application/json" --data $json $ENDPOINT
 done
 echo "we won"
 
