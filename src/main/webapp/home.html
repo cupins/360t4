@@ -383,6 +383,7 @@
         btn = document.getElementById("update-review");
         btn.disabled = false;
       $('#myrevs').append("<p>Reviews :</p>");
+      $('#myreviewselection').append("<select name=\"selection\" id=\"selection\">");
       if (list)
         $.each(list, function(index, review) {
           if (review.userid == sessionStorage.getItem("uid")) {
@@ -390,16 +391,10 @@
             $('#myrevs').append("<p>Text : "+review.text+"</p>");
             $('#myrevs').append("<p>Rating : "+review.rating+"</p>");
             $('#myrevs').append("<p>~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~</p>");
+            $('#myreviewselection').append("<option value=\"" + review.rid + "\">" + review.text + "<\option>");
           }
       });
-      $('myreviewselection').append("<select name=\"selection\" id=\"selection\">");
-      if (list)
-        $.each(list, function(index, review) {
-          if (review.userid == sessionStorage.getItem("uid")) {
-            $('myreviewselection').append("<option value=\"" + review.rid + "\">" + review.text + "<\option>");
-          }
-      });
-      $('myreviewselection').append("</select>");
+      $('#myreviewselection').append("</select>");
     }
   </script>
   </head>
