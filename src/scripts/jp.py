@@ -10,9 +10,10 @@ def main():
 	b = b.split('{')
 #	shops =  ',\"sid\":' + str(x) 
 #	print x
-	shops =  '{\"shopid\":' + str(x)
+	shops =  '\"shopid\":' + str(x) +','
 	ret = "{"+str(b[int(x)])
 	re = str(ret.replace(shops, ""))
+	re = re.replace('},', '}')
 	print(re)
 
 main()

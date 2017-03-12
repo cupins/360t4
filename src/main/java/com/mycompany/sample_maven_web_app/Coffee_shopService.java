@@ -244,7 +244,7 @@ public class Coffee_shopService {
         
         StringBuilder text = new StringBuilder();
         text.append("The JSON obj:" + jobj.toString() + "\n");
-        text.append("Hello " + shop.getCoffeeName() + "\n");
+        text.append("Hello " + shop.getName() + "\n");
         text.append("Messages:\n");
 //        if (user.getMessages() != null)
 //            for (Object msg : user.getMessages())

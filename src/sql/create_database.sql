@@ -23,14 +23,14 @@ create table users (
 
 create table shops (
     cid serial primary key,    
-    coffee_name varchar(50),
+    name varchar(50),
     city varchar(30),
-    stat varchar(30),
+    state varchar(30),
     zip varchar(20),
     description varchar(50),
     phone varchar(13),
     opentime int,
-    clostime int
+    closetime int
 );
 
 create table reviews(

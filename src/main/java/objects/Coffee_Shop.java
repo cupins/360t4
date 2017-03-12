@@ -12,14 +12,14 @@ package objects;
 public class Coffee_Shop {
     
     private int cid;
-    private String coffeeName;
+    private String name;
     private String city;
-    private String stat;
+    private String state;
     private String zip;
     private String description;
     private String phone;
     private int opentime;
-    private int clostime;
+    private int closetime;
     
     
     // Constructor
@@ -37,12 +37,12 @@ public class Coffee_Shop {
     }
     
     //Coffee shop name
-    public String getCoffeeName() {
-        return coffeeName;
+    public String getName() {
+        return name;
     }
 
-    public void setCoffeeName(String coffeeName) {
-        this.coffeeName = coffeeName;
+    public void setCoffeeName(String name) {
+        this.name = name;
     }
     
     // Coffee shop address
@@ -54,12 +54,12 @@ public class Coffee_Shop {
         this.city = city;
     }
     // Coffee shop address
-    public String getStat() {
-        return stat;
+    public String getState() {
+        return state;
     }
 
-    public void setStat(String stat) {
-        this.stat = stat;
+    public void setState(String state) {
+        this.state = state;
     }
     // Coffee shop address
     public String getZip() {
@@ -79,12 +79,12 @@ public class Coffee_Shop {
         this.opentime = opentime;
     }
     // raw score for all reviews for this (cid) coffee shop
-    public int getClostime() {
-        return clostime;
+    public int getClosetime() {
+        return closetime;
     }
 
-    public void setClostime(int clostime) {
-        this.clostime = clostime;
+    public void setClosetime(int closetime) {
+        this.closetime = closetime;
     }
     
     // phone number for coffee shop
