@@ -197,7 +197,15 @@
       $('#new-shop').click(function ()
       {
           location.href = "https://still-fjord-79022.herokuapp.com/add_shop.html";
-      });        
+      });  
+      $('#update-user').click(function ()
+      {
+          location.href = "https://still-fjord-79022.herokuapp.com/update_user.html";
+      });   
+      $('#update-shop').click(function ()
+      {
+          location.href = "https://still-fjord-79022.herokuapp.com/update_shop.html";
+      });         
       $('#update-review').click(function ()
       {
           sessionStorage.rid = document.getElementById("selection").value;
@@ -302,6 +310,8 @@
         btn.disabled = true;
         btn = document.getElementById("review-shop");
         btn.disabled = true;
+        btn = document.getElementById("update-shop");
+        btn.disabled = true;
     }
     function render_deletereview(data)
     {
@@ -311,6 +321,8 @@
         var btn = document.getElementById("delete-shop");
         btn.disabled = true;
         btn = document.getElementById("review-shop");
+        btn.disabled = true;
+        btn = document.getElementById("update-shop");
         btn.disabled = true;
     }
     function render_newreview(data) {
@@ -344,6 +356,8 @@
             var btn = document.getElementById("delete-shop");
             btn.disabled = false;
             btn = document.getElementById("review-shop");
+            btn.disabled = false;
+            btn = document.getElementById("update-shop");
             btn.disabled = false;
             document.getElementById("hiddenbuttons2").style.visibility="hidden";
             var btn = document.getElementById("delete-review");
@@ -387,6 +401,8 @@
         btn.disabled = true;
         btn = document.getElementById("review-shop");
         btn.disabled = true;
+        btn = document.getElementById("update-shop");
+        btn.disabled = true;
         document.getElementById("hiddenbuttons2").style.visibility="visible";
         var btn = document.getElementById("delete-review");
         btn.disabled = false;
@@ -428,19 +444,20 @@
       <div>
         <input type="button" value="Add New Shop" onclick="" id="new-shop"/>
         <input type="button" value="My Reviews" onclick="" id="my-reviews"/>
+        <input type="button" value="Update Profile" onclick="" id="update-user"/>
       </div>
     </div>
       <div id="myshop"></div>
       <div id="myrevs"></div>
       <div id="hiddenbuttons">
         <input type="button" value="Review Shop" onclick="" id="review-shop"/>
+        <input type="button" value="Update Shop" onclick="" id="update-shop"/>
         <input type="button" value="Delete Shop" onclick="" id="delete-shop"/>
         <input type="text" id="cid" size="10" hidden/> 
       </div>
       <div id="hiddenbuttons2">
         <div id="myreviewselection">
-          <select name="selection" id="selection">
-          </select>
+          <select name="selection" id="selection"></select>
         </div>
         <input type="button" value="Delete Review" onclick="" id="delete-review"/>
         <input type="button" value="Alter review" onclick="" id="update-review"/>
