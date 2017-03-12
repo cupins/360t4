@@ -90,43 +90,45 @@
     <script language="javascript">
     $(document).ready(function () { 
 	    
-        $('#update-review').click(function ()
+        $('#update-shop').click(function ()
         {
-            var username  = document.getElementById("username");
-            var password  = document.getElementById("password");
-            var email     = document.getElementById("email");
-	    var fname	  = document.getElementById("fname");
-	    var lname	  = document.getElementById("lname");
-            if (sessionStorage.getItem("uid") !== null) {
-              var user = { 'username': username.value,
-		           'password': password.value,
-                           'email': email.value,
-                           'fname': fname.value,
-                           'lname': lname.value,
-			   'utype': 'u',
-                           'userid': sessionStorage.getItem("uid")};
-              var url='tcss360/users/';
-              if (confirm('Are you sure?')) {
-                $.ajax({
-                  type: 'PUT',
-                  url: url,
-                  datatype: 'json',
-                  data: JSON.stringify(user),
-                  contentType: 'application/json',
-                  success: render_update
-                });               
-             }
+                var coffee_name     = document.getElementById("coffee_name");
+                var city            = document.getElementById("city");
+                var stat            = document.getElementById("stat");
+                var zip             = document.getElementById("zip");
+                var phone           = document.getElementById("phone");
+                var opentime        = document.getElementById("opentime");
+                var clostime        = document.getElementById("opentime");
+                var shop = { 'cid': sessionStorage.getItem("cid"),
+                             'coffee_name': coffee_name.value,
+                             'city': city.value,
+                             'stat': stat.value,
+                             'zip': zip.value,
+                             'phone': phone.value,
+                             'clostime': clostime.value,
+                             'opentime': opentime.value};        
+                var url='tcss360/shops/';
+                if (confirm('Are you sure - UPDATE ' + coffee_name.value + ' ?')) {
+                  $.ajax({
+                    type: 'PUT',
+                    url: url,
+                    datatype: 'json',
+                    data: JSON.stringify(shop),
+                    contentType: 'application/json',
+                    success: render_update
+                  }); 
+                }
           }
       });
-      getuser()
+      getshop()
     } );
-    function getuser() {
-      var url='tcss360/users/'+sessionStorage.getItem("uid");
+    function getshop() {
+      var url='tcss360/shops/'+sessionStorage.getItem("cid");
         $.ajax({
           type: 'GET',
           url: url,
           datatype: 'json',
-          success: render_user
+          success: render_shop
         }); 
     }
     // Checks the user in.
@@ -134,23 +136,25 @@
           location.href = "https://still-fjord-79022.herokuapp.com/home.html";
     }
     function render_review(data) {
-      $.each(data, function(index, user) {
-        $('#frm').append("<tr><td>Change User Name :  </td><td><input type=\"text\" id=\"username\" size=\"20\" value=\""+user.username+"\"/> </td></tr>");
-        $('#frm').append("<tr><td>User Password : </td><td><input type=\"password\" id=\"password\" size=\"20\" value=\""+user.password+"\"/> </td></tr>");
-        $('#frm').append("<tr><td>Email : </td><td><input type=\"email\" id=\"email\" size=\"20\" value=\""+user.email+"\"/></td></tr>");
-        $('#frm').append("<tr><td>User Fname : </td><td><input type=\"text\" id=\"fname\" size=\"20\" value=\""+user.fname+"\"/></td></tr>");
-        $('#frm').append("<tr><td>User Lname : </td><td><input type=\"text\" id=\"lname\" size=\"20\" value=\""+user.lname+"\"/></td></tr>");
+      $.each(data, function(index, shop) {
+        $('#frm').append("<tr><td>Change Shop Name :  </td><td><input type=\"text\" id=\"coffee_name\" size=\"20\" value=\""+shop.coffee_name+"\"/> </td></tr>");
+        $('#frm').append("<tr><td>City : </td><td><input type=\"text\" id=\"city\" size=\"20\" value=\""+shop.city+"\"/> </td></tr>");
+        $('#frm').append("<tr><td>State : </td><td><input type=\"text\" id=\"stat\" size=\"20\" value=\""+shop.stat+"\"/></td></tr>");
+        $('#frm').append("<tr><td>Zip : </td><td><input type=\"text\" id=\"zip\" size=\"20\" value=\""+shop.zip+"\"/></td></tr>");
+        $('#frm').append("<tr><td>Phone : </td><td><input type=\"text\" id=\"phone\" size=\"20\" value=\""+shop.phone+"\"/></td></tr>");
+        $('#frm').append("<tr><td>Open Time : </td><td><input type=\"text\" id=\"opentime\" size=\"20\" value=\""+shop.opentime+"\"/></td></tr>");
+        $('#frm').append("<tr><td>Close TIme : </td><td><input type=\"text\" id=\"clostime\" size=\"20\" value=\""+shop.clostime+"\"/></td></tr>");
       });
     }
   </script>
   </head>
-  <body  id="frm">
+  <body  id="mytable">
     <h1 class="login">Update User</h1>
     <div id="yousaid"></div>
-    <table id="myform">
+    <table id="frm">
 	<tr>
 	    <td>
-		<input type="button" value="Update Profile" onclick="" id="update-user"/>
+		<input type="button" value="Update Shop" onclick="" id="update-shop"/>
 	    </td>
 	</tr>
      </table>
