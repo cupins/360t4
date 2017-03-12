@@ -115,6 +115,7 @@
       var pass = document.getElementById("pass");
       $.each(data, function(index, user) { 
         if (user.email == name.value && user.password == pass.value) {
+          sessionStorage.uid = user.userid;
           location.href = "https://still-fjord-79022.herokuapp.com/home.html";
         }
       });
