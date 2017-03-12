@@ -216,7 +216,7 @@
       });    
       $('#delete-review').click(function ()
       {
-         var rid = document.getElementById("rid");
+         var rid = document.getElementById("selection");
          var shop = { 'rid': rid.value };           
          var url='tcss360/reviews/';
          if (confirm('Are you sure - DELETE ' + '-(' + rid.value + ') ?')) {
