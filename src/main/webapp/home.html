@@ -126,6 +126,9 @@
       .zip {
         width: 40px;
       }
+      .description {
+        width: 40px;
+      }
       .phone {
         width: 80px;
       }
@@ -204,6 +207,7 @@
       });   
       $('#update-shop').click(function ()
       {
+          sessionStorage.cid = document.getElementById("cid").value;
           location.href = "https://still-fjord-79022.herokuapp.com/update_shop.html";
       });         
       $('#update-review').click(function ()
@@ -231,14 +235,14 @@
       $('#delete-review').click(function ()
       {
          var rid = document.getElementById("selection");
-         var shop = { 'rid': rid.value };           
+         var rvw = { 'rid': rid.value };           
          var url='tcss360/reviews/';
          if (confirm('Are you sure - DELETE ' + '-(' + rid.value + ') ?')) {
            $.ajax({
              type: 'DELETE',
              url: url,
              datatype: 'json',
-             data: JSON.stringify(shop),
+             data: JSON.stringify(rvw),
              contentType: 'application/json',
              success: render_deletereview
            }); 
@@ -293,6 +297,7 @@
           newrow += "<td id=\"city\">" + shop.city + "</td>";
           newrow += "<td id=\"stat\">" + shop.stat + "</td>";
           newrow += "<td id=\"zip\">" + shop.zip + "</td>";
+          newrow += "<td id=\"description\">" + shop.description + "</td>";
           newrow += "<td id=\"phone\">" + shop.phone + "</td>";
           newrow += "<td id=\"opentime\">" + shop.opentime + "</td>";
           newrow += "<td id=\"clostime\">" + shop.clostime + "</td>";
@@ -345,6 +350,7 @@
             $('#myshop').append("<p>City : " + shop.city + "</p>");
             $('#myshop').append("<p>State : " + shop.State + "</p>");
             $('#myshop').append("<p>Zip : " + shop.zip + "</p>");
+            $('#myshop').append("<p>Description : " + shop.description + "</p>");
             $('#myshop').append("<p>Phone Number : " + shop.phone + "</p>");
             $('#myshop').append("<p>Opens : " + shop.opentime + "</p>");
             $('#myshop').append("<p>Closes : " + shop.clostime + "</p>");
@@ -434,6 +440,7 @@
                  <td class="city">City</td>
                  <td class="stat">State</td>
                  <td class="zip">Zip</td>
+                 <td class="Description">Description</td>
                  <td class="phone">Phone Number</td>
                  <td class="opentime">Open</td>
                  <td class="clostime">Close</td>
