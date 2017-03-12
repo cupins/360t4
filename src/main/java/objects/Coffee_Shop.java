@@ -13,10 +13,12 @@ public class Coffee_Shop {
     
     private int cid;
     private String coffeeName;
-    private String coffeeAddress;
-    private int rawReview;
+    private String city;
+    private String stat;
+    private String zip;
     private String phone;
-    private String website;
+    private int opentime;
+    private int clostime;
     
     
     // Constructor
@@ -43,21 +45,45 @@ public class Coffee_Shop {
     }
     
     // Coffee shop address
-    public String getCoffeeAddress() {
-        return coffeeAddress;
+    public String getCity() {
+        return city;
     }
 
-    public void setCoffeeAddress(String coffeeAddress) {
-        this.coffeeAddress = coffeeAddress;
+    public void setCity(String city) {
+        this.city = city;
+    }
+    // Coffee shop address
+    public String getStat() {
+        return stat;
+    }
+
+    public void setStat(String stat) {
+        this.stat = stat;
+    }
+    // Coffee shop address
+    public String getZip() {
+        return zip;
+    }
+
+    public void setZip(String zip) {
+        this.zip = zip;
     }
     
     // raw score for all reviews for this (cid) coffee shop
-    public int getRawReview() {
-        return rawReview;
+    public int getOpentime() {
+        return opentime;
     }
 
-    public void setRawReview(int rawReview) {
-        this.rawReview = rawReview;
+    public void setOpentime(int opentime) {
+        this.opentime = opentime;
+    }
+    // raw score for all reviews for this (cid) coffee shop
+    public int getClostime() {
+        return clostime;
+    }
+
+    public void setClostime(int clostime) {
+        this.clostime = clostime;
     }
     
     // phone number for coffee shop
@@ -67,16 +93,6 @@ public class Coffee_Shop {
 
     public void setPhone(String phone) {
         this.phone = phone;
-    }
-    
-    // URL for coffee shop
-    public String getWebsite() {
-        return website;
-    }
-
-    //Determine fields getter/setters and constructors
-    public void setWebsite(String website) {
-        this.website = website;
     }
     
 }
