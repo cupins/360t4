@@ -174,7 +174,7 @@
                            'cid': cid.value,
                            'userid': sessionStorage.getItem("uid")};         
               var url='tcss360/reviews/';
-              if (confirm('Are you sure - CREATE ' + '?')) {
+              if (confirm('Are you sure?')) {
                 $.ajax({
                   type: 'POST',
                   url: url,
@@ -195,8 +195,7 @@
       $('#update-review').click(function ()
       {
           sessionStorage.setItem("rid",document.getElementById("selection").value);
-          document.write("<p> update : " + document.getElementById("selection").value + "</p>");
-          //location.href = "https://still-fjord-79022.herokuapp.com/add_shop.html";
+          location.href = "https://still-fjord-79022.herokuapp.com/update_review.html";
       });     
       $('#delete-shop').click(function ()
       {
