@@ -96,6 +96,7 @@
                 var city            = document.getElementById("city");
                 var stat            = document.getElementById("stat");
                 var zip             = document.getElementById("zip");
+                var description     = document.getElementById("description");
                 var phone           = document.getElementById("phone");
                 var opentime        = document.getElementById("opentime");
                 var clostime        = document.getElementById("opentime");
@@ -104,6 +105,7 @@
                              'city': city.value,
                              'stat': stat.value,
                              'zip': zip.value,
+                             'descrption': description.value,
                              'phone': phone.value,
                              'clostime': clostime.value,
                              'opentime': opentime.value};        
@@ -118,7 +120,6 @@
                     success: render_update
                   }); 
                 }
-          }
       });
       getshop()
     } );
@@ -141,6 +142,7 @@
         $('#frm2').append("<tr><td>City : </td><td><input type=\"text\" id=\"city\" size=\"20\" value=\""+shop.city+"\"/> </td></tr>");
         $('#frm2').append("<tr><td>State : </td><td><input type=\"text\" id=\"stat\" size=\"20\" value=\""+shop.stat+"\"/></td></tr>");
         $('#frm2').append("<tr><td>Zip : </td><td><input type=\"text\" id=\"zip\" size=\"20\" value=\""+shop.zip+"\"/></td></tr>");
+	$('#frm2').append("<tr><td>Desciption : </td><td><input type=\"text\" id=\"description\" size=\"20\" value=\""+shop.desciption+"\"/></td></tr>");
         $('#frm2').append("<tr><td>Phone : </td><td><input type=\"text\" id=\"phone\" size=\"20\" value=\""+shop.phone+"\"/></td></tr>");
         $('#frm2').append("<tr><td>Open Time : </td><td><input type=\"text\" id=\"opentime\" size=\"20\" value=\""+shop.opentime+"\"/></td></tr>");
         $('#frm2').append("<tr><td>Close TIme : </td><td><input type=\"text\" id=\"clostime\" size=\"20\" value=\""+shop.clostime+"\"/></td></tr>");

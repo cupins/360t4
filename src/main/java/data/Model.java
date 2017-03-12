@@ -290,6 +290,9 @@ public class Model {
         sqlQuery.append("stat='" + cs.getStat() + "', ");
         sqlQuery.append("zip='" + cs.getZip() + "', ");
         sqlQuery.append("description=" + cs.getDescription() + "' ");
+        sqlQuery.append("stat='" + cs.getStat() + "' ");
+        sqlQuery.append("zip='" + cs.getZip() + "' ");
+        sqlQuery.append("description='" + cs.getDescription() + "' ");
         sqlQuery.append("where cid=" + cs.getCid() +";");
         Statement st = createStatement();
         logger.log(Level.INFO, "UPDATE SQL=" + sqlQuery.toString());
