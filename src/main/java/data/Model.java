@@ -307,7 +307,7 @@ public class Model {
         logger.log(Level.INFO, "retrieved keys from statement");
         int rid = -1;
         while (rs.next())
-            rid = rs.getInt(7);   // assuming 6rd column is userid
+            rid = rs.getInt(6);   // assuming 6rd column is userid
         logger.log(Level.INFO, "The new rid=" + rid);
         return rvw;
 
@@ -339,6 +339,7 @@ public class Model {
             rvw.setRating(rows.getInt("rating"));
             rvw.setUserid(rows.getInt("userid"));
             rvw.setCid(rows.getInt("cid"));
+            rvw.setRid(rows.getInt("rid"));
             logger.log(Level.INFO, "Adding review to list with id=" + rvw.getRid());
             ll.add(rvw);
         }
@@ -382,7 +383,7 @@ public class Model {
             shop.setPhone(rows.getString("phone"));
             shop.setOpentime(rows.getInt("opentime"));
             shop.setClosetime(rows.getInt("closetime"));
-            //shop.setSid(rows.getInt("sid"));
+            shop.setSid(rows.getInt("sid"));
             
             logger.log(Level.INFO, "Adding shop to list with id=" + shop.getSid());
             ll.add(shop);
