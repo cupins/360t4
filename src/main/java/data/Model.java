@@ -352,6 +352,7 @@ public class Model {
     {
         LinkedList<Review> ll = new LinkedList<Review>();
         String sqlQuery ="select * from reviews;";
+        sqlQuery += (rId > 0) ? " where rid=" + rId + " order by rid;" : " order by rid;";
         Statement st = createStatement();
         ResultSet rows = st.executeQuery(sqlQuery);
         while (rows.next())
