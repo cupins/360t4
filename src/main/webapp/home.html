@@ -276,7 +276,7 @@
     // displays a selected shop in the form
     function render_shop(data)  {
       var list = data;
-      document.getElementbyId("myrevs").innerHTML="";
+      document.getElementById("myrevs").innerHTML="";
       if (list)
         $.each(list, function(index, shop) { 
             document.getElementById("myshop").innerHTML="";
