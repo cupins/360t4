@@ -167,21 +167,25 @@
             var review  = document.getElementById("review");
             var rating  = document.getElementById("rating");
             var cid     = document.getElementById("cid");
-            var rvw  = { 'text': review.value,
-                         'rating': rating.value,
-                         'cid': cid.value,
-                         'userid': '1'};         
-            var url='tcss360/reviews/';
-            if (confirm('Are you sure - CREATE ' + '?')) {
-              $.ajax({
-                type: 'POST',
-                url: url,
-                datatype: 'json',
-                data: JSON.stringify(rvw),
-                contentType: 'application/json',
-                success: render_newreview
-              });               
-           }
+            if (sessionStorage.getItem("uid") !== null) {
+              var rvw  = { 'text': review.value,
+                           'rating': rating.value,
+                           'cid': cid.value,
+                           'userid': sessionStorage.getItem("uid")};         
+              var url='tcss360/reviews/';
+              if (confirm('Are you sure - CREATE ' + '?')) {
+                $.ajax({
+                  type: 'POST',
+                  url: url,
+                  datatype: 'json',
+                  data: JSON.stringify(rvw),
+                  contentType: 'application/json',
+                  success: render_newreview
+                });               
+             }
+            } else {
+              location.href = "https://still-fjord-79022.herokuapp.com/";
+            }
       });
       $('#new-shop').click(function ()
       {
@@ -359,7 +363,7 @@
       </table>
       <div>
         <input type="button" value="Add New Shop" onclick="" id="new-shop"/>
-        <input type="button" value="My Review" onclick="" id="my-reviews"/>
+        <input type="button" value="My Reviews" onclick="" id="my-reviews"/>
       </div>
     </div>
       <div id="myshop"></div>
