@@ -100,6 +100,7 @@
             var city            = document.getElementById("city");
             var stat            = document.getElementById("stat");
             var zip             = document.getElementById("zip");
+            var description     = document.getElementById("description");
             var phone           = document.getElementById("phone");
             var opentime        = document.getElementById("opentime");
             var clostime        = document.getElementById("clostime");
@@ -107,6 +108,7 @@
                          'city': city.value,
                          'stat': stat.value,
                          'zip': zip.value,
+                         'description': description.value,
                          'phone': phone.value,
                          'opentime': opentime.value,
                          'clostime': clostime.value,};         
@@ -152,6 +154,10 @@
    <tr>
        <td>Zip : </td>
        <td><input type="text" id="zip" size="5"/> </td>
+   </tr>
+   <tr>
+       <td>Description : </td>
+       <td><input type="text" id="zip" size="50"/> </td>
    </tr>
    <tr>
        <td>Phone Number : </td>
