@@ -27,6 +27,7 @@ create table shops (
     city varchar(30),
     stat varchar(30),
     zip varchar(20),
+    description varchar(50),
     phone varchar(13),
     opentime int,
     clostime int
