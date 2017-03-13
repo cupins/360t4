@@ -138,38 +138,22 @@
     }
     function render_review(data) {
       $.each(data, function(index, review) {
-        $('#myform').append("<tr><td>Update Comment :  </td><td><input type=\"text\" id=\"review\" size=\"160\" value=\""+review.text+"\"/></td></tr>");
+        $('#myform').append("<tr><td>Update Comment :  </td><td><input type=\"text\" id=\"review\" size=\"40\" value=\""+review.text+"\"/></td></tr>");
         $('#myform').append("<tr><td>Update Rating : </td><td><select name=\"rating\" id=\"rating\" value=\""+review.rating+"\"><option value=\"1\">1</option><option value=\"2\">2</option><option value=\"3\">3</option><option value=\"4\">4</option><option value=\"5\">5</option></select></td></tr>");
-        $('#myform').append("<input type=\"text\" id=\"cid\" size=\"160\" hidden/>");
+        $('#myform').append("<input type=\"text\" id=\"cid\" size=\"14\" hidden/>");
         document.getElementById("cid").value = review.cid;
       });
     }
   </script>
   </head>
-  <body  id="frm">
+  <body  id="cof_body">
     <h1 class="login">Update Review</h1>
-    <table id="myform">
+    <table id="frm">
       <tr>
 	<td>
           <input type="button" value="Update" onclick="" id="update-review"/>
           <input type="button" value="Return to Shops" onclick="" id="retu"/>
 	</td>        
-      </tr>
-      <tr>
-	<td>Comment :  </td>
-	<td><input type="text" id="review" size="160"/> </td>
-      </tr>
-      <tr>
-	<td>Rating : </td>
-               <td>
-                 <select name="rating" id="rating">
-                   <option value="1">1</option>
-                   <option value="2">2</option>
-                   <option value="3">3</option>
-                   <option value="4">4</option>
-                   <option value="5">5</option>
-                 </select> 
-               </td>
       </tr>
      </table>
   </body>
