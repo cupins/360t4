@@ -1,7 +1,10 @@
 {
-  "coffee_name":"SturBacks",
-  "coffee_address": "456 Lazy Street, Default Town",
-  "raw_review": 1,
-  "phone": "555-555-5555",
-  "website": "https://www.google.com" 
+  "shopid":1
+  "name":"SturBacks",
+  "address":"456 Lazy Street, Default Town",
+  "city":"Puyallup"
+  "state":"WA"
+  "zip":"98373"
+  "description":"Burritoooooos!!!!!"
+  "phone":"555-555-5555", 
 }
