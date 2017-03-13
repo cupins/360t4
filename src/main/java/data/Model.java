@@ -284,7 +284,7 @@ public class Model {
 
         sqlQuery.append("update shops ");
         sqlQuery.append("set address='" + cs.getAddress() + "', ");
-        sqlQuery.append("set name='" + cs.getName() + "', ");
+        sqlQuery.append("name='" + cs.getName() + "', ");
         sqlQuery.append("address='" + cs.getAddress() + "', ");
         sqlQuery.append("city='" + cs.getCity() + "', ");
         sqlQuery.append("opentime=" + cs.getOpentime() + ", ");
