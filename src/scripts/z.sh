@@ -1,4 +1,4 @@
-echo "Hello World i might suck"
+echo " INFO running GET to POST"
 hope=https://team4360.herokuapp.com/tcss360/shops
 
 #ENDPOINT SHOULD BE HERE CHANGE TO DESIRED
