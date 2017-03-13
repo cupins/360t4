@@ -202,8 +202,8 @@ public class Model {
     public Coffee_Shop newCoffeeShop(Coffee_Shop cs) throws SQLException
 
     {
-        String sqlInsert="insert into shops (name, city, state, zip, phone, opentime, closetime, description) values("
-                + "'" + cs.getName() + "', '" + cs.getCity()
+        String sqlInsert="insert into shops (address, name, city, state, zip, phone, opentime, closetime, description) values("
+                + "'" + cs.getAddress() + "', '" + cs.getName() + "', '" + cs.getCity()
                 + "', '" + cs.getState() + "', '" + cs.getZip() + "', '" + cs.getPhone()
                 + "', " +  cs.getOpentime() + ", " + cs.getClosetime() + ", '" + cs.getDescription() + "');";
         Statement s = createStatement();

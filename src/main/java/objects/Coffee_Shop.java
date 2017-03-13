@@ -12,13 +12,13 @@ package objects;
 public class Coffee_Shop {
     
     private int cid;
+    private String address;
     private String name;
     private String city;
     private String state;
     private String zip;
     private String description;
     private String phone;
-    private String address;
     private int opentime;
     private int closetime;
     
