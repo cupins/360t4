@@ -1,7 +1,1 @@
-{
-  "coffeeName": "Test Shop 1",
-  "coffeeAddress": "42 Wallaby Way, Sydney",
-  "rawReview": 3,
-  "phone": "111-111-1111",
-  "website": "https://www.google.com"
-}
+{"cid":3,"address":"null","name":"coffeeBrew","city":"Chicago","state":"WA","zip":"98009","description":"shophavingspaoutside.","phone":"3107793311","opentime":9,"closetime":15}

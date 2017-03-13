@@ -283,7 +283,8 @@ public class Model {
         StringBuilder sqlQuery = new StringBuilder();
 
         sqlQuery.append("update shops ");
-        sqlQuery.append("set coffee_name='" + cs.getName() + "', ");
+        sqlQuery.append("set address='" + cs.getAddress() + "', ");
+        sqlQuery.append("set name='" + cs.getName() + "', ");
         sqlQuery.append("city='" + cs.getCity() + "', ");
         sqlQuery.append("opentime=" + cs.getOpentime() + ", ");
         sqlQuery.append("closetime=" + cs.getClosetime() + ", ");

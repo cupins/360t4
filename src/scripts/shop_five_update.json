@@ -1,8 +1,12 @@
 {
-  "cid": 5,
-  "coffeeName": "LOOOK WE CHANGED NAMES",
-  "coffeeAddress": "OUR ADDRESS IS DIFFERENT 3241",
-  "rawReview": 100,
-  "phone": "555-222-6662",
-  "website": "https://www.boogle.com"
+  "cid": 1,
+  "address": "xd",
+  "name": "newname",
+  "city": "funville",
+  "state": "newstate",
+  "zip": "2315461",
+  "description": "new description",
+  "phone": "323-3232-322-3223",
+  "opentime": 4,
+  "closetime": 5
 }
