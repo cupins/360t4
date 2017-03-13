@@ -2,9 +2,7 @@
 <html>
   <head>
     <style>
-        <!-- inline style sheet -->
       #cof_body{
-        background-image: url("http://wallpapersdsc.net/wp-content/uploads/2016/09/Coffee-Beans-Wallpaper.jpg") #00d repeat-y fixed;
         background-color: rgba(0,0,0,0.3);
       }
       #frm{
@@ -96,24 +94,24 @@
         $('#save-shop').click(function ()
         {
             // Create a new record
-            var coffee_name     = document.getElementById("coffee_name");
+            var name            = document.getElementById("name");
             var city            = document.getElementById("city");
-            var stat            = document.getElementById("stat");
+            var state           = document.getElementById("state");
             var zip             = document.getElementById("zip");
             var description     = document.getElementById("description");
             var phone           = document.getElementById("phone");
             var opentime        = document.getElementById("opentime");
-            var clostime        = document.getElementById("clostime");
-            var shop = { 'coffeeName': coffee_name.value,
+            var closetime        = document.getElementById("closetime");
+            var shop = { 'name': name.value,
                          'city': city.value,
-                         'stat': stat.value,
+                         'state': state.value,
                          'zip': zip.value,
                          'description': description.value,
                          'phone': phone.value,
                          'opentime': opentime.value,
-                         'clostime': clostime.value,};         
+                         'closetime': closetime.value,};         
             var url='tcss360/shops/';
-            if (confirm('Are you sure - CREATE ' + coffee_name.value + ' ?')) {
+            if (confirm('Are you sure - CREATE ' + name.value + ' ?')) {
               $.ajax({
                 type: 'POST',
                 url: url,
@@ -141,7 +139,7 @@
    </tr>
    <tr>
        <td>Shop Name :  </td>
-       <td><input type="text" id="coffee_name" size="20"/> </td>
+       <td><input type="text" id="name" size="20"/> </td>
    </tr>
    <tr>
        <td>City : </td>
@@ -149,7 +147,7 @@
    </tr>
    <tr>
        <td>State : </td>
-       <td><input type="text" id="stat" size="5"/> </td>
+       <td><input type="text" id="state" size="5"/> </td>
    </tr>
    <tr>
        <td>Zip : </td>
@@ -169,7 +167,7 @@
    </tr>
    <tr>
        <td>Closes at : </td>
-       <td><input type="text" id="clostime" size="20"/> </td>
+       <td><input type="text" id="closetime" size="20"/> </td>
    </tr>
 </table>
   </body>
