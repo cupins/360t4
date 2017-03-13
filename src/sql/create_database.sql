@@ -22,7 +22,8 @@ create table users (
 );
 
 create table shops (
-    cid serial primary key,    
+    cid serial primary key, 
+    address varchar(50),
     name varchar(50),
     city varchar(30),
     state varchar(30),

@@ -18,6 +18,7 @@ public class Coffee_Shop {
     private String zip;
     private String description;
     private String phone;
+    private String address;
     private int opentime;
     private int closetime;
     
@@ -52,6 +53,14 @@ public class Coffee_Shop {
 
     public void setCity(String city) {
         this.city = city;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
+    public String getAddress() {
+        return address;
     }
     // Coffee shop address
     public String getState() {
@@ -103,6 +112,8 @@ public class Coffee_Shop {
     public void setDescription(String description) {
         this.description = description;
     }
+    
+
    
     
 }

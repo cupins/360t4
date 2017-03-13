@@ -268,6 +268,7 @@ public class Model {
             shop.setOpentime(rows.getInt("opentime"));
             shop.setClosetime(rows.getInt("closetime"));
             shop.setPhone(rows.getString("phone"));
+            shop.setAddress(rows.getString("address"));
             shop.setDescription(rows.getString("description"));
             
             logger.log(Level.INFO, "Adding shop to list with id=" + shop.getCid());
