@@ -283,13 +283,9 @@ public class Model {
         StringBuilder sqlQuery = new StringBuilder();
 
         sqlQuery.append("update shops ");
-<<<<<<< HEAD
         sqlQuery.append("set address='" + cs.getAddress() + "', ");
         sqlQuery.append("set name='" + cs.getName() + "', ");
-=======
-        sqlQuery.append("set coffee_name='" + cs.getName() + "', ");
         sqlQuery.append("address='" + cs.getAddress() + "', ");
->>>>>>> d2b011e95b6f76419ff759909356dac434a66faf
         sqlQuery.append("city='" + cs.getCity() + "', ");
         sqlQuery.append("opentime=" + cs.getOpentime() + ", ");
         sqlQuery.append("closetime=" + cs.getClosetime() + ", ");
