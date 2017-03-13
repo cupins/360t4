@@ -204,6 +204,11 @@
       {
           location.href = "https://still-fjord-79022.herokuapp.com/add_shop.html";
       });  
+      $('#logout').click(function ()
+      {
+          sessionStorage.setItem("uid", null);
+          location.href = "https://still-fjord-79022.herokuapp.com";
+      }); 
       $('#update-user').click(function ()
       {
           location.href = "https://still-fjord-79022.herokuapp.com/update_user.html";
@@ -270,6 +275,9 @@
     } );
     // gets and displays all shops by calling render
     function getshops() {
+        if (sessionStorage.getItem("uid") == null) {
+          location.href"https://still-fjord-79022.herokuapp.com";
+        }
         var url='tcss360/shops/0';
         $.ajax({
           type: 'GET',
@@ -407,12 +415,12 @@
              contentType: 'application/json',
              success: render_getReviews
            }); 
-          if ( document.getElementById("secretcount").value == 0) {
+          /*if ( document.getElementById("secretcount").value == 0) {
             $('#myshop').prepend("<p>Average Rating : NA</p>");
           } else {
             $('#myshop').prepend("<p>Average Rating : "+document.getElementById("secretrat").value / document.getElementById("secretcount").value+"<p/>");
-          }
-          $('#myshop').append("<p>Name of Shop : " + shop.name + "</p>");
+          }*/
+          $('#myshop').prepend("<p>Name of Shop : " + shop.name + "</p>");
       });
     }
     function render_getReviews(data) {
@@ -425,8 +433,8 @@
             $('#myshop').append("<p>Text : "+review.text+"</p>");
             $('#myshop').append("<p>Rating : "+review.rating+"</p>");
             $('#myshop').append("<p>~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~</p>");
-            document.getElementById("secretrat").value += review.rating;
-            document.getElementById("secretcount").value += 1;
+            //document.getElementById("secretrat").value += review.rating;
+            //document.getElementById("secretcount").value += 1;
           }
       });
     }
@@ -471,7 +479,7 @@
              <tr class="table-header">
                  <td class="cid">Shop Id</td>
                  <td class="name">Shop Name</td>
-                 <td class="rating">Rating</td>
+                 <!--<td class="rating">Rating</td>-->
                  <td class="address">Address</td>
                  <td class="city">City</td>
                  <td class="state">State</td>
@@ -489,6 +497,7 @@
         <input type="button" value="Add New Shop" onclick="" id="new-shop"/>
         <input type="button" value="My Reviews" onclick="" id="my-reviews"/>
         <input type="button" value="Update Profile" onclick="" id="update-user"/>
+        <input type="button" value="logout" onclick="" id="logout"/>
       </div>
     </div>
       <div id="myshop"></div>
