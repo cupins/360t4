@@ -295,7 +295,7 @@
       document.getElementById("review_form").style.visibility="hidden";
       sessionStorage.rid = null
       $.each(data, function(index, shop) { 
-          $('#calc').append("<div id'\"asd\" value=\""+shop.cid+"\" hidden></div>");
+          $('#calc').append("<input type=\"text\" value=\""+shop.cid+"\" onclick=\"\" id=\"asd\" hidden/>");
           var newrow = "<tr id=\"shtable\"><td id=\"cid\"" + index + "\">"+ shop.cid + "</td>";
           newrow += "<td id=\"name\">" + shop.name + "</td>";
           newrow += "<td id=\"rating\">" + $.ajax({type: 'GET', url: 'tcss360/reviews/0', datatype: 'json', success: render_rating}) + "</td>";
