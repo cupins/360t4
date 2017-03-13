@@ -122,7 +122,7 @@
     } );
     function getreview() {
         if (sessionStorage.getItem("uid") == null) {
-          location.href"https://team4360.herokuapp.com";
+          location.href = "https://team4360.herokuapp.com";
         }
       var url='tcss360/reviews/'+sessionStorage.getItem("rid");
         $.ajax({
