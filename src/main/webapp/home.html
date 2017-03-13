@@ -297,7 +297,7 @@
       $.each(data, function(index, shop) { 
           var newrow = "<tr id=\"shtable\"><td id=\"cid\"" + index + "\">"+ shop.cid + "</td>";
           newrow += "<td id=\"name\">" + shop.name + "</td>";
-          newrow += "<td id=\"rating\">" + $.ajax({type: 'GET', url: 'tcss360/shops/0', datatype: 'json', success: render_rating}) + "</td>";
+          newrow += "<td id=\"rating\">" + $.ajax({type: 'GET', url: 'tcss360/reviews/0', datatype: 'json', success: render_rating}) + "</td>";
           newrow += "<td id=\"address\">" + shop.address + "</td>";
           newrow += "<td id=\"city\">" + shop.city + "</td>";
           newrow += "<td id=\"state\">" + shop.state + "</td>";
