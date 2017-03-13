@@ -133,13 +133,13 @@
     function render_update(data)  {
           location.href = "https://still-fjord-79022.herokuapp.com/home.html";
     }
-    function render_review(data) {
+    function render_user(data) {
       $.each(data, function(index, user) {
-        $('#frm').append("<tr><td>Change User Name :  </td><td><input type=\"text\" id=\"username\" size=\"20\" value=\""+user.username+"\"/> </td></tr>");
-        $('#frm').append("<tr><td>User Password : </td><td><input type=\"password\" id=\"password\" size=\"20\" value=\""+user.password+"\"/> </td></tr>");
-        $('#frm').append("<tr><td>Email : </td><td><input type=\"email\" id=\"email\" size=\"20\" value=\""+user.email+"\"/></td></tr>");
-        $('#frm').append("<tr><td>User Fname : </td><td><input type=\"text\" id=\"fname\" size=\"20\" value=\""+user.fname+"\"/></td></tr>");
-        $('#frm').append("<tr><td>User Lname : </td><td><input type=\"text\" id=\"lname\" size=\"20\" value=\""+user.lname+"\"/></td></tr>");
+        $('#frm2').append("<tr><td>Change User Name :  </td><td><input type=\"text\" id=\"username\" size=\"20\" value=\""+user.username+"\"/> </td></tr>");
+        $('#frm2').append("<tr><td>User Password : </td><td><input type=\"password\" id=\"password\" size=\"20\" value=\""+user.password+"\"/> </td></tr>");
+        $('#frm2').append("<tr><td>Email : </td><td><input type=\"email\" id=\"email\" size=\"20\" value=\""+user.email+"\"/></td></tr>");
+        $('#frm2').append("<tr><td>User Fname : </td><td><input type=\"text\" id=\"fname\" size=\"20\" value=\""+user.fname+"\"/></td></tr>");
+        $('#frm2').append("<tr><td>User Lname : </td><td><input type=\"text\" id=\"lname\" size=\"20\" value=\""+user.lname+"\"/></td></tr>");
       });
     }
   </script>
@@ -148,11 +148,13 @@
     <h1 class="login">Update User</h1>
     <div id="yousaid"></div>
     <table id="frm">
+      <tbody id="frm2">
 	<tr>
 	    <td>
 		<input type="button" value="Update Profile" onclick="" id="update-user"/>
 	    </td>
 	</tr>
-     </table>
+      </tbody>
+    </table>
   </body>
 </html>
