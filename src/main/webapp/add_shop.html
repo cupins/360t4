@@ -95,6 +95,7 @@
         {
             // Create a new record
             var name            = document.getElementById("name");
+            var address         = document.getElementById("address");
             var city            = document.getElementById("city");
             var state           = document.getElementById("state");
             var zip             = document.getElementById("zip");
@@ -103,6 +104,7 @@
             var opentime        = document.getElementById("opentime");
             var closetime        = document.getElementById("closetime");
             var shop = { 'name': name.value,
+                         'address': address.value,
                          'city': city.value,
                          'state': state.value,
                          'zip': zip.value,
@@ -140,6 +142,10 @@
    <tr>
        <td>Shop Name :  </td>
        <td><input type="text" id="name" size="20"/> </td>
+   </tr>
+   <tr>
+       <td>Address :  </td>
+       <td><input type="text" id="address" size="30"/> </td>
    </tr>
    <tr>
        <td>City : </td>
