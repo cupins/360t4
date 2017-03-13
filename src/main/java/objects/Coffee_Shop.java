@@ -42,7 +42,7 @@ public class Coffee_Shop {
         return name;
     }
 
-    public void setCoffeeName(String name) {
+    public void setName(String name) {
         this.name = name;
     }
     
