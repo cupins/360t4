@@ -260,7 +260,7 @@ public class Model {
         {
             logger.log(Level.INFO, "Reading row...");
             Coffee_Shop shop = new Coffee_Shop();
-            shop.setCoffeeName(rows.getString("name"));
+            shop.setName(rows.getString("name"));
             shop.setCid(rows.getInt("cid"));
             shop.setCity(rows.getString("city"));
             shop.setState(rows.getString("state"));
