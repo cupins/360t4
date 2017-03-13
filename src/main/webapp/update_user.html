@@ -84,12 +84,16 @@
         box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24),0 17px 50px 0 rgba(0,0,0,0.19);
       }
     </style>
-    <title>Update Review</title>
+    <title>Update User</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>    
     <script language="javascript">
     $(document).ready(function () { 
 	    
+        $('#retu').click(function ()
+        {
+		location.href = "https://team4360.herokuapp.com/home.html";
+	}
         $('#update-user').click(function ()
         {
             var username  = document.getElementById("username");
@@ -121,6 +125,9 @@
       getuser()
     } );
     function getuser() {
+        if (sessionStorage.getItem("uid") == null) {
+          location.href"https://team4360.herokuapp.com";
+        }
       var url='tcss360/users/'+sessionStorage.getItem("uid");
         $.ajax({
           type: 'GET',
@@ -131,7 +138,7 @@
     }
     // Checks the user in.
     function render_update(data)  {
-          location.href = "https://still-fjord-79022.herokuapp.com/home.html";
+          location.href = "https://team4360.herokuapp.com/home.html";
     }
     function render_user(data) {
       $.each(data, function(index, user) {
@@ -152,6 +159,7 @@
 	<tr>
 	    <td>
 		<input type="button" value="Update Profile" onclick="" id="update-user"/>
+		<input type="button" value="Return to Shops" onclick="" id="retu"/>
 	    </td>
 	</tr>
       </tbody>
