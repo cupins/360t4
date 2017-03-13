@@ -90,6 +90,10 @@
     <script language="javascript">
     $(document).ready(function () { 
 	    
+        $('#retu').click(function ()
+        {
+		location.href= "https://still-fjoijoijoasdijfoiasjf";
+	}
         $('#update-review').click(function ()
         {
             var review  = document.getElementById("review");
@@ -117,6 +121,9 @@
       getreview()
     } );
     function getreview() {
+        if (sessionStorage.getItem("uid") == null) {
+          location.href"https://still-fjord-79022.herokuapp.com";
+        }
       var url='tcss360/reviews/'+sessionStorage.getItem("rid");
         $.ajax({
           type: 'GET',
@@ -145,6 +152,7 @@
       <tr>
 	<td>
           <input type="button" value="Update" onclick="" id="update-review"/>
+          <input type="button" value="Return to Shops" onclick="" id="retu"/>
 	</td>        
       </tr>
       <tr>
