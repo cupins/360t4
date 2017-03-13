@@ -93,6 +93,7 @@
         $('#update-shop').click(function ()
         {
                 var name            = document.getElementById("name");
+                var address         = document.getElementById("address");
                 var city            = document.getElementById("city");
                 var state           = document.getElementById("state");
                 var zip             = document.getElementById("zip");
@@ -102,6 +103,7 @@
                 var closetime       = document.getElementById("closetime");
                 var shop = { 'cid': sessionStorage.getItem("cid"),
                              'name': name.value,
+                             'address': address.value,
                              'city': city.value,
                              'state': state.value,
                              'zip': zip.value,
@@ -139,6 +141,7 @@
     function render_shop(data) {
       $.each(data, function(index, shop) {
         $('#frm2').append("<tr><td>Change Shop Name :  </td><td><input type=\"text\" id=\"coffee_name\" size=\"20\" value=\""+shop.name+"\"/> </td></tr>");
+        $('#frm2').append("<tr><td>Address : </td><td><input type=\"text\" id=\"address\" size=\"20\" value=\""+shop.address+"\"/></td></tr>");
         $('#frm2').append("<tr><td>City : </td><td><input type=\"text\" id=\"city\" size=\"20\" value=\""+shop.city+"\"/> </td></tr>");
         $('#frm2').append("<tr><td>State : </td><td><input type=\"text\" id=\"state\" size=\"20\" value=\""+shop.state+"\"/></td></tr>");
         $('#frm2').append("<tr><td>Zip : </td><td><input type=\"text\" id=\"zip\" size=\"20\" value=\""+shop.zip+"\"/></td></tr>");
