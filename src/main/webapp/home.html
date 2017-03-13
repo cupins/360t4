@@ -295,6 +295,7 @@
       document.getElementById("review_form").style.visibility="hidden";
       sessionStorage.rid = null
       $.each(data, function(index, shop) { 
+          $('#calc').append("<div id'\"asd\" value=\""+shop.cid+"\" hidden></div>");
           var newrow = "<tr id=\"shtable\"><td id=\"cid\"" + index + "\">"+ shop.cid + "</td>";
           newrow += "<td id=\"name\">" + shop.name + "</td>";
           newrow += "<td id=\"rating\">" + $.ajax({type: 'GET', url: 'tcss360/reviews/0', datatype: 'json', success: render_rating}) + "</td>";
@@ -307,17 +308,17 @@
           newrow += "<td id=\"opentime\">" + shop.opentime + "</td>";
           newrow += "<td id=\"closetime\">" + shop.closetime + "</td>";
           $('#mybody').append(newrow);
+          $('#calc').empty();
       });
     }
     function render_rating(data)
     {
-        $('#calc').empty();
         $('#calc').append("<div id=\"secretrat2\" value=\""+0+"\" hidden></div>");
         $('#calc').append("<div id=\"secretcount2\" value=\""+0+"\" hidden></div>");
       var list = data;
       if (list)
         $.each(list, function(index, review) {
-          if (review.cid == document.getElementById("cid").value) {
+          if (review.cid == document.getElementById("asd").value) {
             document.getElementById("secretrat2").value += review.rating;
             document.getElementById("secretcount2").value += 1;
           }
