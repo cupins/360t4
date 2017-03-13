@@ -197,31 +197,31 @@
                 });               
              }
             } else {
-              location.href = "https://still-fjord-79022.herokuapp.com/";
+              location.href = "https://team4360.herokuapp.com/";
             }
       });
       $('#new-shop').click(function ()
       {
-          location.href = "https://still-fjord-79022.herokuapp.com/add_shop.html";
+          location.href = "https://team4360.herokuapp.com/add_shop.html";
       });  
       $('#logout').click(function ()
       {
           sessionStorage.setItem("uid", null);
-          location.href = "https://still-fjord-79022.herokuapp.com";
+          location.href = "https://team4360.herokuapp.com";
       }); 
       $('#update-user').click(function ()
       {
-          location.href = "https://still-fjord-79022.herokuapp.com/update_user.html";
+          location.href = "https://team4360.herokuapp.com/update_user.html";
       });   
       $('#update-shop').click(function ()
       {
           sessionStorage.cid = document.getElementById("cid").value;
-          location.href = "https://still-fjord-79022.herokuapp.com/update_shop.html";
+          location.href = "https://team4360.herokuapp.com/update_shop.html";
       });         
       $('#update-review').click(function ()
       {
           sessionStorage.rid = document.getElementById("selection").value;
-          location.href = "https://still-fjord-79022.herokuapp.com/update_review.html";
+          location.href = "https://team4360.herokuapp.com/update_review.html";
       });     
       $('#delete-shop').click(function ()
       {
@@ -276,7 +276,7 @@
     // gets and displays all shops by calling render
     function getshops() {
         if (sessionStorage.getItem("uid") == null) {
-          location.href"https://still-fjord-79022.herokuapp.com";
+          location.href"team4360.herokuapp.com";
         }
         var url='tcss360/shops/0';
         $.ajax({
