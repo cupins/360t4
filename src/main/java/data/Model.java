@@ -383,7 +383,7 @@ public class Model {
         StringBuilder sqlQuery = new StringBuilder();
         sqlQuery.append("update reviews ");
         sqlQuery.append("set text='" + rvw.getText() + "', ");
-        sqlQuery.append("set date= now(), ");
+        sqlQuery.append("date= now(), ");
         sqlQuery.append("rating=" + rvw.getRating() + " ");
         sqlQuery.append("where rid=" + rvw.getRid() + ";");
         Statement st = createStatement();
