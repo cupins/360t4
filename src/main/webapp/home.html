@@ -114,7 +114,10 @@
       .cid {
           width: 30px;
       }
-      .coffee_name {
+      .name {
+          width: 125px;
+      }
+      .address {
           width: 125px;
       }
       .city {
@@ -294,6 +297,7 @@
       $.each(data, function(index, shop) { 
           var newrow = "<tr id=\"shtable\"><td id=\"cid\"" + index + "\">"+ shop.cid + "</td>";
           newrow += "<td id=\"name\">" + shop.name + "</td>";
+          newrow += "<td id=\"address\">" + shop.address + "</td>";
           newrow += "<td id=\"city\">" + shop.city + "</td>";
           newrow += "<td id=\"state\">" + shop.state + "</td>";
           newrow += "<td id=\"zip\">" + shop.zip + "</td>";
@@ -347,6 +351,7 @@
             document.getElementById("myshop").innerHTML="";
             $('#myshop').append("<p>Name of user : " + sessionStorage.getItem("uid") + "</p>");
             $('#myshop').append("<p>Name of Shop : " + shop.name + "</p>");
+            $('#myshop').append("<p>Address of Shop : " + shop.address + "</p>");
             $('#myshop').append("<p>City : " + shop.city + "</p>");
             $('#myshop').append("<p>State : " + shop.state + "</p>");
             $('#myshop').append("<p>Zip : " + shop.zip + "</p>");
@@ -437,6 +442,7 @@
              <tr class="table-header">
                  <td class="cid">Shop Id</td>
                  <td class="name">Shop Name</td>
+                 <td class="address">Address</td>
                  <td class="city">City</td>
                  <td class="state">State</td>
                  <td class="zip">Zip</td>
