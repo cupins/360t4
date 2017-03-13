@@ -295,10 +295,10 @@
       document.getElementById("review_form").style.visibility="hidden";
       sessionStorage.rid = null
       $.each(data, function(index, shop) { 
-          $('#calc').append("<input type=\"text\" value=\""+shop.cid+"\" onclick=\"\" id=\"asd\" hidden/>");
+          //$('#calc').append("<input type=\"text\" value=\""+shop.cid+"\" onclick=\"\" id=\"asd\" hidden/>");
           var newrow = "<tr id=\"shtable\"><td id=\"cid\"" + index + "\">"+ shop.cid + "</td>";
           newrow += "<td id=\"name\">" + shop.name + "</td>";
-          newrow += "<td id=\"rating\">" + $.ajax({type: 'GET', url: 'tcss360/reviews/0', datatype: 'json', success: render_rating}) + "</td>";
+          //newrow += "<td id=\"rating\">" + $.ajax({type: 'GET', url: 'tcss360/reviews/0', datatype: 'json', success: render_rating}) + "</td>";
           newrow += "<td id=\"address\">" + shop.address + "</td>";
           newrow += "<td id=\"city\">" + shop.city + "</td>";
           newrow += "<td id=\"state\">" + shop.state + "</td>";
@@ -308,9 +308,9 @@
           newrow += "<td id=\"opentime\">" + shop.opentime + "</td>";
           newrow += "<td id=\"closetime\">" + shop.closetime + "</td>";
           $('#mybody').append(newrow);
-          $('#calc').empty();
+          //$('#calc').empty();
       });
-    }
+    }/*
     function render_rating(data)
     {
         $('#calc').append("<div id=\"secretrat2\" value=\""+0+"\" hidden></div>");
@@ -328,7 +328,7 @@
       } else {
         return document.getElementById("secretrat2").value / document.getElementById("secretcount2").value;
       }
-    }
+    }*/
     function render_delete(data)
     {
         $('#mybody').empty();
