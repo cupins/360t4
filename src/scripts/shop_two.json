@@ -1,7 +1,1 @@
-{
-  "coffeeName": "Test Shop 2",
-  "coffeeAddress": "123 Lazy Street, Default Town",
-  "rawReview": 2,
-  "phone": "222-222-2222",
-  "website": "https://www.google.com"
-}
+{  "shopid":2,  "name":"BigFoot",  "address":"456 Lazy Street, Default Town",  "city":"Tacoma",  "state":"WA",  "zip":"98445",  "description":"Coffee!Coffee!Coffee!Coffee!Coffee!",  "phone":"555-555-5555", "opentime":12, "closetime":5}
