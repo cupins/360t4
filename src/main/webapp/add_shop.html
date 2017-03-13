@@ -90,6 +90,10 @@
     <script language="javascript">
     $(document).ready(function () { 
         
+        $('#retu').click(function ()
+        {
+           href.location  = "https://still-fjord-79022.herokuapp.com/home.html";
+        }
        
         $('#save-shop').click(function ()
         {
@@ -124,7 +128,13 @@
               }); 
             }
         });
+      start();
     } );
+    function start() {
+        if (sessionStorage.getItem("uid") == null) {
+          location.href"https://still-fjord-79022.herokuapp.com";
+        } 
+    }
     // Checks the user in.
     function render(data)  {
           location.href = "https://still-fjord-79022.herokuapp.com/home.html";
@@ -137,6 +147,7 @@
    <tr>
        <td>
            <input type="button" value="Save Shop" onclick="" id="save-shop"/>
+           <input type="button" value="Return to Shops" onclick="" id="retu"/>
        </td>        
    </tr>
    <tr>
