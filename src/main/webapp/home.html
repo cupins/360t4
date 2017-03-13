@@ -297,6 +297,7 @@
       $.each(data, function(index, shop) { 
           var newrow = "<tr id=\"shtable\"><td id=\"cid\"" + index + "\">"+ shop.cid + "</td>";
           newrow += "<td id=\"name\">" + shop.name + "</td>";
+          newrow += "<td id=\"rating\">" + $.ajax({type: 'GET', url: 'tcss360/shops/0', datatype: 'json', success: render_rating}); + "</td>";
           newrow += "<td id=\"address\">" + shop.address + "</td>";
           newrow += "<td id=\"city\">" + shop.city + "</td>";
           newrow += "<td id=\"state\">" + shop.state + "</td>";
@@ -307,6 +308,25 @@
           newrow += "<td id=\"closetime\">" + shop.closetime + "</td>";
           $('#mybody').append(newrow);
       });
+    }
+    function render_rating(data)
+    {
+        $('#calc').empty();
+        $('#calc').append("<div id=\"secretrat2\" value=\""+0+"\" hidden></div>");
+        $('#calc').append("<div id=\"secretcount2\" value=\""+0+"\" hidden></div>");
+      var list = data;
+      if (list)
+        $.each(list, function(index, review) {
+          if (review.cid == document.getElementById("cid").value) {
+            document.getElementById("secretrat2").value += review.rating;
+            document.getElementById("secretcount2").value += 1;
+          }
+      });
+      if  (document.getElementById("secretcount2").value == 0) {
+        return 0;
+      } else {
+        return document.getElementById("secretrat2").value / document.getElementById("secretcount2").value;
+      }
     }
     function render_delete(data)
     {
@@ -349,8 +369,6 @@
       if (list)
         $.each(list, function(index, shop) { 
             document.getElementById("myshop").innerHTML="";
-            $('#myshop').append("<p>Name of user : " + sessionStorage.getItem("uid") + "</p>");
-            $('#myshop').append("<p>Name of Shop : " + shop.name + "</p>");
             $('#myshop').append("<p>Address of Shop : " + shop.address + "</p>");
             $('#myshop').append("<p>City : " + shop.city + "</p>");
             $('#myshop').append("<p>State : " + shop.state + "</p>");
@@ -360,6 +378,8 @@
             $('#myshop').append("<p>Opens : " + shop.opentime + "</p>");
             $('#myshop').append("<p>Closes : " + shop.closetime + "</p>");
             $('#myshop').append("<div id=\"secretcid\" value=\""+shop.cid+"\"></div>");
+            $('#myshop').append("<div id=\"secretrat\" value=\""+0+"\" hidden></div>");
+            $('#myshop').append("<div id=\"secretcount\" value=\""+0+"\" hidden></div>");
             
           
             document.getElementById("cid").value = shop.cid;
@@ -386,19 +406,26 @@
              contentType: 'application/json',
              success: render_getReviews
            }); 
+          if ( document.getElementById("secretcount").value == 0) {
+            $('#myshop').prepend("<p>Average Rating : NA</p>";
+          } else {
+            $('#myshop').prepend("<p>Average Rating : "+document.getElementById("secretrat").value / document.getElementById("secretcount").value+"<p/>");
+          }
+          $('#myshop').append("<p>Name of Shop : " + shop.name + "</p>");
       });
     }
     function render_getReviews(data) {
       var list = data;
-      $('#myshop').append("<p>Reviews :</p>");
       if (list)
         $.each(list, function(index, review) {
           if (review.cid == document.getElementById("cid").value) {
-            $('#myshop').append("<p>~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~</p>");
+            $('#myshop').append("<p>~~~~~~~~~~~~~~~~~REVIEW~~~~~~~~~~~~~~~~~~~~~~~</p>");
             $('#myshop').append("<p>Date : "+review.date+"</p>");
             $('#myshop').append("<p>Text : "+review.text+"</p>");
             $('#myshop').append("<p>Rating : "+review.rating+"</p>");
             $('#myshop').append("<p>~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~</p>");
+            document.getElementById("secretrat").value += review.rating;
+            document.getElementById("secretcount").value += 1;
           }
       });
     }
@@ -436,12 +463,14 @@
   </head>
   <body  id="cof_body">
     <div id="shop_table">
+      <div id="calc"><div>
     <h1 class="login">The Shops</h1>
     <table id="mytable" class="table">
            <thead>
              <tr class="table-header">
                  <td class="cid">Shop Id</td>
                  <td class="name">Shop Name</td>
+                 <td class="rating">Rating</td>
                  <td class="address">Address</td>
                  <td class="city">City</td>
                  <td class="state">State</td>
