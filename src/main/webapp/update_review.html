@@ -138,9 +138,9 @@
     }
     function render_review(data) {
       $.each(data, function(index, review) {
-        $('#myform').append("<tr><td>Update Comment :  </td><td><input type=\"text\" id=\"review\" size=\"40\" value=\""+review.text+"\"/></td></tr>");
-        $('#myform').append("<tr><td>Update Rating : </td><td><select name=\"rating\" id=\"rating\" value=\""+review.rating+"\"><option value=\"1\">1</option><option value=\"2\">2</option><option value=\"3\">3</option><option value=\"4\">4</option><option value=\"5\">5</option></select></td></tr>");
-        $('#myform').append("<input type=\"text\" id=\"cid\" size=\"14\" hidden/>");
+        $('#frm').append("<tr><td>Update Comment :  </td><td><input type=\"text\" id=\"review\" size=\"40\" value=\""+review.text+"\"/></td></tr>");
+        $('#frm').append("<tr><td>Update Rating : </td><td><select name=\"rating\" id=\"rating\" value=\""+review.rating+"\"><option value=\"1\">1</option><option value=\"2\">2</option><option value=\"3\">3</option><option value=\"4\">4</option><option value=\"5\">5</option></select></td></tr>");
+        $('#frm').append("<input type=\"text\" id=\"cid\" size=\"14\" hidden/>");
         document.getElementById("cid").value = review.cid;
       });
     }
