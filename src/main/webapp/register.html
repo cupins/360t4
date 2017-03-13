@@ -99,30 +99,33 @@
         // If an existing user, call the PUT to update the user
         $('#register-user').click(function ()
         {
-            // Create a new record
-            //document.write("hello");
-            var username = document.getElementById("username");
-            var password = document.getElementById("password");
-            var email = document.getElementById("email");
-            var Fname = document.getElementById("fname");
-            var Lname = document.getElementById("lname");
-            var user = { 'username': username.value,
-                         'password': password.value,
-                         'email': email.value,
-                         'fname': Fname.value,
-                         'lname': Lname.value,
-                         'utype': 'u'};         
-            var url='tcss360/users/';
-            if (confirm('Are you sure?')) {
-              $.ajax({
-                type: 'POST',
-                url: url,
-                datatype: 'json',
-                data: JSON.stringify(user),
-                contentType: 'application/json',
-                success: render
-              });         
-            }
+	    if (document.getElementById("password") == document.getElementById("confirm")) {
+		    
+		    var username = document.getElementById("username");
+		    var password = document.getElementById("password");
+		    var email = document.getElementById("email");
+		    var Fname = document.getElementById("fname");
+		    var Lname = document.getElementById("lname");
+		    var user = { 'username': username.value,
+				 'password': password.value,
+				 'email': email.value,
+				 'fname': Fname.value,
+				 'lname': Lname.value,
+				 'utype': 'u'};         
+		    var url='tcss360/users/';
+		    if (confirm('Are you sure?')) {
+		      $.ajax({
+			type: 'POST',
+			url: url,
+			datatype: 'json',
+			data: JSON.stringify(user),
+			contentType: 'application/json',
+			success: render
+		      });         
+		    }
+	    } else {
+		$('#frm').append("<p>Passwords do not match. Try again</p>");    
+	    }
         });    
     } );
     // Checks the user in.
@@ -136,7 +139,7 @@
   </head>
   <body  id="cof_body">
     <h1 class="login">Coffee Register</h1>
-    <table id="myform">
+    <table id="frm">
       <tr>
 	<td>
           <input type="button" value="Register" onclick="" id="register-user"/>
@@ -148,11 +151,15 @@
       </tr>
       <tr>
 	<td>Password : </td>
-	<td><input type="text" id="password" size="20"/> </td>
+	<td><input type="password" id="password" size="20"/> </td>
+      </tr>
+      <tr>
+	<td>Confirm Password : </td>
+	<td><input type="password" id="confirm" size="20"/> </td>
       </tr>
       <tr>
 	<td>Email : </td>
-	<td><input type="text" id="email" size="20"/> </td>
+	<td><input type="email" id="email" size="20"/> </td>
       </tr>
       <tr>
 	<td>First Name : </td>
