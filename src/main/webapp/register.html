@@ -99,7 +99,7 @@
         // If an existing user, call the PUT to update the user
         $('#register-user').click(function ()
         {
-	    if (document.getElementById("password") == document.getElementById("confirm")) {
+	    if (document.getElementById("password").value == document.getElementById("confirm").value) {
 		    
 		    var username = document.getElementById("username");
 		    var password = document.getElementById("password");
